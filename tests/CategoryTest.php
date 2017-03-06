@@ -78,6 +78,7 @@
 
             $testSave = new Category($category);
             $testSave->save();
+            var_dump($testSave);
 
             //Act
             $result = Category::getAll();
