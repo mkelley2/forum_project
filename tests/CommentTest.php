@@ -99,9 +99,40 @@
 
             // Act
             $result = Comment::getAll();
+
             // Assert
             $this->assertEquals([$new_comment, $new_comment2], $result);
+        }
 
+        function test_deleteAll()
+        {
+            // Arrange
+            $user_id = 5;
+            $comment = "I thought the frs was terrible";
+            $parent_id = 6;
+            $score = 345;
+            $post_time = '2005-08-15 15:52:01';
+            $init_comment_id = 7;
+            $thread_id = 8;
+            $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id);
+            $new_comment->save();
+
+            $user_id2 = 5;
+            $comment2 = "I thought the frs was terrible";
+            $parent_id2 = 6;
+            $score2 = 345;
+            $post_time2 = '2005-08-15 15:52:01';
+            $init_comment_id2 = 7;
+            $thread_id2 = 8;
+            $new_comment2 = new Comment($user_id2, $comment2, $parent_id2, $score2, $post_time2, $init_comment_id2, $thread_id2);
+            $new_comment2->save();
+
+            // Act
+            Comment::deleteAll();
+            $result = Comment::getAll();
+
+            // Assert
+            $this->assertEquals([], $result);
         }
         // function testUpdate()
         // {
