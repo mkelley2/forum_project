@@ -89,7 +89,7 @@
 
         function getCommentId()
         {
-            return (int) $this->comment_id;
+            return $this->comment_id;
         }
 
 
@@ -97,7 +97,6 @@
 
         function save()
         {
-            // var_dump($this->getThreadId());
             $GLOBALS['DB']->exec("INSERT INTO comments (user_id, comment, parent_id, score, post_time, init_comment_id, thread_id) VALUES
             ({$this->getUserId()},
             '{$this->getComment()}',
@@ -110,9 +109,10 @@
             $this->comment_id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function updateComment($new_comment)
+        function updateComment($new_text)
         {
-                $GLOBALS['DB']->exec("UPDATE comments SET comment = '{$new_comment}' WHERE comment_id = {$this->getCommentId()};");
+                $GLOBALS['DB']->exec("UPDATE comments SET comment = '{$new_text}' WHERE comment_id = {$this->getCommentId()};");
+                $this->setComment($new_text);
         }
 
         function updateScore($new_score)

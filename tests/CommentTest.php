@@ -134,6 +134,28 @@
             // Assert
             $this->assertEquals([], $result);
         }
+
+        function test_updateComment()
+        {
+            // Arrange
+            $user_id = 5;
+            $comment = "I thought the frs was terrible";
+            $parent_id = 6;
+            $score = 345;
+            $post_time = '2005-08-15 15:52:01';
+            $init_comment_id = 7;
+            $thread_id = 8;
+            $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id);
+            $new_comment->save();
+
+            $new_text = "Well I guess it was not that bad but I am still displeased";
+
+            // Act
+            $new_comment->updateComment($new_text);
+
+            // Assert
+            $this->assertEquals($new_text, $new_comment->getComment());
+        }
         // function testUpdate()
         // {
         //     //Arrange
