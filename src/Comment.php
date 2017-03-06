@@ -123,7 +123,7 @@
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM comments WHERE id = {$this->getCommentId()};");
+            $GLOBALS['DB']->exec("DELETE FROM comments WHERE comment_id = {$this->getCommentId()};");
 
         }
 

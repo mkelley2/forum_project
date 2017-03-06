@@ -179,27 +179,36 @@
             $this->assertEquals($new_score, $new_comment->getScore());
         }
 
-        // function testUpdate()
-        // {
-        //     //Arrange
-        //     $title = "War on Terror Revisited: Trumps America";
-        //     $genre = "Non-fiction";
-        //     $ISBN = "123456789104";
-        //     $total = 3;
-        //     $available = 0;
-        //     $checked_out = 3;
-        //     $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out);
-        //     $test_book->save();
-        //
-        //     $test_total = 1;
-        //
-        //     //Act
-        //     $test_book->update($test_total);
-        //
-        //     //Assert
-        //     $this->assertEquals(4, $test_book->getTotal());
-        // }
-        //
+        function test_deleteComment()
+        {
+            // Arrange
+            $user_id = 5;
+            $comment = "I thought the frs was terrible";
+            $parent_id = 6;
+            $score = 345;
+            $post_time = '2005-08-15 15:52:01';
+            $init_comment_id = 7;
+            $thread_id = 8;
+            $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id);
+            $new_comment->save();
+
+            $user_id2 = 7;
+            $comment2 = "I like turtles";
+            $parent_id2 = 8;
+            $score2 = 315;
+            $post_time2 = '2007-08-15 15:52:01';
+            $init_comment_id2 = 5;
+            $thread_id2 = 9;
+            $new_comment2 = new Comment($user_id2, $comment2, $parent_id2, $score2, $post_time2, $init_comment_id2, $thread_id2);
+            $new_comment2->save();
+
+            // Act
+            $dead = $new_comment->delete();
+            $result = Comment::getAll();
+
+            // Assert
+            $this->assertEquals([$new_comment2], $result);
+        }
         // function testDeleteBook()
         // {
         //     //Arrange
