@@ -90,7 +90,7 @@
 
         function setThreadId($new_thread_id)
         {
-            $this->thread_id =;
+            $this->thread_id;
         }
 
         function getCommentId()

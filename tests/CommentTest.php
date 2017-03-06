@@ -26,11 +26,11 @@
             // Arrange
             $user_id = "KittenFartz";
             $comment = "I thought the frs was terrible!";
-            $parent_id = 3;
+            $parent_id = null;
             $score = 345;
             $post_time = " 2005-08-15T15:52:01+00:00";
-            $init_comment_id = 4;
-            $thread_id = 2;
+            $init_comment_id = null;
+            $thread_id = null;
             $comment_id = null;
             $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id, $comment_id);
 
