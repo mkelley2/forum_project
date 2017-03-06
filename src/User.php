@@ -1,65 +1,152 @@
 <?php
     class User
     {
-        private $first_name;
-        private $last_name;
+        private $username;
+        private $password;
+        private $user_photo;
+        private $rank;
+        private $bio;
+        private $location_city;
+        private $location_state;
+        private $location_country;
+        private $user_score;
+        private $creation_date;
         private $id;
 
-        function __construct($first_name, $last_name, $id = null)
+        function __construct($username, $password, $user_photo, $rank, $bio, $location_city, $location_state, $location_country, $user_score, $creation_date, $id = null)
         {
-            $this->first_name = $first_name;
-            $this->last_name = $last_name;
+
+            $this->username = $username;
+            $this->password = $password;
+            $this->user_photo = $user_photo;
+            $this->rank = $rank;
+            $this->bio = $bio;
+            $this->location_city = $location_city;
+            $this->location_state = $location_state;
+            $this->location_country = $location_country;
+            $this->user_score = $user_score;
+            $this->creation_date = $creation_date;
             $this->id = $id;
         }
 
-        function setFirstName($new_first_name)
-        {
-            $this->first_name = (string) $new_first_name;
+
+        function getUsername(){
+            return $this->username;
         }
 
-        function getFirstName()
-        {
-            return $this->first_name;
+        function setUsername($username){
+            $this->username = $username;
         }
 
-        function setLastName($new_last_name)
-        {
-            $this->last_name = (string) $new_last_name;
+        function getPassword(){
+            return $this->password;
         }
 
-        function getLastName()
-        {
-            return $this->last_name;
+        function setPassword($password){
+            $this->password = $password;
         }
 
-        function getId()
-        {
+        function getUser_photo(){
+            return $this->user_photo;
+        }
+
+        function setUser_photo($user_photo){
+            $this->user_photo = $user_photo;
+        }
+
+        function getRank(){
+            return $this->rank;
+        }
+
+        function setRank($rank){
+            $this->rank = $rank;
+        }
+
+        function getBio(){
+            return $this->bio;
+        }
+
+        function setBio($bio){
+            $this->bio = $bio;
+        }
+
+        function getLocation_city(){
+            return $this->location_city;
+        }
+
+        function setLocation_city($location_city){
+            $this->location_city = $location_city;
+        }
+
+        function getLocation_state(){
+            return $this->location_state;
+        }
+
+        function setLocation_state($location_state){
+            $this->location_state = $location_state;
+        }
+
+        function getLocation_country(){
+            return $this->location_country;
+        }
+
+        function setLocation_country($location_country){
+            $this->location_country = $location_country;
+        }
+
+        function getUser_score(){
+            return $this->user_score;
+        }
+
+        function setUser_score($user_score){
+            $this->user_score = $user_score;
+        }
+
+        function getCreation_date(){
+            return $this->creation_date;
+        }
+
+        function setCreation_date($creation_date){
+            $this->creation_date = $creation_date;
+        }
+
+        function getId(){
             return $this->id;
         }
 
+
+
         function save()
         {
-              $GLOBALS['DB']->exec("INSERT INTO authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");
+              $GLOBALS['DB']->exec("INSERT INTO users (username, password, user_photo, rank, bio, location_city, location_state, location_country, user_score, creation_date) VALUES ( '{$this->getUsername()}', '{$this->getPassword()}', '{$this->getUser_photo()}', {$this->getRank()}, '{$this->getBio()}', '{$this->getLocation_city()}', '{$this->getLocation_state()}', '{$this->getLocation_country()}', {$this->getCreation_date});");
               $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
         {
-            $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors ORDER BY last_name ASC;");
-            $authors = array();
-            foreach($returned_authors as $author) {
-                $first_name = $author['first_name'];
-                $last_name = $author['last_name'];
-                $id = $author['id'];
-                $new_author = new Author($first_name, $last_name, $id);
-                array_push($authors, $new_author);
+            $returned_users = $GLOBALS['DB']->query("SELECT * FROM users;");
+            $users = array();
+            foreach($returned_users as $user) {
+                $username = $user['username'];
+                $password = $user['password'];
+                $user_photo = $user['user_photo'];
+                $rank = $user['rank'];
+                $bio = $user['user'];
+                $location_city = $user['location_city'];
+                $location_state = $user['location_state'];
+                $location_country = $user['location_country'];
+                $user_score = $user['user_score'];
+                $creation_date = $user['creation_date'];
+                $id = $user['id'];
+                $new_author = new Author($username, $password, $user_photo, $rank, $bio, $location_city, $location_state, $location_country, $user_score, $creation_date, $id);
+                array_push($users, $new_user);
             }
-            return $authors;
+            return $users;
         }
 
         static function deleteAll()
         {
-          $GLOBALS['DB']->exec("DELETE FROM authors;");
+          $GLOBALS['DB']->exec("DELETE FROM users;");
         }
 
         static function find($search_id)
