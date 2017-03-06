@@ -47,16 +47,10 @@
             $this->parent_id = (string) $new_parent_id;
         }
 
-        function getparentId()
+        function getParentId()
         {
             return $this->parent_id;
         }
-
-        function setCommentId($new_comment_id)
-        {
-            $this->comment_id = (string) $new_comment_id;
-        }
-
 
         function setScore($new_score)
         {
@@ -70,7 +64,7 @@
 
         function setPostTime($new_post_time)
         {
-            $this->post_time = $new_post_time;
+            $this->post_time = (string) $new_post_time;
         }
 
         function getPostTime()
@@ -85,17 +79,17 @@
 
         function getThreadId()
         {
-            $this->thread_id;
+            return $this->thread_id;
         }
 
         function setThreadId($new_thread_id)
         {
-            $this->thread_id;
+            $this->thread_id = (int) $new_thread_id;
         }
 
         function getCommentId()
         {
-            return $this->comment_id;
+            return (int) $this->comment_id;
         }
 
 
@@ -103,13 +97,16 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO comments (user_id, comment, parent_id, comment_id, score, post_time, init_comment_id, thread_id) VALUES ('{$this->getUserId()}',
+            // var_dump($this->getThreadId());
+            $GLOBALS['DB']->exec("INSERT INTO comments (user_id, comment, parent_id, score, post_time, init_comment_id, thread_id) VALUES
+            ({$this->getUserId()},
             '{$this->getComment()}',
-            '{$this->getparent_id()}',
+            {$this->getParentId()},
             {$this->getScore()},
-            {$this->getPostTime()}),
+            '{$this->getPostTime()}',
             {$this->getInitCommentId()},
-            {$this->getThreadId()};");
+            {$this->getThreadId()}
+            );");
             $this->comment_id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -135,14 +132,14 @@
             $comments = array();
             foreach($returned_comments as $comment) {
                 $user = $comment['user_id'];
-                $comment = $comment['comment'];
+                $comment_text = $comment['comment'];
                 $parent_id = $comment['parent_id'];
                 $score = $comment['score'];
                 $post_time = $comment['post_time'];
                 $init_comment_id = $comment['init_comment_id'];
                 $thread_id = $comment['thread_id'];
                 $comment_id = $comment['comment_id'];
-                $new_comment = new Comment($user, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id, $comment_id);
+                $new_comment = new Comment($user, $comment_text, $parent_id, $score, $post_time, $init_comment_id, $thread_id, $comment_id);
                 array_push($comments, $new_comment);
             }
             return $comments;

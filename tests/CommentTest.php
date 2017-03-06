@@ -15,16 +15,15 @@
     class CommentTest extends PHPUnit_Framework_TestCase
     {
 
-        // protected function tearDown()
-        // {
-        //
-        // }
+        protected function tearDown()
+        {
+            Comment::deleteAll();
+        }
 
         function test_construct()
-
         {
             // Arrange
-            $user_id = "KittenFartz";
+            $user_id = 5;
             $comment = "I thought the frs was terrible!";
             $parent_id = null;
             $score = 345;
@@ -53,49 +52,27 @@
             $this->assertEquals($init_comment_id, $result6);
             $this->assertEquals($thread_id, $result7);
             $this->assertEquals($comment_id, $result8);
-
         }
 
-        // function testSetTitle()
-        // {
-        //     //Arrange
-        //     $title = "1984";
-        //     $genre = "Non-fiction";
-        //     $ISBN = "123456789101";
-        //     $total = 3;
-        //     $available = 0;
-        //     $checked_out = 3;
-        //     $id = null;
-        //
-        //     $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out, $id);
-        //
-        //     //Act
-        //     $test_book->setTitle("Trumps Reich");
-        //     $result = $test_book->getTitle();
-        //
-        //     //Assert
-        //     $this->assertEquals("Trumps Reich", $result);
-        // }
-        //
-        // function testGetId()
-        // {
-        //     //Arrange
-        //     $title = "War of the Worlds";
-        //     $genre = "Science Fiction";
-        //     $ISBN = "123456789104";
-        //     $total = 3;
-        //     $available = 0;
-        //     $checked_out = 3;
-        //     $id = 84;
-        //
-        //     $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out, $id);
-        //
-        //     //Act
-        //     $result = $test_book->getId();
-        //
-        //     //Assert
-        //     $this->assertEquals($id, $result);
-        // }
+        function test_save()
+        {
+            // Arrange
+            $user_id = 5;
+            $comment = "I thought the frs was terrible";
+            $parent_id = 6;
+            $score = 345;
+            $post_time = '2005-08-15 15:52:01';
+            $init_comment_id = 7;
+            $thread_id = 8;
+            $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id);
+
+            // Act
+            $new_comment->save();
+            // var_dump($new_comment);
+            $result = Comment::getAll();
+            // Assert
+            $this->assertEquals($new_comment, $result[0]);
+        }
         //
         // function testSave()
         // {
