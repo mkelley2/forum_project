@@ -241,34 +241,7 @@
             $this->assertEquals($new_comment2, $result);
         }
 
-        // function testFind()
-        // {
-        //     //Arrange
-        //     $title = "War on Terror Revisited: Trumps America";
-        //     $genre = "Non-fiction";
-        //     $ISBN = "123456789104";
-        //     $total = 3;
-        //     $available = 0;
-        //     $checked_out = 3;
-        //     $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out);
-        //     $test_book->save();
-        //
-        //     $title2 = "Stas Wars: The Empire Strikes Back";
-        //     $genre2 = "Non-fiction";
-        //     $ISBN2 = "123456789104";
-        //     $total2 = 3;
-        //     $available2 = 0;
-        //     $checked_out2 = 3;
-        //     $test_book2 = new Book($title2, $genre2, $ISBN2, $total2, $available2, $checked_out2);
-        //     $test_book2->save();
-        //
-        //     //Act
-        //     $result = Book::find($test_book->getId());
-        //
-        //     //Assert
-        //     $this->assertEquals($test_book, $result);
-        // }
-        //
+        
         // function testAddAuthor()
         // {
         //     //Arrange
