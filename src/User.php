@@ -118,8 +118,19 @@
 
         function save()
         {
-              $GLOBALS['DB']->exec("INSERT INTO users (username, password, user_photo, rank, bio, location_city, location_state, location_country, user_score, creation_date) VALUES ( '{$this->getUsername()}', '{$this->getPassword()}', '{$this->getUser_photo()}', {$this->getRank()}, '{$this->getBio()}', '{$this->getLocation_city()}', '{$this->getLocation_state()}', '{$this->getLocation_country()}', {$this->getCreation_date});");
-              $this->user_id = $GLOBALS['DB']->lastInsertId();
+            $GLOBALS['DB']->exec("INSERT INTO users (username, password, user_photo, rank, bio, location_city, location_state, location_country, user_score, creation_date) VALUES (
+                '{$this->getUsername()}',
+                '{$this->getPassword()}',
+                '{$this->getUser_photo()}',
+                '{$this->getRank()}',
+                '{$this->getBio()}',
+                '{$this->getLocation_city()}',
+                '{$this->getLocation_state()}',
+                '{$this->getLocation_country()}',
+                '{$this->getUser_score()}',
+                '{$this->getCreation_date()}'
+            );");
+            $this->user_id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
@@ -131,7 +142,7 @@
                 $password = $user['password'];
                 $user_photo = $user['user_photo'];
                 $rank = $user['rank'];
-                $bio = $user['user'];
+                $bio = $user['bio'];
                 $location_city = $user['location_city'];
                 $location_state = $user['location_state'];
                 $location_country = $user['location_country'];
@@ -173,9 +184,9 @@
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM users WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM comments WHERE user_id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM threads WHERE user_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM users WHERE user_id = {$this->getId()};");
+            // $GLOBALS['DB']->exec("DELETE FROM comments WHERE user_id = {$this->getId()};");
+            // $GLOBALS['DB']->exec("DELETE FROM threads WHERE user_id = {$this->getId()};");
         }
 
         function getComments()
