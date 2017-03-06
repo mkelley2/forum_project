@@ -6,29 +6,53 @@
     */
 
     require_once "src/Comment.php";
-    require_once "src/User.php";
-    require_once "src/Category.php";
-    require_once "src/Thread.php";
 
     $server = 'mysql:host=localhost:8889;dbname=forum_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    class BookTest extends PHPUnit_Framework_TestCase
+    class CommentTest extends PHPUnit_Framework_TestCase
     {
 
-        protected function tearDown()
-        {
-            Author::deleteAll();
-            Book::deleteAll();
-            Patron::deleteAll();
-        }
+        // protected function tearDown()
+        // {
+        //
+        // }
 
         function test_construct()
 
         {
+            // Arrange
+            $user_id = "KittenFartz";
+            $comment = "I thought the frs was terrible!";
+            $parent_id = 3;
+            $score = 345;
+            $post_time = " 2005-08-15T15:52:01+00:00";
+            $init_comment_id = 4;
+            $thread_id = 2;
+            $comment_id = null;
+            $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id, $comment_id);
 
+            // Act
+            $result1 = $new_comment->getUserId();
+            $result2 = $new_comment->getComment();
+            $result3 = $new_comment->getparentId();
+            $result4 = $new_comment->getScore();
+            $result5 = $new_comment->getPostTime();
+            $result6 = $new_comment->getInitCommentId();
+            $result7 = $new_comment->getThreadId();
+            $result8 = $new_comment->getCommentId();
+
+            // Assert
+            $this->assertEquals($user_id, $result1);
+            $this->assertEquals($comment, $result2);
+            $this->assertEquals($parent_id, $result3);
+            $this->assertEquals($score, $result4);
+            $this->assertEquals($post_time, $result5);
+            $this->assertEquals($init_comment_id, $result6);
+            $this->assertEquals($thread_id, $result7);
+            $this->assertEquals($comment_id, $result8);
 
         }
 

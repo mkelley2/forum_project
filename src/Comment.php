@@ -19,13 +19,12 @@
             $this->post_time = $post_time;
             $this->init_comment_id = $init_comment_id;
             $this->thread_id = $thread_id;
-            $this->id = $id;
             $this->comment_id = $comment_id;
         }
 
         function setUserId($new_user_id)
         {
-            $this->user_id = (string) $new_user_id;
+            $this->user_id = (int) $new_user_id;
         }
 
         function getUserId()
@@ -43,12 +42,12 @@
             return $this->comment;
         }
 
-        function setparent_id($new_parent_id)
+        function setParentId($new_parent_id)
         {
             $this->parent_id = (string) $new_parent_id;
         }
 
-        function getparent_id()
+        function getparentId()
         {
             return $this->parent_id;
         }
@@ -61,7 +60,7 @@
 
         function setScore($new_score)
         {
-            $this->score = (string) $new_score;
+            $this->score = (int) $new_score;
         }
 
         function getScore()
@@ -71,7 +70,7 @@
 
         function setPostTime($new_post_time)
         {
-            $this->post_time = (string) $new_post_time;
+            $this->post_time = $new_post_time;
         }
 
         function getPostTime()
@@ -87,6 +86,11 @@
         function getThreadId()
         {
             $this->thread_id;
+        }
+
+        function setThreadId($new_thread_id)
+        {
+            $this->thread_id =;
         }
 
         function getCommentId()
