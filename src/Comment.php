@@ -118,6 +118,7 @@
         function updateScore($new_score)
         {
             $GLOBALS['DB']->exec("UPDATE comments SET score = ( score + {$new_score}) WHERE comment_id = {$this->getCommentId()};");
+            $this->setScore($new_score);
         }
 
         function delete()

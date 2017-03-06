@@ -156,6 +156,29 @@
             // Assert
             $this->assertEquals($new_text, $new_comment->getComment());
         }
+
+        function test_updateScore()
+        {
+            // Arrange
+            $user_id = 5;
+            $comment = "I thought the frs was terrible";
+            $parent_id = 6;
+            $score = 345;
+            $post_time = '2005-08-15 15:52:01';
+            $init_comment_id = 7;
+            $thread_id = 8;
+            $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id);
+            $new_comment->save();
+
+            $new_score =  425;
+
+            // Act
+            $new_comment->updateScore($new_score);
+
+            // Assert
+            $this->assertEquals($new_score, $new_comment->getScore());
+        }
+
         // function testUpdate()
         // {
         //     //Arrange
