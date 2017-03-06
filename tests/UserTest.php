@@ -16,59 +16,113 @@
     $DB = new PDO($server, $username, $password);
 
 
-    class PatronTest extends PHPUnit_Framework_TestCase
+    class UserTest extends PHPUnit_Framework_TestCase
     {
 
         protected function tearDown()
         {
-            Author::deleteAll();
-            Book::deleteAll();
-            Patron::deleteAll();
+            User::deleteAll();
         }
 
-        function testGetFirstName()
+        function testGetUserName()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
+            $testGetUserName = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
 
             //Act
-            $result = $testGetFirstName->getFirstName();
+            $result = $testGetUserName->getUserName();
 
             //Assert
-            $this->assertEquals($first_name, $result);
+            $this->assertEquals($username, $result);
 
         }
 
-        function testSetFirstName()
+        function testSetUserName()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
+            $testGetUserName = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
 
             //Act
-            $testGetFirstName->setFirstName("Mike");
-            $result = $testGetFirstName->getFirstName();
+            $testGetUserName->setUsername("Bob");
+            $result = $testGetUserName->getUserName();
 
             //Assert
-            $this->assertEquals("Mike", $result);
+            $this->assertEquals("Bob", $result);
         }
+
+        // function testGetUserPassword()
+        // {
+        //     //Arrange
+        //     $password = "andand";
+        //
+        //
+        //     $testGetPassword = new User($password);
+        //
+        //     //Act
+        //     $result = $testGetPassword->getPassword();
+        //
+        //     //Assert
+        //     $this->assertEquals($password, $result);
+        //
+        // }
+        //
+        // function testSetUserPassword()
+        // {
+        //     //Arrange
+        //     $password = "andand";
+        //
+        //
+        //     $testSetPassword = new User($password);
+        //     $new_password = "copy";
+        //     //Act
+        //     $testGetFirstName->setPassword("copy");
+        //     $result = $testGetFirstName->getPassword();
+        //
+        //     //Assert
+        //     $this->assertEquals("copy", $result);
+        // }
 
         function testGetId()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
             $id = 1;
 
-            $testGetFirstName = new Patron($first_name, $last_name, $id);
+            $testUser = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create, $id);
 
             //Act
-            $result = $testGetFirstName->getId();
+            $result = $testUser->getId();
 
             //Assert
             $this->assertEquals($id, $result);
@@ -77,251 +131,207 @@
         function testSave()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
-            $testGetFirstName->save();
+            $testUser = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
+            $testUser->save();
 
             //Act
-            $result = Patron::getAll();
+            $result = User::getAll();
 
             //Assert
-            $this->assertEquals($testGetFirstName, $result[0]);
+            $this->assertEquals($testUser, $result[0]);
         }
 
         function testUpdate()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
-            $testGetFirstName->save();
+            $testUser = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
+            $testUser->save();
 
-            $new_first_name = "Mike";
-            $new_last_name = "Smith";
+            $new_city = "Mike";
+            $new_state = "Mike";
+            $new_country = "Mike";
+            $new_bio = "Mike";
 
             //Act
-            $testGetFirstName->update($new_first_name, $new_last_name);
+            $testUser->update($new_city, $new_state, $new_country, $new_bio);
 
             //Assert
-            $this->assertEquals($new_first_name, $testGetFirstName->getFirstName());
+            $this->assertEquals($new_city, $testUser->getLocation_city());
         }
 
-        function testDeletePatron()
+        function testDeleteUser()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
-            $testGetFirstName->save();
+            $testUser = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
+            $testUser->save();
 
-            $first_name2 = "John";
-            $last_name2 = "Johnson";
+            $username2 = "John";
+            $password2 = "pwq";
+            $user_photo2 = "imgur.com/fsdfs";
+            $rank2 = "normal";
+            $bio2 = "I am John";
+            $city2 = "Seatlle";
+            $state2 = "WA";
+            $country2 = "USA";
+            $score2 = 12324;
+            $create2 = "2017-02-01 12:01:00";
 
-            $testGetFirstName2 = new Patron($first_name2, $last_name2);
-            $testGetFirstName2->save();
+            $testUser2 = new User($username2, $password2, $user_photo2, $rank2, $bio2, $city2, $state2, $country2, $score2, $create2);
+            $testUser2->save();
 
             //Act
-            $testGetFirstName->delete();
+            $testUser->delete();
 
             //Assert
-            $this->assertEquals([$testGetFirstName2], Patron::getAll());
+            $this->assertEquals([$testUser2], User::getAll());
         }
 
         function testGetAll()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
-            $enroll_date = "2017-12-12";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
-            $testGetFirstName->save();
+            $testUser = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
+            $testUser->save();
 
-            $first_name2 = "John";
-            $last_name2 = "Johnson";
-            $enroll_date2 = "2017-12-12";
+            $username2 = "John";
+            $password2 = "pwq";
+            $user_photo2 = "imgur.com/fsdfs";
+            $rank2 = "normal";
+            $bio2 = "I am John";
+            $city2 = "Seatlle";
+            $state2 = "WA";
+            $country2 = "USA";
+            $score2 = 12324;
+            $create2 = "2017-02-01 12:01:00";
 
-            $testGetFirstName2 = new Patron($first_name2, $last_name2);
-            $testGetFirstName2->save();
+            $testUser2 = new User($username2, $password2, $user_photo2, $rank2, $bio2, $city2, $state2, $country2, $score2, $create2);
+            $testUser2->save();
 
             //Act
-            $result = Patron::getAll();
+            $result = User::getAll();
 
             //Assert
-            $this->assertEquals([$testGetFirstName, $testGetFirstName2], $result);
+            $this->assertEquals([$testUser, $testUser2], $result);
         }
 
         function testDeleteAll()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
-            $enroll_date = "2017-12-12";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
-            $testGetFirstName->save();
+            $testUser = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
+            $testUser->save();
 
-            $first_name2 = "John";
-            $last_name2 = "Johnson";
-            $enroll_date2 = "2017-12-12";
+            $username2 = "John";
+            $password2 = "pwq";
+            $user_photo2 = "imgur.com/fsdfs";
+            $rank2 = "normal";
+            $bio2 = "I am John";
+            $city2 = "Seatlle";
+            $state2 = "WA";
+            $country2 = "USA";
+            $score2 = 12324;
+            $create2 = "2017-02-01 12:01:00";
 
-            $testGetFirstName2 = new Patron($first_name2, $last_name2);
-            $testGetFirstName2->save();
+            $testUser2 = new User($username2, $password2, $user_photo2, $rank2, $bio2, $city2, $state2, $country2, $score2, $create2);
+            $testUser2->save();
 
             //Act
-            Patron::deleteAll();
+            User::deleteAll();
 
             //Assert
-            $result = Patron::getAll();
+            $result = User::getAll();
             $this->assertEquals([], $result);
         }
 
         function testFind()
         {
             //Arrange
-            $first_name = "Mark";
-            $last_name = "Johnson";
-            $enroll_date = "2017-12-12";
+            $username = "Mark";
+            $password = "pw";
+            $user_photo = "imgur.com/dasdasd";
+            $rank = "admin";
+            $bio = "I am Mark";
+            $city = "Portland";
+            $state = "OR";
+            $country = "USA";
+            $score = 372193;
+            $create = "2017-01-01 12:00:00";
 
-            $testGetFirstName = new Patron($first_name, $last_name);
-            $testGetFirstName->save();
+            $testUser = new User($username, $password, $user_photo, $rank, $bio, $city, $state, $country, $score, $create);
+            $testUser->save();
 
-            $first_name2 = "John";
-            $last_name2 = "Johnson";
-            $enroll_date2 = "2017-12-12";
+            $username2 = "John";
+            $password2 = "pwq";
+            $user_photo2 = "imgur.com/fsdfs";
+            $rank2 = "normal";
+            $bio2 = "I am John";
+            $city2 = "Seatlle";
+            $state2 = "WA";
+            $country2 = "USA";
+            $score2 = 12324;
+            $create2 = "2017-02-01 12:01:00";
 
-            $testGetFirstName2 = new Patron($first_name2, $last_name2);
-            $testGetFirstName2->save();
-
-            //Act
-            $result = Patron::find($testGetFirstName->getId());
-
-            //Assert
-            $this->assertEquals($testGetFirstName, $result);
-        }
-
-        function testAddBook()
-        {
-            //Arrange
-            $title = "1984";
-            $genre = "Non-fiction";
-            $ISBN = "123456789101";
-            $total = 3;
-            $available = 1;
-            $checked_out = 2;
-
-            $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out);
-            $test_book->save();
-
-            $first_name = "Mark";
-            $last_name = "Johnson";
-
-            $test_patron = new Patron($first_name, $last_name);
-            $test_patron->save();
+            $testUser2 = new User($username2, $password2, $user_photo2, $rank2, $bio2, $city2, $state2, $country2, $score2, $create2);
+            $testUser2->save();
 
             //Act
-            $test_patron->addBook($test_book);
+            $result = User::find($testUser->getId());
 
             //Assert
-            $this->assertEquals([$test_book], $test_patron->getBooks());
-        }
-
-        function testGetBooks()
-        {
-            //Arrange
-            $title = "War on Terror Revisited: Trumps America";
-            $genre = "Non-fiction";
-            $ISBN = "123456789104";
-            $total = 3;
-            $available = 1;
-            $checked_out = 2;
-            $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out);
-            $test_book->save();
-
-            $title2 = "Stas Wars: The Empire Strikes Back";
-            $genre2 = "Non-fiction";
-            $ISBN2 = "123456789104";
-            $total2 = 3;
-            $available2 = 0;
-            $checked_out2 = 3;
-            $test_book2 = new Book($title2, $genre2, $ISBN2, $total2, $available2, $checked_out2);
-            $test_book2->save();
-
-            $first_name = "Mark";
-            $last_name = "Johnson";
-
-            $test_patron = new Patron($first_name, $last_name);
-            $test_patron->save();
-
-            //Act
-            $test_patron->addBook($test_book);
-            $test_patron->addBook($test_book2);
-
-            //Assert
-            $this->assertEquals($test_patron->getBooks(), [$test_book, $test_book2]);
-        }
-
-        function testFindBooks()
-        {
-            //Arrange
-            $title = "War on Terror Revisited: Trumps America";
-            $genre = "Non-fiction";
-            $ISBN = "123456789104";
-            $total = 3;
-            $available = 1;
-            $checked_out = 2;
-            $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out);
-            $test_book->save();
-
-            $id = $test_book->getId();
-
-            $title2 = "Stas Wars: The Empire Strikes Back";
-            $genre2 = "Non-fiction";
-            $ISBN2 = "123456789104";
-            $total2 = 3;
-            $available2 = 0;
-            $checked_out2 = 3;
-            $test_book2 = new Book($title2, $genre2, $ISBN2, $total2, $available2, $checked_out2);
-            $test_book2->save();
-
-            $first_name = "Mark";
-            $last_name = "Johnson";
-
-            $testAuthor = new Author($first_name, $last_name);
-            $testAuthor->save();
-
-            $testAuthor->addBook($test_book);
-
-            $first_name2 = "Jim";
-            $last_name2 = "Jackson";
-
-            $testAuthor2 = new Author($first_name2, $last_name2);
-            $testAuthor2->save();
-
-            $testAuthor2->addBook($test_book2);
-
-            $patron_first_name = "Sam";
-            $patron_last_name = "Waters";
-
-            $test_patron = new Patron($patron_first_name, $patron_last_name);
-            $test_patron->save();
-
-            $test_patron->addBook($test_book);
-            $test_patron->addBook($test_book2);
-
-            $date = "2017-03-02";
-            $due = "2017-03-16";
-
-            //Act
-
-            $test_patron->findBooks();
-
-            //Assert
-            $this->assertEquals($test_patron->findBooks(),array('title'=>$title, 'id'=>$id, 'first_name'=>$first_name, 'last_name'=>$last_name, 'due'=> $due, 'check'=>$date));
+            $this->assertEquals($testUser, $result);
         }
     }
 

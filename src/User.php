@@ -1,154 +1,213 @@
 <?php
     class User
     {
-        private $first_name;
-        private $last_name;
-        private $id;
+        private $username;
+        private $password;
+        private $user_photo;
+        private $rank;
+        private $bio;
+        private $location_city;
+        private $location_state;
+        private $location_country;
+        private $user_score;
+        private $creation_date;
+        private $user_id;
 
-        function __construct($first_name, $last_name, $id = null)
+        function __construct($username, $password, $user_photo, $rank, $bio, $location_city, $location_state, $location_country, $user_score, $creation_date, $user_id = null)
         {
-            $this->first_name = $first_name;
-            $this->last_name = $last_name;
-            $this->id = $id;
+
+            $this->username = $username;
+            $this->password = $password;
+            $this->user_photo = $user_photo;
+            $this->rank = $rank;
+            $this->bio = $bio;
+            $this->location_city = $location_city;
+            $this->location_state = $location_state;
+            $this->location_country = $location_country;
+            $this->user_score = $user_score;
+            $this->creation_date = $creation_date;
+            $this->user_id = $user_id;
         }
 
-        function setFirstName($new_first_name)
-        {
-            $this->first_name = (string) $new_first_name;
+
+        function getUsername(){
+            return $this->username;
         }
 
-        function getFirstName()
-        {
-            return $this->first_name;
+        function setUsername($username){
+            $this->username = $username;
         }
 
-        function setLastName($new_last_name)
-        {
-            $this->last_name = (string) $new_last_name;
+        function getPassword(){
+            return $this->password;
         }
 
-        function getLastName()
-        {
-            return $this->last_name;
+        function setPassword($password){
+            $this->password = $password;
         }
 
-        function getId()
-        {
-            return $this->id;
+        function getUser_photo(){
+            return $this->user_photo;
         }
+
+        function setUser_photo($user_photo){
+            $this->user_photo = $user_photo;
+        }
+
+        function getRank(){
+            return $this->rank;
+        }
+
+        function setRank($rank){
+            $this->rank = $rank;
+        }
+
+        function getBio(){
+            return $this->bio;
+        }
+
+        function setBio($bio){
+            $this->bio = $bio;
+        }
+
+        function getLocation_city(){
+            return $this->location_city;
+        }
+
+        function setLocation_city($location_city){
+            $this->location_city = $location_city;
+        }
+
+        function getLocation_state(){
+            return $this->location_state;
+        }
+
+        function setLocation_state($location_state){
+            $this->location_state = $location_state;
+        }
+
+        function getLocation_country(){
+            return $this->location_country;
+        }
+
+        function setLocation_country($location_country){
+            $this->location_country = $location_country;
+        }
+
+        function getUser_score(){
+            return $this->user_score;
+        }
+
+        function setUser_score($user_score){
+            $this->user_score = $user_score;
+        }
+
+        function getCreation_date(){
+            return $this->creation_date;
+        }
+
+        function setCreation_date($creation_date){
+            $this->creation_date = $creation_date;
+        }
+
+        function getId(){
+            return $this->user_id;
+        }
+
+
 
         function save()
         {
-              $GLOBALS['DB']->exec("INSERT INTO authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");
-              $this->id = $GLOBALS['DB']->lastInsertId();
+            $GLOBALS['DB']->exec("INSERT INTO users (username, password, user_photo, rank, bio, location_city, location_state, location_country, user_score, creation_date) VALUES (
+                '{$this->getUsername()}',
+                '{$this->getPassword()}',
+                '{$this->getUser_photo()}',
+                '{$this->getRank()}',
+                '{$this->getBio()}',
+                '{$this->getLocation_city()}',
+                '{$this->getLocation_state()}',
+                '{$this->getLocation_country()}',
+                '{$this->getUser_score()}',
+                '{$this->getCreation_date()}'
+            );");
+            $this->user_id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
         {
-            $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors ORDER BY last_name ASC;");
-            $authors = array();
-            foreach($returned_authors as $author) {
-                $first_name = $author['first_name'];
-                $last_name = $author['last_name'];
-                $id = $author['id'];
-                $new_author = new Author($first_name, $last_name, $id);
-                array_push($authors, $new_author);
+            $returned_users = $GLOBALS['DB']->query("SELECT * FROM users;");
+            $users = array();
+            foreach($returned_users as $user) {
+                $username = $user['username'];
+                $password = $user['password'];
+                $user_photo = $user['user_photo'];
+                $rank = $user['rank'];
+                $bio = $user['bio'];
+                $location_city = $user['location_city'];
+                $location_state = $user['location_state'];
+                $location_country = $user['location_country'];
+                $user_score = $user['user_score'];
+                $creation_date = $user['creation_date'];
+                $id = $user['user_id'];
+                $new_user = new User($username, $password, $user_photo, $rank, $bio, $location_city, $location_state, $location_country, $user_score, $creation_date, $id);
+                array_push($users, $new_user);
             }
-            return $authors;
+            return $users;
         }
 
         static function deleteAll()
         {
-          $GLOBALS['DB']->exec("DELETE FROM authors;");
+          $GLOBALS['DB']->exec("DELETE FROM users;");
         }
 
         static function find($search_id)
         {
-            $found_author = null;
-            $authors = Author::getAll();
-            foreach($authors as $author) {
-                $author_id = $author->getId();
-                if ($author_id == $search_id) {
-                  $found_author = $author;
+            $found_user = null;
+            $users = User::getAll();
+            foreach($users as $user) {
+                $user_id = $user->getId();
+                if ($user_id == $search_id) {
+                  $found_user = $user;
                 }
             }
-            return $found_author;
+            return $found_user;
         }
 
-        static function findAuthor($search_first, $search_last)
+        function update($city, $state, $country, $bio)
         {
-            $found_author = null;
-            $authors = Author::getAll();
-            foreach($authors as $author) {
-                $author_first = $author->getFirstName();
-                $author_last = $author->getLastName();
-                if (strtolower($author_first) == strtolower($search_first) && strtolower($author_last) == strtolower($search_last)) {
-                  $found_author = $author;
-                }
-            }
-            return $found_author;
-        }
-
-        function update($new_first_name, $new_last_name)
-        {
-            $GLOBALS['DB']->exec("UPDATE authors SET first_name = '{$new_first_name}', last_name = '{$new_last_name}' WHERE id = {$this->getId()};");
-            $this->setFirstName($new_first_name);
-            $this->setLastName($new_last_name);
+            $GLOBALS['DB']->exec("UPDATE users SET location_city = '{$city}', location_state = '{$state}', location_country = '{$country}', bio = '{$bio}' WHERE user_id = {$this->getId()};");
+            $this->setBio($bio);
+            $this->setLocation_city($city);
+            $this->setLocation_state($state);
+            $this->setLocation_country($country);
         }
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE author_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM users WHERE user_id = {$this->getId()};");
+            // $GLOBALS['DB']->exec("DELETE FROM comments WHERE user_id = {$this->getId()};");
+            // $GLOBALS['DB']->exec("DELETE FROM threads WHERE user_id = {$this->getId()};");
         }
 
-        function removeBook($book)
+        function getComments()
         {
-            $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE book_id = {$book->getId()} and author_id = {$this->getId()};");
-        }
+            $return_comments = $GLOBALS['DB']->query("SELECT * FROM comments where user_id = {$this->getId()};");
 
-        function addBook($book)
-        {
-            $GLOBALS['DB']->exec("INSERT INTO authors_books (book_id, author_id) VALUES ({$book->getId()}, {$this->getId()});");
-        }
+            $comments = array();
 
-        function getBooks()
-        {
-            $return_books = $GLOBALS['DB']->query("SELECT books.* FROM authors JOIN authors_books ON (authors.id = authors_books.author_id) JOIN books ON (authors_books.book_id = books.id) WHERE authors.id = {$this->getId()};");
-
-            $books = array();
-
-            foreach ($return_books as $book){
-                $name = $book['title'];
-                $genre = $book['genre'];
-                $ISBN = $book['ISBN'];
-                $total = $book['total'];
-                $available = $book['available'];
-                $checked_out = $book['checked_out'];
-                $return_id = $book['id'];
-                $new_book = new Book($name, $genre, $ISBN, $total, $available, $checked_out, $return_id);
-                array_push($books, $new_book);
+            foreach ($return_comments as $comment){
+                $user_id = $comment['user_id'];
+                $comment_text = $comment['comment'];
+                $parent_id = $comment['parent_id'];
+                $score = $comment['score'];
+                $post_time = $comment['post_time'];
+                $init_commit_id = $comment['init_commit_id'];
+                $thread_id = $comment['thread_id'];
+                $comment_id = $comment['comment_id'];
+                $new_comment = new User($user_id, $comment_text, $parent_id, $score, $post_time, $init_commit_id, $thread_id, $comment_id);
+                array_push($comments, $new_comment);
             }
-            return $books;
-        }
-
-        static function searchFor($search_term)
-        {
-            $matches = array();
-            $search_term = preg_replace("/[^[:alnum:][:space:]]/u", '', $search_term);
-            $search_term = explode(" ", strtolower($search_term));
-            $end = end($search_term);
-
-            $query = $GLOBALS['DB']->query("SELECT * FROM authors WHERE first_name = '{$search_term[0]}' OR last_name = '{$end}' OR first_name = '{$end}';");
-            foreach ($query as $match) {
-                $return_first = $match['first_name'];
-                $return_last = $match['last_name'];
-                $return_enroll = $match['enroll_date'];
-                $return_id = $match['id'];
-                $new_author = new Author($return_first, $return_last, $return_enroll, $return_id);
-                array_push($matches, $new_author);
-            }
-            return $matches;
+            return $comments;
         }
     }
 ?>
