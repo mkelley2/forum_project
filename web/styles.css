@@ -1,0 +1,23 @@
+body, h1 {
+    font-family: 'Slabo 27px', serif;
+}
+
+.title {
+    font-family: 'Slabo 27px', serif;
+    font-size: 2em;
+    letter-spacing: 1px;
+}
+
+.tbl-edit, .tbl-del {
+    float: right;
+    margin-bottom: 0;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
+
+#newCopies {
+    color: black;
+}

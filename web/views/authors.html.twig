@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    {% include '/components/head.html.twig' %}
+    <body>
+        <div class="container">
+            {% include '/components/navbar.html.twig' %}
+
+            <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Author Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% set count = 0 %}
+                      {% if authors is not empty %}
+                      {% for author in authors %}
+                      {% set count = count + 1%}
+                      <tr>
+                          <td>{{count}}</td>
+                          <td><a href="/authors/{{author.getId}}">{{author.getLastName}}, {{author.getFirstName}}</a></td>
+                          <td>
+                              <form class="form-group tbl-del" action="/delete-author/{{author.getId}}" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
+                              </form>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      {%endif%}
+                  </tbody>
+                </table>
+
+                <form class="form-horizontal well" action="/authors" method="post">
+                  <fieldset>
+                    <legend>Add Author</legend>
+                    <div class="form-group">
+                      <label for="inputFirstName" class="col-lg-2 control-label">First Name</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputFirstName" placeholder="First Name">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputLastName" class="col-lg-2 control-label">Last Name</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputLastName" placeholder="Last Name">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+
+
+
+            {% include '/components/footer.html.twig' %}
+        </div>
+    </body>
+</html>

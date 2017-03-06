@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    {% include '/components/head.html.twig' %}
+    <body>
+        <div class="container">
+            {% include '/components/navbar.html.twig' %}
+
+            <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Book Title</th>
+                      <th>Genre</th>
+                      <th>ISBN</th>
+                      <th>Total Copies</th>
+                      <th>Available Copies</th>
+                      <th>Checked Out Copies</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% set count = 0 %}
+                      {% if books is not empty %}
+                      {% for book in books %}
+                      {% set count = count + 1%}
+                      <tr>
+                          <td>{{count}}</td>
+                          <td><a href="/books/{{book.getId}}">{{book.getTitle}}</a></td>
+                          <td>{{book.getGenre}}</td>
+                          <td>{{book.getISBN}}</td>
+                          <td>{{book.getTotal}}</td>
+                          <td>{{book.getAvailable}}</td>
+                          <td>{{book.getCheckedOut}}</td>
+                          <td>
+                              <form class="form-group tbl-del" action="/delete-book/{{book.getId}}" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
+                              </form>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      {%endif%}
+                  </tbody>
+                </table>
+
+                <form class="form-horizontal well" action="/books" method="post">
+                  <fieldset>
+                    <legend>Add Book</legend>
+                    <div class="form-group">
+                      <label for="inputTitle" class="col-lg-2 control-label">Title</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputTitle" placeholder="Title">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputGenre" class="col-lg-2 control-label">Genre</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputGenre" placeholder="Genre">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputISBN" class="col-lg-2 control-label">ISBN</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputISBN" placeholder="ISBN">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputTotal" class="col-lg-2 control-label">Total Copies</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputTotal" placeholder="Total Copies">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputAvailable" class="col-lg-2 control-label">Available Copies</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputAvailable" placeholder="Available Copies">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputCheckedOut" class="col-lg-2 control-label">Checked Out Copies</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputCheckedOut" placeholder="Checked Out Copies">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputAuthor" class="col-lg-2 control-label">Author</label>
+                      <div class="col-lg-10">
+                        <select type="text" class="form-control" name="inputAuthor">
+                            {% if authors is not empty %}
+                                {% for author in authors %}
+                                <option value="{{author.getId}}">{{author.getLastName}}, {{author.getFirstName}}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+
+
+
+            {% include '/components/footer.html.twig' %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    {% include '/components/head.html.twig' %}
+    <body>
+        <div class="container">
+            {% include '/components/navbar.html.twig' %}
+
+            <h1 class="title">{{patron.getLastName}}, {{patron.getFirstName}}</h1>
+            <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Due Date</th>
+                        <th>Date Checked Out</th>
+                        <th>Turn In</th>
+                        <th>Renew</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                          {% if found_books is not empty %}
+                          {% set count = 0 %}
+                          {% for book in found_books %}
+                          {% set count = count + 1 %}
+                          <tr>
+                          <td>{{ count }}</td>
+                          <td>{{ book.title }}</td>
+                          <td>{{ book.last_name }}, {{ book.first_name }}</td>
+                          <td>{{ book.due }}</td>
+                          <td>{{ book.check }}</td>
+
+                          <td>
+                              <form class="form-group" action="/turn-in/{{book.id}}/{{book.join_id}}" method="post">
+                                  <input type="hidden" name="_method" value="delete">
+                                  <button type="submit" class="btn btn-xs btn-info" name="button">Turn In</button>
+                              </form>
+                          </td>
+                          <td>
+                              <form class="form-group" action="/renew/{{book.id}}/{{book.join_id}}" method="post">
+                                  <input type="hidden" name="_method" value="patch">
+                                  <button type="submit" class="btn btn-xs btn-warning" name="button">Renew</button>
+                              </form>
+                          </td>
+                      </tr>
+                          {% endfor %}
+                          {% endif %}
+                  </tbody>
+                </table>
+
+                <form class="form-horizontal well" action="/patrons/{{patron.getId}}" method="post">
+                  <fieldset>
+                    <legend>Add Book</legend>
+                    <div class="form-group">
+                      <label for="inputTitle" class="col-lg-1 control-label">Title</label>
+                      <div class="col-lg-10">
+                          <select class="form-control" id="select"name="bookDrop" >
+                              {% if all_books is not empty %}
+                                  {% for book in all_books %}
+                                  <option name="bookDrop" value='{{book.getId}}'>{{book.getTitle}}</option>
+                                  {% endfor %}
+                              {% endif %}
+                          </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-5 col-lg-offset-1">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+
+
+
+            {% include '/components/footer.html.twig' %}
+        </div>
+    </body>
+</html>
