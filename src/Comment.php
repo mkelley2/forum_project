@@ -1,235 +1,219 @@
 <?php
     class Comment
     {
-        private $title;
-        private $genre;
-        private $ISBN;
-        private $total;
-        private $available;
-        private $checked_out;
-        private $id;
+        private $user_id;
+        private $comment;
+        private $parent_id;
+        private $score;
+        private $post_time;
+        private $init_comment_id;
+        private $thread_id;
+        private $comment_id;
 
-        function __construct($title, $genre, $ISBN, $total, $available, $checked_out, $id = null)
+        function __construct($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id, $comment_id = null)
         {
-            $this->title = $title;
-            $this->genre = $genre;
-            $this->ISBN = $ISBN;
-            $this->total = $total;
-            $this->available = $available;
-            $this->checked_out = $checked_out;
+            $this->user_id = $user_id;
+            $this->comment = $comment;
+            $this->parent_id = $parent_id;
+            $this->score = $score;
+            $this->post_time = $post_time;
+            $this->init_comment_id = $init_comment_id;
+            $this->thread_id = $thread_id;
             $this->id = $id;
+            $this->comment_id = $comment_id;
         }
 
-        function setTitle($new_title)
+        function setUserId($new_user_id)
         {
-            $this->title = (string) $new_title;
+            $this->user_id = (string) $new_user_id;
         }
 
-        function getTitle()
+        function getUserId()
         {
-            return $this->title;
+            return $this->user_id;
         }
 
-        function setGenre($new_genre)
+        function setComment($new_comment)
         {
-            $this->genre = (string) $new_genre;
+            $this->comment = (string) $new_comment;
         }
 
-        function getGenre()
+        function getComment()
         {
-            return $this->genre;
+            return $this->comment;
         }
 
-        function setISBN($new_ISBN)
+        function setparent_id($new_parent_id)
         {
-            $this->ISBN = (string) $new_ISBN;
+            $this->parent_id = (string) $new_parent_id;
         }
 
-        function getISBN()
+        function getparent_id()
         {
-            return $this->ISBN;
+            return $this->parent_id;
         }
 
-        function setTotal($new_total)
+        function setCommentId($new_comment_id)
         {
-            $this->total = (string) $new_total;
+            $this->comment_id = (string) $new_comment_id;
         }
 
-        function getTotal()
+
+        function setScore($new_score)
         {
-            return $this->total;
+            $this->score = (string) $new_score;
         }
 
-        function setAvailable($new_available)
+        function getScore()
         {
-            $this->available = (string) $new_available;
+            return $this->score;
         }
 
-        function getAvailable()
+        function setPostTime($new_post_time)
         {
-            return $this->available;
+            $this->post_time = (string) $new_post_time;
         }
 
-        function setCheckedOut($new_checked_out)
+        function getPostTime()
         {
-            $this->checked_out = (string) $new_checked_out;
+            return $this->post_time;
         }
 
-        function getCheckedOut()
+        function getInitCommentId()
         {
-            return $this->checked_out;
+            return $this->init_comment_id;
         }
 
-        function getId()
+        function getThreadId()
         {
-            return $this->id;
+            $this->thread_id;
         }
+
+        function getCommentId()
+        {
+            return $this->comment_id;
+        }
+
+
+        // CRUD functions
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO books (title, genre, ISBN, total, available, checked_out) VALUES ('{$this->getTitle()}',
-            '{$this->getGenre()}',
-            '{$this->getISBN()}',
-            {$this->getTotal()},
-            {$this->getAvailable()},
-            {$this->getCheckedOut()});");
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $GLOBALS['DB']->exec("INSERT INTO comments (user_id, comment, parent_id, comment_id, score, post_time, init_comment_id, thread_id) VALUES ('{$this->getUserId()}',
+            '{$this->getComment()}',
+            '{$this->getparent_id()}',
+            {$this->getScore()},
+            {$this->getPostTime()}),
+            {$this->getInitCommentId()},
+            {$this->getThreadId()};");
+            $this->comment_id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function update($new_total)
+        function updateComment($new_comment)
         {
-            $GLOBALS['DB']->exec("UPDATE books SET total = (total + {$new_total}), available = (available + {$new_total})  WHERE id = {$this->getId()};");
+                $GLOBALS['DB']->exec("UPDATE comments SET comment = '{$new_comment}' WHERE comment_id = {$this->getCommentId()};");
+        }
 
-            $total = $GLOBALS['DB']->query("SELECT total FROM books WHERE id = {$this->getId()}");
-            $new_num = null;
-            foreach ($total as $num) {
-                $new_num = $num['total'];
-            }
-            $this->setTotal($new_num);
+        function updateScore($new_score)
+        {
+            $GLOBALS['DB']->exec("UPDATE comments SET score = ( score + {$new_score}) WHERE comment_id = {$this->getCommentId()};");
         }
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM patrons_books WHERE book_id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE book_id = {$this->getId()};");
-        }
+            $GLOBALS['DB']->exec("DELETE FROM comments WHERE id = {$this->getCommentId()};");
 
-        function turnIn()
-        {
-            $GLOBALS['DB']->exec("UPDATE books SET available = (available + 1), checked_out = (checked_out - 1)  WHERE id = {$this->getId()};");
-
-            $available = $GLOBALS['DB']->query("SELECT available, checked_out FROM books WHERE id = {$this->getId()}");
-            $new_avail = null;
-            $new_check = null;
-            foreach ($available as $num) {
-                $new_avail = $num['available'];
-                $new_check = $num['checked_out'];
-            }
-            $this->setAvailable($new_avail);
-            $this->setCheckedOut($new_check);
-        }
-
-        function renew($id)
-        {
-            $date = date("Y-m-d");
-            $due = date('Y-m-d', strtotime($date. ' + 20 days'));
-            $GLOBALS['DB']->exec("UPDATE patrons_books SET due_date = '{$due}' WHERE join_id = {$id};");
-        }
-
-        function removeBook($id)
-        {
-            $GLOBALS['DB']->exec("DELETE FROM patrons_books WHERE join_id = {$id}");
         }
 
         static function getAll()
         {
-            $returned_books = $GLOBALS['DB']->query("SELECT * FROM books;");
-            $books = array();
-            foreach($returned_books as $book) {
-                $name = $book['title'];
-                $genre = $book['genre'];
-                $ISBN = $book['ISBN'];
-                $total = $book['total'];
-                $available = $book['available'];
-                $checked_out = $book['checked_out'];
-                $id = $book['id'];
-                $new_book = new Book($name, $genre, $ISBN, $total, $available, $checked_out, $id);
-                array_push($books, $new_book);
+            $returned_comments = $GLOBALS['DB']->query("SELECT * FROM comments;");
+            $comments = array();
+            foreach($returned_comments as $comment) {
+                $user = $comment['user_id'];
+                $comment = $comment['comment'];
+                $parent_id = $comment['parent_id'];
+                $score = $comment['score'];
+                $post_time = $comment['post_time'];
+                $init_comment_id = $comment['init_comment_id'];
+                $thread_id = $comment['thread_id'];
+                $comment_id = $comment['comment_id'];
+                $new_comment = new Comment($user, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id, $comment_id);
+                array_push($comments, $new_comment);
             }
-            return $books;
+            return $comments;
         }
 
         static function deleteAll()
         {
-          $GLOBALS['DB']->exec("DELETE FROM books;");
+          $GLOBALS['DB']->exec("DELETE FROM comments;");
         }
 
         static function find($search_id)
         {
-            $found_book = null;
-            $all_books = Book::getAll();
-            foreach($all_books as $book) {
-                $book_id = $book->getId();
-                if ($book_id == $search_id) {
-                  $found_book = $book;
+            $found_comment = null;
+            $all_comments = Comment::getAll();
+            foreach($all_comments as $comment) {
+                $comment_id = $comment->getCommentId();
+                if ($comment_id == $search_id) {
+                  $found_comment = $comment;
                 }
             }
-            return $found_book;
+            return $found_comment;
         }
 
-        static function findBook($search_name)
+        static function findComment($search_user)
         {
-            $found_book = null;
-            $all_books = Book::getAll();
-            foreach($all_books as $book) {
-                $title = $book->getTitle();
-                if ($title == $search_name) {
-                  $found_book = $book;
+            $found_comment = null;
+            $all_comments = Comment::getAll();
+            foreach($all_comments as $comment) {
+                $user_id = $comment->getUserId();
+                if ($user_id == $search_user) {
+                  $found_comment = $comment;
                 }
             }
-            return $found_book;
+            return $found_comment;
         }
 
-        function addAuthor($author)
+        function addTag($tag)
         {
-            $GLOBALS['DB']->exec("INSERT INTO authors_books (book_id, author_id) VALUES ({$this->getId()}, {$author->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO comments_tags (comment_id, tag_id) VALUES ({$this->getCommentId()}, {$this->getTagId()});");
         }
 
-        function getAuthors()
+        function getTags()
         {
-            $return_authors = $GLOBALS['DB']->query("SELECT authors.* FROM books JOIN authors_books ON (books.id = authors_books.book_id) JOIN authors ON (authors_books.author_id = authors.id) WHERE books.id = {$this->getId()};");
+            $return_tags = $GLOBALS['DB']->query("SELECT tags.* FROM comments JOIN comments_tags ON (comments.id = comments_tags.comment_id) JOIN tags ON (comments_tags.tag_id = tags.id) WHERE comments.id = {$this->getCommentId()};");
 
-            $authors = array();
+            $tags = array();
 
-            foreach ($return_authors as $author){
-                $first_name = $author['first_name'];
-                $last_name = $author['last_name'];
-                $return_id = $author['id'];
-                $new_author = new Author($first_name, $last_name, $return_id);
-                array_push($authors, $new_author);
+            foreach ($return_tags as $tag){
+                $ct_id = $tag['ct_id'];
+                $comment_id = $tag['comment_id'];
+                $tag_id = $tag['tag_id'];
+                $new_tag = new Tag($ct_id, $comment_id, $tag_id);
+                array_push($tags, $new_tag);
             }
-            return $authors;
+            return $tags;
         }
 
-        static function searchFor($search_term)
-        {
-            $matches = array();
-            $search_term = explode(" ", strtolower($search_term));
-
-            $query = $GLOBALS['DB']->query("SELECT * FROM books WHERE title LIKE '%$search_term%' ORDER BY title ASC;");
-            foreach ($query as $match) {
-                $name = $match['title'];
-                $genre = $match['genre'];
-                $ISBN = $match['ISBN'];
-                $total = $match['total'];
-                $available = $match['available'];
-                $checked_out = $match['checked_out'];
-                $return_id = $match['id'];
-                $new_book = new Book($name, $genre, $ISBN, $total, $available, $checked_out, $return_id);
-                array_push($matches, $new_book);
-            }
-            return $matches;
-        }
+        // static function searchFor($search_term)
+        // {
+        //     $matches = array();
+        //     $search_term = explode(" ", strtolower($search_term));
+        //
+        //     $query = $GLOBALS['DB']->query("SELECT * FROM comments WHERE user_id LIKE '%$search_term%' ORDER BY user_id ASC;");
+        //     foreach ($query as $match) {
+        //         $user = $match['user_id'];
+        //         $comment = $match['comment'];
+        //         $parent_id = $match['parent_id'];
+        //         $comment_id = $match['comment_id'];
+        //         $score = $match['score'];
+        //         $post_time = $match['post_time'];
+        //         $return_id = $match['id'];
+        //         $new_comment = new Comment($user, $comment, $parent_id, $comment_id, $score, $post_time, $return_id);
+        //         array_push($matches, $new_comment);
+        //     }
+        //     return $matches;
+        // }
     }
 ?>
