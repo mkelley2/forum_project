@@ -61,11 +61,39 @@
             }
             return $found_category;
         }
+        
+        static function findbyCategory($search_id)
+        {
+            $found_category = null;
+            $categories = Category::getAll();
+            foreach($categories as $category) {
+                $category_id = $category->getCategory();
+                if ($category_id == $search_id) {
+                  $found_category = $category;
+                }
+            }
+            return $found_category;
+        }
 
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM categories WHERE category_id = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM threads WHERE category_id = {$this->getId()};");
+        }
+        
+        function getThreads(){
+            $returned_threads = $GLOBALS['DB']->query("SELECT * FROM threads WHERE category_id = {$this->getId};");
+        
+            $threads = array();
+            foreach($returned_threads as $thread) {
+                $post = $thread['post'];
+                $category_id = $thread['category_id'];
+                $user_id = $thread['user_id'];
+                $thread_id = $thread['thread_id'];
+                $new_thread = new Thread($post, $category_id, $user_id, $thread_id);
+                array_push($threads, $new_thread);
+            }
+            return $threads;
         }
     }
 ?>
