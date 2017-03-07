@@ -4,13 +4,15 @@
         private $post;
         private $category_id;
         private $user_id;
+        private $post_title;
         private $id;
 
-        function __construct($post, $category_id, $user_id, $id = null)
+        function __construct($post, $category_id, $user_id, $post_title, $id = null)
         {
             $this->post = $post;
             $this->category_id = $category_id;
             $this->user_id = $user_id;
+            $this->post_title = $post_title;
             $this->id = $id;
         }
 
@@ -44,6 +46,16 @@
             $this->user_id = $user_id;
         }
 
+        function getPostTitle()
+        {
+            return $this->post_title;
+        }
+
+        function setPostTitle($post_title)
+        {
+            $this->post_title = $post_title;
+        }
+
         function getId()
         {
             return $this->id;
@@ -51,7 +63,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO threads (post, category_id, user_id) VALUES ('{$this->getPost()}', {$this->getCategoryId()}, {$this->getUserId()});");
+            $GLOBALS['DB']->exec("INSERT INTO threads (post, category_id, user_id, post_title) VALUES ('{$this->getPost()}', {$this->getCategoryId()}, {$this->getUserId()}, '{$this->getPostTitle()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -63,8 +75,9 @@
                 $post = $thread['post'];
                 $category_id = $thread['category_id'];
                 $user_id = $thread['user_id'];
+                $post_title = $thread['post_title'];
                 $thread_id = $thread['thread_id'];
-                $new_thread = new Thread($post, $category_id, $user_id, $thread_id);
+                $new_thread = new Thread($post, $category_id, $user_id, $post_title, $thread_id);
                 array_push($threads, $new_thread);
             }
             return $threads;
