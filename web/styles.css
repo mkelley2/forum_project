@@ -80,6 +80,12 @@ td {
     top: -10%;
 }
 
+/*for when user is logged out*/
+/*.fa-user-circle-o {
+  font-size: 2em;
+  float: right;
+}*/
+
 .fa-user-circle-o {
   font-size: 2em;
   float: right;
