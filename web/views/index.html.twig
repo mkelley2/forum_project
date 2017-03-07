@@ -15,12 +15,12 @@
                     <div class="panel panel-default">
                       <div class="panel-heading">Posts</div>
                       <div class="panel-body">
-                          <p>Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.</p>
+                          <!-- <p>Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.</p>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
                         <button type="button" class="btn btn-primary">Comment</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
                         <button type="button" class="btn btn-primary">Rank Up</button>
-                        <button type="button" class="btn btn-primary">Rank Down</button>
+                        <button type="button" class="btn btn-primary">Rank Down</button> -->
                       </div>
                     </div>
                 </div>
@@ -29,27 +29,27 @@
                         <div class="panel-heading">Comments</div>
                         <div class="panel-body" id="comments-here">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="row">
-                                        <p>
+                                        <!-- <p>
                                             Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.
                                         </p>
                                         <p>
                                             Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.
                                         </p>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
-                                        <button type="button" class="btn btn-primary">Comment</button>
+                                        <button type="button" class="btn btn-primary">Comment</button> -->
                                     </div>
 
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <div id="append-comments">
-                                        <p>Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.</p>
+                                        <!-- <p>Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.</p>
                                     </div>
 
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
                                     <button type="button" class="btn btn-primary">Rank Up</button>
-                                    <button type="button" class="btn btn-primary">Rank Down</button>
+                                    <button type="button" class="btn btn-primary">Rank Down</button> -->
                                 </div>
 
                             </div>
@@ -58,25 +58,6 @@
                     </div>
                 </div>
             </div>
-
-            {% if user is not empty %}
-              <h1>{{user.getUsername}}</h1>
-            {% endif %}
-            <form class="form-group" action="/login" method="post">
-              <input type="text" name="inputUsername">
-              <input type="password" name="inputPassword">
-              <button type="submit">Log In</button>
-            </form>
-
-            <form class="form-group" action="/register" method="post">
-              <input type="text" name="inputUsername">
-              <input type="password" name="inputPassword">
-              <button type="submit">register</button>
-            </form>
-
-            <form class="form-group" action="/logout" method="post">
-              <button type="submit">logout</button>
-            </form>
 
             {% include '/components/footer.html.twig' %}
         </div>
