@@ -4,12 +4,59 @@
     <body>
         <div class="container">
             {% include '/components/navbar.html.twig' %}
-            <h1>
-                Welcome to CodeFusion <br>
-                Answers are the elixer for what ails ya.
-            </h1>
+            <div id="post-wrapper">
+                <div class="title">
+                    <h1>
+                        Welcome to CodeFusion <br>
+                        Answers are the elixer for what ails ya.
+                    </h1>
+                </div>
+                <div id="posts" class="well">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">Posts</div>
+                      <div class="panel-body">
+                        Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.
+                        <br>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+                        <button type="button" class="btn btn-primary">Comment</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
+                        <button type="button" class="btn btn-primary">Rank Up</button>
+                        <button type="button" class="btn btn-primary">Rank Down</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="well" id="comment-holder">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Comments</div>
+                        <div class="panel-body" id="comments-here">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <p>Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.</p>
+                                    <br>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+                                    <button type="button" class="btn btn-primary">Comment</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
+                                    <button type="button" class="btn btn-primary">Rank Up</button>
+                                    <button type="button" class="btn btn-primary">Rank Down</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.
+                                        </p>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, eos et epicurei officiis. Summo graece voluptua sea cu, mei no audire molestiae interpretaris. Quot omnesque nam cu, modo cetero appareat eu sit, scripta temporibus vis ut. Aeque option praesent pri ut, vide complectitur eos in, doctus laoreet expetenda eu eam. Ei eos euismod intellegam, graece vivendum intellegat nec eu.
+                                        </p>
+                                    </div>
 
+                                </div>
 
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {% include '/components/footer.html.twig' %}
         </div>
