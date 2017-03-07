@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    {% include '/components/head.html.twig' %}
+    <body>
+        <div class="container">
+            {% include '/components/navbar.html.twig' %}
+
+            <h1>
+                Welcome to CodeFusion <br>
+                Answers are the elixer for what ails ya.
+            </h1>
+            <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Category Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% set count = 0 %}
+                      {% if all_categories is not empty %}
+                      {% for category in all_categories %}
+                      {% set count = count + 1%}
+                      <tr>
+                          <td>{{count}}</td>
+                          <td><a href="/category/{{category.getCategory}}">{{category.getCategory}}</a></td>
+                          <td>
+                              <form class="form-group tbl-del" action="/delete-category/{{category.getId}}" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
+                              </form>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      {%endif%}
+                  </tbody>
+                </table>
+
+                <form class="form-horizontal well" action="/categories" method="post">
+                  <fieldset>
+                    <legend>Add category</legend>
+                    <div class="form-group">
+                      <label for="inputCategory" class="col-lg-2 control-label">Category Name</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="inputCategory" placeholder="Category Name">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+
+
+            {% include '/components/footer.html.twig' %}
+        </div>
+    </body>
+</html>
