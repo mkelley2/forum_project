@@ -172,6 +172,19 @@
             }
             return $found_user;
         }
+        
+        static function findbyName($search_id)
+        {
+            $found_user = null;
+            $users = User::getAll();
+            foreach($users as $user) {
+                $user_id = $user->getUsername();
+                if ($user_id == $search_id) {
+                  $found_user = $user;
+                }
+            }
+            return $found_user;
+        }
 
         function update($city, $state, $country, $bio)
         {
@@ -208,6 +221,32 @@
                 array_push($comments, $new_comment);
             }
             return $comments;
+        }
+        
+        static function logIn($username, $password){
+          $return_users= $GLOBALS['DB']->query("SELECT * FROM users WHERE username = '{$username}';");
+          $users = null;
+          
+          foreach($return_users as $user){
+            if(password_verify($password, $user['password'])){
+              $username = $user['username'];
+              $password = $user['password'];
+              $user_photo = $user['user_photo'];
+              $rank = $user['rank'];
+              $bio = $user['bio'];
+              $location_city = $user['location_city'];
+              $location_state = $user['location_state'];
+              $location_country = $user['location_country'];
+              $user_score = $user['user_score'];
+              $creation_date = $user['creation_date'];
+              $id = $user['user_id'];
+              $new_user = new User($username, $password, $user_photo, $rank, $bio, $location_city, $location_state, $location_country, $user_score, $creation_date, $id);
+              $users = $new_user;
+            }else{
+              return false;
+            }
+          }
+          return $users;
         }
     }
 ?>
