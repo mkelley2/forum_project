@@ -70,11 +70,18 @@ td {
     color: black;
 }
 
-.fa-user-circle-o {
-  font-size: 2em;
-  color: #ff8800;
+
+#bs-example-navbar-collapse-2 {
+    position: relative;
+}
+#user-dropdown {
+    position: absolute;
+    right: 23%;
+    top: -10%;
 }
 
 .fa-user-circle-o {
+  font-size: 2em;
   float: right;
+  color: #ff8800;
 }

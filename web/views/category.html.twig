@@ -5,14 +5,24 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
 
+<<<<<<< HEAD
             <h1 class="welcome">Welcome to CodeFusion</h1>
             <h2 class="welcome">Answers are the elixer for what ails ya.</h2>
             
+=======
+            <h1>
+                Welcom to CodeFusion <br>
+                Where answers are the elixir for what ails you.
+            </h1>
+            <form class="" action="/new-thread/{{specific_category.getCategory}}" method="get">
+              <button type="submit" class="btn btn-success" name="button">New Post</button>
+            </form>
+>>>>>>> 6631f7dc99c36afaa7741d3d65ea8f3e92f51644
             <table class="table table-striped table-hover ">
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>thread Name</th>
+                      <th>Thread Name</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -22,7 +32,7 @@
                       {% set count = count + 1%}
                       <tr>
                           <td>{{count}}</td>
-                          <td><a href="/category/{{specific_category.getCategory}}{{thread.getId}}">{{thread.getthread}}</a></td>
+                          <td><a href="/category/{{specific_category.getCategory}}/{{thread.getId}}">{{thread.getPostTitle}}</a></td>
                           <td>
                               <form class="form-group tbl-del" action="/delete-thread/{{thread.getId}}" method="post">
                                     <input type="hidden" name="_method" value="delete">
@@ -36,7 +46,7 @@
                 </table>
 
 
-            {% include '/components/footer.html.twig' %}
+                {% include '/components/footer.html.twig' %}
         </div>
     </body>
 </html>

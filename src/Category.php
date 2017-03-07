@@ -89,8 +89,9 @@
                 $post = $thread['post'];
                 $category_id = $thread['category_id'];
                 $user_id = $thread['user_id'];
+                $title = $thread['post_title'];
                 $thread_id = $thread['thread_id'];
-                $new_thread = new Thread($post, $category_id, $user_id, $thread_id);
+                $new_thread = new Thread($post, $category_id, $user_id, $title, $thread_id);
                 array_push($threads, $new_thread);
             }
             return $threads;
