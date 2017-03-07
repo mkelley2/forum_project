@@ -1,16 +1,31 @@
-body, h1 {
+body, h1, h2 {
     font-family: 'Slabo 27px', serif;
 }
 
 h2 {
-    font-family: 'Slabo 27px', serif;
     font-size: 35px;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
 }
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: black;
+}
+
 
 th {
     font-size: 1.5em
@@ -18,6 +33,15 @@ th {
 
 td {
     font-size: 1.5em
+}
+
+.well,
+.title,
+.jumbotron,
+.panel,
+.panel-heading,
+.panel-body {
+    font-family: 'Slabo 27px', serif;
 }
 
 .welcome {
@@ -48,9 +72,9 @@ td {
 
 .fa-user-circle-o {
   font-size: 2em;
+  color: #ff8800;
 }
 
 .fa-user-circle-o {
   float: right;
-
 }
