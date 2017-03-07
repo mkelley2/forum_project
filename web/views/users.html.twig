@@ -5,12 +5,6 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
             <div id="post-wrapper">
-                <div class="title jumbotron">
-                    <h1>
-                        Welcome to CodeFusion <br>
-                        Answers are the elixir for what ails ya.
-                    </h1>
-                </div>
                 <div id="posts" class="well">
                     <div class="panel panel-default">
                       <div class="panel-heading">Posts</div>
@@ -58,25 +52,6 @@
                     </div>
                 </div>
             </div>
-
-            {% if user is not empty %}
-              <h1>{{user.getUsername}}</h1>
-            {% endif %}
-            <form class="form-group" action="/login" method="post">
-              <input type="text" name="inputUsername">
-              <input type="password" name="inputPassword">
-              <button type="submit">Log In</button>
-            </form>
-
-            <form class="form-group" action="/register" method="post">
-              <input type="text" name="inputUsername">
-              <input type="password" name="inputPassword">
-              <button type="submit">register</button>
-            </form>
-
-            <form class="form-group" action="/logout" method="post">
-              <button type="submit">logout</button>
-            </form>
 
             {% include '/components/footer.html.twig' %}
         </div>
