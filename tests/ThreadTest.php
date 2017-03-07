@@ -31,9 +31,10 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
             $id = 2;
 
-            $testThread = new Thread($post, $category_id, $user_id, $id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title, $id);
 
             //Act
             $result = $testThread->getPost();
@@ -49,9 +50,10 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
             $id = 2;
 
-            $testThread = new Thread($post, $category_id, $user_id, $id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title, $id);
 
             //Act
             $testThread->setPost("Comment text goes here again");
@@ -68,9 +70,10 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
             $id = 2;
 
-            $testThread = new Thread($post, $category_id, $user_id, $id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title, $id);
 
             //Act
             $result = $testThread->getId();
@@ -85,8 +88,9 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
 
-            $testThread = new Thread($post, $category_id, $user_id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title);
             $testThread->save();
 
             //Act
@@ -102,15 +106,16 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
 
-            $testThread = new Thread($post, $category_id, $user_id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title);
             $testThread->save();
 
             $post2 = "Comment text goes here again";
             $category_id2 = 6;
             $user_id2 = 2;
 
-            $testThread2 = new Thread($post2, $category_id2, $user_id2);
+            $testThread2 = new Thread($post2, $category_id2, $user_id2, $post_title);
             $testThread2->save();
 
             //Act
@@ -126,15 +131,17 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
 
-            $testThread = new Thread($post, $category_id, $user_id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title);
             $testThread->save();
 
             $post2 = "Comment text goes here again";
             $category_id2 = 6;
             $user_id2 = 2;
+            $post_title = "Another Post";
 
-            $testThread2 = new Thread($post2, $category_id2, $user_id2);
+            $testThread2 = new Thread($post2, $category_id2, $user_id2, $post_title);
             $testThread2->save();
 
             //Act
@@ -150,15 +157,17 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
 
-            $testThread = new Thread($post, $category_id, $user_id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title);
             $testThread->save();
 
             $post2 = "Comment text goes here again";
             $category_id2 = 6;
             $user_id2 = 2;
+            $post_title = "Another Post";
 
-            $testThread2 = new Thread($post2, $category_id2, $user_id2);
+            $testThread2 = new Thread($post2, $category_id2, $user_id2, $post_title);
             $testThread2->save();
 
             //Act
@@ -175,15 +184,18 @@
             $post = "Comment text goes here";
             $category_id = 5;
             $user_id = 4;
+            $post_title = "Great Post";
+            $id = 2;
 
-            $testThread = new Thread($post, $category_id, $user_id);
+            $testThread = new Thread($post, $category_id, $user_id, $post_title, $id);
             $testThread->save();
 
             $post2 = "Comment text goes here again";
             $category_id2 = 6;
             $user_id2 = 2;
+            $post_title = "Another Post";
 
-            $testThread2 = new Thread($post2, $category_id2, $user_id2);
+            $testThread2 = new Thread($post2, $category_id2, $post_title, $user_id2);
             $testThread2->save();
 
             //Act
@@ -195,11 +207,13 @@
 
         function test_addTags()
        {
-           $post = "stuff";
+           $post = "Comment text goes here";
            $category_id = 5;
            $user_id = 4;
+           $post_title = "Great Post";
+           $id = 2;
 
-           $testThread = new Thread($post, $category_id, $user_id);
+           $testThread = new Thread($post, $category_id, $user_id, $post_title, $id);
            $testThread->save();
 
            $tag = "dogs";
@@ -213,11 +227,13 @@
        }
        function test_getTags()
        {
-           $post = "stuff";
+           $post = "Comment text goes here";
            $category_id = 5;
            $user_id = 4;
+           $post_title = "Great Post";
+           $id = 2;
 
-           $testThread = new Thread($post, $category_id, $user_id);
+           $testThread = new Thread($post, $category_id, $user_id, $post_title, $id);
            $testThread->save();
 
            $tag = "dogs";

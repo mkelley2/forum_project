@@ -61,7 +61,7 @@
             }
             return $found_category;
         }
-        
+
         static function findbyCategory($search_id)
         {
             $found_category = null;
@@ -80,10 +80,10 @@
             $GLOBALS['DB']->exec("DELETE FROM categories WHERE category_id = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM threads WHERE category_id = {$this->getId()};");
         }
-        
+
         function getThreads(){
-            $returned_threads = $GLOBALS['DB']->query("SELECT * FROM threads WHERE category_id = {$this->getId};");
-        
+            $returned_threads = $GLOBALS['DB']->query("SELECT * FROM threads WHERE category_id = {$this->getId()};");
+
             $threads = array();
             foreach($returned_threads as $thread) {
                 $post = $thread['post'];
