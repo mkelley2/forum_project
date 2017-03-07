@@ -71,7 +71,7 @@
         $new_category = Category::findbyCategory($id);
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
-        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags, 'user'=>$_SESSION['user']));
+        return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags, 'user'=>$_SESSION['user']));
 
     });
     
@@ -82,10 +82,11 @@
     
     $app->post("/new-thread/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
-        $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), 1, $_POST['inputTitle']);
+        $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), $_SESSION['user']->getId(), $_POST['inputTitle']);
         $new_thread->save();
         $thread_id = $new_thread->getId();
         return $app->redirect("/category/$id/$thread_id");
+        
     });
     
     $app->post("/category/{id}/{thread_id}", function($id, $thread_id) use ($app) {
@@ -93,8 +94,8 @@
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
         $date = date("Y-m-d h:i:s");
-        $new_comment = new Comment(1, $_POST['inputComment'], $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
-        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags, 'user'=>$_SESSION['user']));
+        $new_comment = new Comment($_SESSION['user']->getId(), $_POST['inputComment'], $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
+        return $app->redirect("/category/$id/$thread_id");
 
     });
     
