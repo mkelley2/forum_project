@@ -4,13 +4,19 @@
     <body>
         <div class="container">
             {% include '/components/navbar.html.twig' %}
-            <div class="">
-                
+            <div class="post">
+                <!--  text will be generated here  -->
             </div>
-            <!-- put thread info and comment div here -->
-
-
-
+            <div class="new_comment">
+                <form action="/category/{{ specific_category.getCategory }}/{{ sepcific_thread.getId }}" method="post">
+                    <input type="hidden" name="inputParent" value="null">
+                    <input type="textarea" name="inputComment" value="">
+                    <button class="btn btn-primary" type="submit" name="button">Submit</button>
+                </form>
+            </div>
+            <div class="comment-holder">
+                <!-- comments will be generated here -->
+            </div>
             {% include '/components/footer.html.twig' %}
         </div>
     </body>
