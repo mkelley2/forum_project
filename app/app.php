@@ -12,7 +12,7 @@
 
     $app['debug']=true;
 
-    $server = 'mysql:host=localhost:8889;dbname=library';
+    $server = 'mysql:host=localhost:8889;dbname=forum';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -36,31 +36,31 @@
     ));
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('homeView.html.twig');
+        return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll()));
     });
 
     $app->get("/categories", function() use ($app) {
-        return $app['twig']->render('categories.html.twig', array('all_categories'=>Category::getall()));
+        return $app['twig']->render('categories.html.twig', array('all_categories'=>Category::getAll()));
     });
 
     $app->post("/categories", function() use ($app) {
         $new_category = new Category($_POST['inputCategory']);
         $new_category->save();
-        return $app['twig']->render('categories.html.twig', array('all_categories'=>Category::getall()));
+        return $app['twig']->render('categories.html.twig', array('all_categories'=>Category::getAll()));
     });
 
     $app->get("/category/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
         $threads = $new_category->getThreads();
-        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getall(), 'specific_category'=>$new_category, 'threads'=>$threads));
+        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'threads'=>$threads));
     });
-    
+
     $app->post("/category/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
         $threads = $new_category->getThreads();
         $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), 1);
         $new_thread->save();
-        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getall(), 'specific_category'=>$new_category, 'threads'=>$threads));
+        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'threads'=>$threads));
     });
 
     $app->delete("/delete-category/{id}", function($id) use ($app) {
@@ -68,12 +68,12 @@
         $category->delete();
         return $app->redirect("/categories");
     });
-    
+
     $app->get("/category/{id}/{thread_id}", function($id, $thread_id) use ($app) {
         $new_category = Category::findbyCategory($id);
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
-        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getall(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags));
+        return $app['twig']->render('category.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags));
 
     });
 
