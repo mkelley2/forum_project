@@ -7,7 +7,7 @@
 
     require_once "src/Comment.php";
     require_once "src/User.php";
-    require_once "src/Category.php";
+    require_once "src/Tag.php";
     require_once "src/Thread.php";
 
     $server = 'mysql:host=localhost:8889;dbname=forum_test';
@@ -16,41 +16,41 @@
     $DB = new PDO($server, $username, $password);
 
 
-    class CategoryTest extends PHPUnit_Framework_TestCase
+    class TagTest extends PHPUnit_Framework_TestCase
     {
 
         protected function tearDown()
         {
-            Category::deleteAll();
+            Tag::deleteAll();
         }
 
-        function testGetCategory()
+        function testGetTag()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
             $id = 1;
 
-            $testGetCategory = new Category($category, $id);
+            $testGetTag = new Tag($tag, $id);
 
             //Act
-            $result = $testGetCategory->getId();
+            $result = $testGetTag->getId();
 
             //Assert
             $this->assertEquals($id, $result);
 
         }
 
-        function testSetCategory()
+        function testSetTag()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
             $id = 1;
 
-            $testSetCategory = new Category($category, $id);
+            $testSetTag = new Tag($tag, $id);
 
             //Act
-            $testSetCategory->setCategory("cats");
-            $result = $testSetCategory->getCategory();
+            $testSetTag->setTag("cats");
+            $result = $testSetTag->getTag();
 
             //Assert
             $this->assertEquals("cats", $result);
@@ -59,10 +59,10 @@
         function testGetId()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
             $id = 1;
 
-            $testGetId = new Category($category, $id);
+            $testGetId = new Tag($tag, $id);
 
             //Act
             $result = $testGetId->getId();
@@ -74,56 +74,55 @@
         function testSave()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
 
-            $testSave = new Category($category);
+            $testSave = new Tag($tag);
             $testSave->save();
-            var_dump($testSave);
 
             //Act
-            $result = Category::getAll();
+            $result = Tag::getAll();
 
             //Assert
             $this->assertEquals($testSave, $result[0]);
         }
 
-        function testDeleteCategory()
+        function testDeleteTag()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
 
-            $testSave = new Category($category);
+            $testSave = new Tag($tag);
             $testSave->save();
 
-            $category2 = "cats";
+            $tag2 = "cats";
 
-            $testSave2 = new Category($category2);
+            $testSave2 = new Tag($tag2);
             $testSave2->save();
 
             //Act
             $testSave2->delete();
 
             //Assert
-            $this->assertEquals([$testSave], Category::getAll());
+            $this->assertEquals([$testSave], Tag::getAll());
         }
 
         function testGetAll()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
             $id = 1;
 
-            $testSave = new Category($category, $id);
+            $testSave = new Tag($tag, $id);
             $testSave->save();
 
-            $category2 = "cats";
+            $tag2 = "cats";
             $id2 = 2;
 
-            $testSave2 = new Category($category, $id);
+            $testSave2 = new Tag($tag, $id);
             $testSave2->save();
 
             //Act
-            $result = Category::getAll();
+            $result = Tag::getAll();
 
             //Assert
             $this->assertEquals([$testSave, $testSave2], $result);
@@ -132,43 +131,43 @@
         function testDeleteAll()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
             $id = 1;
 
-            $testSave = new Category($category, $id);
+            $testSave = new Tag($tag, $id);
             $testSave->save();
 
-            $category2 = "cats";
+            $tag2 = "cats";
             $id2 = 2;
 
-            $testSave2 = new Category($category, $id);
+            $testSave2 = new Tag($tag, $id);
             $testSave2->save();
 
             //Act
-            Category::deleteAll();
+            Tag::deleteAll();
 
             //Assert
-            $result = Category::getAll();
+            $result = Tag::getAll();
             $this->assertEquals([], $result);
         }
 
         function testFind()
         {
             //Arrange
-            $category = "dogs";
+            $tag = "dogs";
             $id = 1;
 
-            $testSave = new Category($category, $id);
+            $testSave = new Tag($tag, $id);
             $testSave->save();
 
-            $category2 = "cats";
+            $tag2 = "cats";
             $id2 = 2;
 
-            $testSave2 = new Category($category, $id);
+            $testSave2 = new Tag($tag, $id);
             $testSave2->save();
 
             //Act
-            $result = Category::find($testSave->getId());
+            $result = Tag::find($testSave->getId());
 
             //Assert
             $this->assertEquals($testSave, $result);
