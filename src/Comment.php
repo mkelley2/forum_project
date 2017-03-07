@@ -179,20 +179,19 @@
 
         function addTag($tag)
         {
-            $GLOBALS['DB']->exec("INSERT INTO comments_tags (comment_id, tag_id) VALUES ({$this->getCommentId()}, {$this->getTagId()});");
+            $GLOBALS['DB']->exec("INSERT INTO comments_tags (comment_id, tag_id) VALUES ({$this->getCommentId()}, {$tag->getId()});");
         }
 
         function getTags()
         {
-            $return_tags = $GLOBALS['DB']->query("SELECT tags.* FROM comments JOIN comments_tags ON (comments.id = comments_tags.comment_id) JOIN tags ON (comments_tags.tag_id = tags.id) WHERE comments.id = {$this->getCommentId()};");
+            $return_tags = $GLOBALS['DB']->query("SELECT tags.* FROM comments JOIN comments_tags ON (comments.comment_id = comments_tags.comment_id) JOIN tags ON (comments_tags.tag_id = tags.tag_id) WHERE comments.comment_id = {$this->getCommentId()};");
 
             $tags = array();
 
             foreach ($return_tags as $tag){
-                $ct_id = $tag['ct_id'];
-                $comment_id = $tag['comment_id'];
+                $tag_text = $tag['tag'];
                 $tag_id = $tag['tag_id'];
-                $new_tag = new Tag($ct_id, $comment_id, $tag_id);
+                $new_tag = new Tag($tag_text, $tag_id);
                 array_push($tags, $new_tag);
             }
             return $tags;
