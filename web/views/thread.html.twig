@@ -5,35 +5,19 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
 
-
-            <h1 class="welcome">Welcome to CodeFusion</h1>
-            <h2 class="welcome">Answers are the elixer for what ails ya.</h2>
-
-
-            <div class="modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Write Post</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p></p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
+            <div class="post">
+                <!--  text will be generated here  -->
             </div>
-
-
-            <!-- put thread info and comment div here -->
-
-
-
-
+            <div class="new_comment">
+                <form action="/category/{{ specific_category.getCategory }}/{{ sepcific_thread.getId }}" method="post">
+                    <input type="hidden" name="inputParent" value="null">
+                    <input type="textarea" name="inputComment" value="">
+                    <button class="btn btn-primary" type="submit" name="button">Submit</button>
+                </form>
+            </div>
+            <div class="comment-holder">
+                <!-- comments will be generated here -->
+            </div>
             {% include '/components/footer.html.twig' %}
         </div>
     </body>
