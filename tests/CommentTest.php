@@ -68,7 +68,6 @@
 
             // Act
             $new_comment->save();
-            // var_dump($new_comment);
             $result = Comment::getAll();
             // Assert
             $this->assertEquals($new_comment, $result[0]);

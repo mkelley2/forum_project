@@ -98,6 +98,27 @@
             $GLOBALS['DB']->exec("DELETE FROM comments_tags JOIN comments ON (threads.thread_id = comments.thread_id) JOIN comments_tags ON (comments.comment_id = comments_tags.comment_id) WHERE thread_id = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM comments WHERE thread_id = {$this->getId()};");
         }
+
+        function addTag($tag)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO threads_tags (thread_id, tag_id) VALUES ({$this->getId()}, {$tag->getId()})");
+        }
+
+        function getTags()
+        {
+            $returned_tags = $GLOBALS['DB']->query("SELECT tags.* FROM threads
+            JOIN threads_tags ON (threads_tags.thread_id = threads.thread_id)
+            JOIN tags ON (tags.tag_id = threads_tags.tag_id)
+            WHERE threads.thread_id = {$this->getId()};");
+            $tags = array();
+            foreach($returned_tags as $tag) {
+                $tag_name = $tag['tag'];
+                $id = $tag['tag_id'];
+                $new_tag = new Tag($tag_name, $id);
+                array_push($tags, $new_tag);
+                }
+            return $tags;
+        }
     }
 
 ?>

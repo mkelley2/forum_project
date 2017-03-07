@@ -22,6 +22,7 @@
         protected function tearDown()
         {
             Thread::deleteAll();
+            Tag::deleteAll();
         }
 
         function testGetThreadName()
@@ -191,6 +192,48 @@
             //Assert
             $this->assertEquals($testThread, $result);
         }
+
+        function test_addTags()
+       {
+           $post = "stuff";
+           $category_id = 5;
+           $user_id = 4;
+
+           $testThread = new Thread($post, $category_id, $user_id);
+           $testThread->save();
+
+           $tag = "dogs";
+           $id = null;
+           $new_tag = new Tag($tag, $id);
+           $new_tag->save();
+
+           $testThread->addTag($new_tag);
+
+           $this->assertEquals($testThread->getTags(), [$new_tag]);
+       }
+       function test_getTags()
+       {
+           $post = "stuff";
+           $category_id = 5;
+           $user_id = 4;
+
+           $testThread = new Thread($post, $category_id, $user_id);
+           $testThread->save();
+
+           $tag = "dogs";
+           $id = null;
+           $new_tag = new Tag($tag, $id);
+           $new_tag->save();
+
+           $tag2 = "snoop";
+           $id2 = null;
+           $new_tag2 = new Tag($tag2, $id2);
+           $new_tag2->save();
+
+           $testThread->addTag($new_tag);
+           $testThread->addTag($new_tag2);
+           $this->assertEquals($testThread->getTags(), [$new_tag, $new_tag2]);
+       }
     }
 
 ?>
