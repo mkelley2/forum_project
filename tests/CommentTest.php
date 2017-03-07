@@ -242,7 +242,32 @@
         }
 
 
-        // function testAddAuthor()
+        function testAddTag()
+        {
+            //Arrange
+            $user_id = 5;
+            $comment = "I thought the frs was terrible";
+            $parent_id = 6;
+            $score = 345;
+            $post_time = '2005-08-15 15:52:01';
+            $init_comment_id = 7;
+            $thread_id = 8;
+            $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id);
+            $new_comment->save();
+
+
+            $tag = "#notmyfave";
+            $test_tag = new Tag($tag);
+            $test_tag->save();
+
+            //Act
+            $new_comment->addTag($test_tag);
+
+            //Assert
+            $this->assertEquals($new_comment->getTags(), [$test_tag]);
+        }
+
+        // function testGetTags()
         // {
         //     //Arrange
         //     $title = "War on Terror Revisited: Trumps America";
@@ -256,33 +281,8 @@
         //
         //     $first_name = "Mark";
         //     $last_name = "Johnson";
-        //
-        //     $test_author = new Author($first_name, $last_name);
-        //     $test_author->save();
-        //
-        //     //Act
-        //     $test_book->addAuthor($test_author);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_book->getAuthors(), [$test_author]);
-        // }
-        //
-        // function testGetAuthors()
-        // {
-        //     //Arrange
-        //     $title = "War on Terror Revisited: Trumps America";
-        //     $genre = "Non-fiction";
-        //     $ISBN = "123456789104";
-        //     $total = 3;
-        //     $available = 0;
-        //     $checked_out = 3;
-        //     $test_book = new Book($title, $genre, $ISBN, $total, $available, $checked_out);
-        //     $test_book->save();
-        //
-        //     $first_name = "Mark";
-        //     $last_name = "Johnson";
-        //     $test_author = new Author($first_name, $last_name);
-        //     $test_author->save();
+        //     $test_tag = new Tag($first_name, $last_name);
+        //     $test_tag->save();
         //
         //     $title2 = "Stas Wars: The Empire Strikes Back";
         //     $genre2 = "Non-fiction";
@@ -295,15 +295,15 @@
         //
         //     $first_name2 = "Donald";
         //     $last_name2 = "Glut";
-        //     $test_author2 = new Author($first_name2, $last_name2);
-        //     $test_author2->save();
+        //     $test_tag2 = new Tag($first_name2, $last_name2);
+        //     $test_tag2->save();
         //
         //     //Act
-        //     $test_book->addAuthor($test_author);
-        //     $test_book->addAuthor($test_author2);
+        //     $test_book->addTag($test_tag);
+        //     $test_book->addTag($test_tag2);
         //
         //     //Assert
-        //     $this->assertEquals($test_book->getAuthors(), [$test_author, $test_author2]);
+        //     $this->assertEquals($test_book->getTags(), [$test_tag, $test_tag2]);
         // }
         //
 
