@@ -102,9 +102,9 @@
         $check = User::findbyName($_POST['inputUsername']);
         $date = date("Y-m-d h:i:s");
         if(!$check){
-          $_SESSION['user'] = new User($_POST['inputUsername'], password_hash($_POST['inputPassword'], CRYPT_BLOWFISH), "imgur.com", "normal", "", "", "", 0, $date);
+          $_SESSION['user'] = new User($_POST['inputUsername'], password_hash($_POST['inputPassword'], CRYPT_BLOWFISH), "imgur.com", "normal", "", "", "", "", 0, $date);
           $_SESSION['user']->save();
-          return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
+          return $app->redirect('/');
         }else{
           return "User already exists";
         }
@@ -112,20 +112,24 @@
     
     $app->post("/login", function() use ($app) {
       $check = User::findbyName($_POST['inputUsername']);
-      $date = date("Y-m-d h:i:s");
       if($check){
         $pass_login = User::logIn($_POST['inputUsername'], $_POST['inputPassword']);
         if($pass_login){
           $_SESSION['user'] = $pass_login;
-          return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
+          return $app->redirect('/');
         }else{
           return "Incorrect Login info";
-          
         }
       }else{
         return "User does not exist, please register";
       }
     });
+    
+    $app->post("/logout", function() use ($app) {
+      $_SESSION['user'] = array();
+      return $app->redirect('/');
+    });
+    
     
     return $app;
 ?>

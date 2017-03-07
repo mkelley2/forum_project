@@ -6,7 +6,25 @@
             {% include '/components/navbar.html.twig' %}
             <h1 class="welcome">Welcome to CodeFusion</h1>
             <h2 class="welcome">Answers are the elixer for what ails ya.</h2>
-
+            {% if user is not empty %}
+              <h1>{{user.getUsername}}</h1>
+            {% endif %}
+            <form class="form-group" action="/login" method="post">
+              <input type="text" name="inputUsername">
+              <input type="password" name="inputPassword">
+              <button type="submit">Log In</button>
+            </form>
+            
+            <form class="form-group" action="/register" method="post">
+              <input type="text" name="inputUsername">
+              <input type="password" name="inputPassword">
+              <button type="submit">register</button>
+            </form>
+            
+            <form class="form-group" action="/logout" method="post">
+              <button type="submit">logout</button>
+            </form>
+            
 
             {% include '/components/footer.html.twig' %}
         </div>
