@@ -1,16 +1,31 @@
-body, h1 {
+body, h1, h2 {
     font-family: 'Slabo 27px', serif;
 }
 
 h2 {
-    font-family: 'Slabo 27px', serif;
     font-size: 35px;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
 }
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: black;
+}
+
 
 th {
     font-size: 1.5em
@@ -18,6 +33,15 @@ th {
 
 td {
     font-size: 1.5em
+}
+
+.well,
+.title,
+.jumbotron,
+.panel,
+.panel-heading,
+.panel-body {
+    font-family: 'Slabo 27px', serif;
 }
 
 .welcome {
@@ -46,9 +70,7 @@ td {
     color: black;
 }
 
-/**********
-USER DROPDOWN
-**********/
+
 #bs-example-navbar-collapse-2 {
     position: relative;
 }
@@ -58,6 +80,14 @@ USER DROPDOWN
     top: -10%;
 }
 
+/*for when user is logged out*/
+/*.fa-user-circle-o {
+  font-size: 2em;
+  float: right;
+}*/
+
 .fa-user-circle-o {
   font-size: 2em;
+  float: right;
+  color: #ff8800;
 }
