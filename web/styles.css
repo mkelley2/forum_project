@@ -6,6 +6,17 @@ h2 {
     font-size: 35px;
 }
 
+button.button-add {
+    /*background-image: url('/new_comment.png');*/
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    height: 16px;
+    padding-left: 16px;
+    vertical-align: middle;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -25,7 +36,7 @@ body {
   height: 60px;
   background-color: black;
 }
-
+/* end of sticky footer */
 
 th {
     font-size: 1.5em
@@ -65,6 +76,7 @@ td {
     background-color: #339999;
     border-color: #339999;
 }
+
 
 .topGenerated {
     padding-left: 30px;
