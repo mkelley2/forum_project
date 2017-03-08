@@ -37,6 +37,15 @@
                             </form>
                         </div>
                     </div>
+                <div class="post-right">
+                    <form action="/delete-thread/{{specific_thread.getId}}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="categoryName" value="{{specific_category.getCategory}}">
+                        <button type="submit" name="delete-button"><img src="/img/delete.png"></button>
+                    </form>
+                    <form class="" action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="edit-button"><img src="/img/edit.png"></button>
+                    </form>
                 </div>
             </div>
         </div>
