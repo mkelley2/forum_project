@@ -132,6 +132,28 @@
                 }
             return $tags;
         }
+        
+        function getComments()
+        {
+            $returned_comments = $GLOBALS['DB']->query("SELECT * FROM comments WHERE thread_id = {$this->getId()} ORDER BY score DESC;");
+            $comments = array();
+            foreach($returned_comments as $comment) {
+                $user = $comment['user_id'];
+                $comment_text = $comment['comment'];
+                $parent_id = $comment['parent_id'];
+                $score = $comment['score'];
+                $post_time = $comment['post_time'];
+                $init_comment_id = $comment['init_comment_id'];
+                $thread_id = $comment['thread_id'];
+                $comment_id = $comment['comment_id'];
+                if($parent_id==null){
+                  $parent_id = "false";
+                }
+                $new_comment = '{"user_id":"' . $user . '", "comment":"' . $comment_text . '", "parent_id":"' . $parent_id . '", "score":"' . $score . '", "post_time":"' . $post_time . '", "thread_id":"' . $thread_id . '", "comment_id":"' . $comment_id . '"}';
+                array_push($comments, $new_comment);
+            }
+            return $comments;
+        }
     }
 
 ?>
