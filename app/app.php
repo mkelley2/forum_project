@@ -133,12 +133,13 @@
       return $app->redirect('/');
     });
 
+
     $app->post("/users", function() use ($app) {
         return $app['twig']->render("users.html.twig", array('all_categories'=>Category::getAll(),  'user'=>$_SESSION['user']));
     });
 
     $app->patch('/score{id}', function($id) use ($app) {
-      $comment = Commend::find($id);
+      $comment = Comment::find($id);
       $comment->updateScore($_POST['inputScore']);
       $url = $_POST['currentUrl'];
       return $app->redirect($url);
@@ -147,6 +148,13 @@
     $app->delete("/delete-thread/{id}", function($id) use ($app) {
         $thread = Thread::find($id);
         $thread->delete();
+        $category = $_POST['categoryName'];
+        return $app->redirect("/category/$category");
+    });
+
+    $app->patch("/edit-thread/{id}", function($id) use ($app) {
+        $thread = Thread::find($id);
+        $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
     });

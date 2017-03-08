@@ -44,4 +44,17 @@ $(document).ready(function(){
     loop();
   }
 // console.log(copy);
+
+  $(".editThreadBTN").click(function(){
+    
+    $(".editThread").empty();
+    $(".editThread").html(
+      '<form action="/edit-thread/' + thread + '" method="post">' +
+        '<input type="hidden" name="_method" value="patch">' + 
+        '<input type="hidden" name="categoryName" value="'+ category +'">' +
+        '<input type="text" name="inputPost">' +
+        '<button type="submit" name="edit-button"><img src="/img/edit.png"></button>' +
+      '</form>'
+    );
+  });
 });
