@@ -7,6 +7,11 @@
 
             <div class="post">
                 <!--  text will be generated here  -->
+                <div class="post-left">
+                    <form action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="like-button"><img src="/delete.png"></button>
+                    </form>
+                </div>
                 <div class="post-right">
                     <form action="/THIS NEEDS A ROUTE" method="post">
                         <button type="submit" name="delete-button"><img src="/delete.png"></button>
@@ -14,7 +19,7 @@
                     <form class="" action="/THIS NEEDS A ROUTE" method="post">
                         <button type="submit" name="edit-button"><img src="/edit.png"></button>
                     </form>
-            </div>
+                </div>
             </div>
             <div class="new_comment">
                 <form action="/category/{{ specific_category.getCategory }}/{{ sepcific_thread.getId }}" method="post">
