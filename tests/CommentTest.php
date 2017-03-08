@@ -175,13 +175,13 @@
             $new_comment = new Comment($user_id, $comment, $parent_id, $score, $post_time, $init_comment_id, $thread_id);
             $new_comment->save();
 
-            $new_score =  425;
+            $new_score =  1;
 
             // Act
             $new_comment->updateScore($new_score);
 
             // Assert
-            $this->assertEquals($new_score, $new_comment->getScore());
+            $this->assertEquals(346, $new_comment->getScore());
         }
 
         function test_deleteComment()
