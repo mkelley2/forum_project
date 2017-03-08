@@ -14,8 +14,7 @@ button.button-add {
     background-position: center;
     border: none;
     cursor: pointer;
-    /*height: 16px;
-    padding-left: 16px;*/
+    width: 32px;
     vertical-align: middle;
 }
 
@@ -41,7 +40,7 @@ button.button-add {
 /* This is for lower LEFT buttons */
 
 .post-left {
-    background-color: #fff;*/
+    /*background-color: #fff;*/*/
 }
 
 /* end of LEFT POST*/
@@ -51,7 +50,6 @@ button.button-add {
     color: #fff;
 }
 /* end of post for thread page*/
-
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -155,6 +153,29 @@ td {
   color: #ff8800;
 }
 
-.comment {
+.comment-parent {
   margin-left: 10%;
+  background-color: #222222;
+  padding: 25px;
+
+}
+
+.comment {
+  margin-left: 25%;
+  padding: 25px;
+  border-left: solid 2px #000;
+}
+
+.comment-parent p {
+    text-align: center;
+    bottom: 5px;
+}
+
+.button-form {
+    z-index: -1;
+    width: 32px;
+}
+
+.button-form p {
+    width: 75%;
 }
