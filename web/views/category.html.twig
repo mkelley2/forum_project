@@ -6,12 +6,13 @@
             {% include '/components/navbar.html.twig' %}
 
 
-            <h1 class="welcome">Welcome to CodeFusion</h1>
+            <!-- <h1 class="welcome">Welcome to CodeFusion</h1> -->
             <h2 class="welcome">Answers are the elixer for what ails ya.</h2>
 
-            <form class="" action="/new-thread/{{specific_category.getCategory}}" method="get">
-              <button type="submit" class="btn btn-success" name="button">New Post</button>
+            <form action="/new-thread/{{specific_category.getCategory}}" method="get">
+              <button class="button-add" type="submit" name="button"><img src="/new_comment.png">&nbsp add a new thread</button>
             </form>
+            <br>
 
             <table class="table table-striped table-hover ">
                   <thead>
@@ -39,8 +40,6 @@
                       {%endif%}
                   </tbody>
                 </table>
-
-
                 {% include '/components/footer.html.twig' %}
         </div>
     </body>
