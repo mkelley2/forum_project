@@ -26,16 +26,16 @@ $(document).ready(function(){
       if(copy[i].parent_id == false){
         $(".comment-holder").append("<div class='comment-parent' id='"+ copy[i].comment_id + "'><div class='row'><div class'col-sm-10'><input" +
         "type='hidden' name='currentUrl' value='" + document.referrer + "'><p>" + "Score:" +  copy[i].score + " - " + copy[i].comment + "</p></div><div class'col-sm-2'><form class='button-form' action='/score/" + copy[i].comment_id + "' method='post'> <input type='hidden' name='_method' value='patch'><input type='hidden' name='inputScore' value='1'><button class='button-add' type='submit' name='like-button'><img src='/img/like.png'></button></form><form class='button-form' action='/score/" + copy[i].comment_id + "'method='post'> <input type='hidden' name='_method' value='patch'> <input type='hidden' name='inputScore' value='-1'><button class='button-add' type='submit'" +
-        "name='dislike-button'><img src='/img/dislike.png'></button></form> </div> </div> </div>");
+        "name='dislike-button'><img src='/img/dislike.png'></button></form><button type='button' name='reply-button' class='reply-button' value='"+ copy[i].comment_id +"'>Reply</button><div class='reply-form'></div></div> </div> </div>");
         added.push(copy[i]);
         copy.splice(i,1);
         loop();
 
       }else{
         if(search(copy[i].parent_id,added)){
-          $("#"+copy[i].parent_id).append("<div class='comment' id='"+ copy[i].comment_id + "'><div class='row'><div class'col-sm-10'><input" +
+          $("#"+copy[i].parent_id).append("<div class='comment-parent' id='"+ copy[i].comment_id + "'><div class='row'><div class'col-sm-10'><input" +
           "type='hidden' name='currentUrl' value='" + document.referrer + "'><p>" + "Score:" +  copy[i].score + " - " + copy[i].comment + "</p></div><div class'col-sm-2'><form class='button-form' action='/score/" + copy[i].comment_id + "' method='post'> <input type='hidden' name='_method' value='patch'><input type='hidden' name='inputScore' value='1'><button class='button-add' type='submit' name='like-button'><img src='/img/like.png'></button></form><form class='button-form' action='/score/" + copy[i].comment_id + "'method='post'> <input type='hidden' name='_method' value='patch'> <input type='hidden' name='inputScore' value='-1'><button class='button-add' type='submit'" +
-          "name='dislike-button'><img src='/img/dislike.png'></button></form> </div> </div> </div>");
+          "name='dislike-button'><img src='/img/dislike.png'></button></form><button type='button' name='reply-button' class='reply-button' value='"+ copy[i].comment_id +"'>Reply</button><div class='reply-form'></div></div> </div> </div>");
           added.push(copy[i]);
           copy.splice(i,1);
           loop();
@@ -43,10 +43,24 @@ $(document).ready(function(){
       }
     }
   }
+  
+  
 
   // while(copy.length>0){
     loop();
   // }
+  
+  $(".reply-button").click(function(){
+    $(this).next().append(
+      '<form action="/category/' + category + '/'+ thread +'" method="post">' +
+          '<input type="hidden" name="inputParent" value="'+ $(this).val() +'">' +
+          '<textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea>' +
+          '<button class="btn btn-primary" type="submit" name="button">Submit</button>' +
+      '</form>'
+      
+    );
+    
+  });
 
   $(".editThreadBTN").click(function(){
 
