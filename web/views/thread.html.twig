@@ -17,7 +17,9 @@
                     </form>
                 </div>
                 <div class="post-right">
-                    <form action="/THIS NEEDS A ROUTE" method="post">
+                    <form action="/delete-thread/{{specific_thread.getId}}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="categoryName" value="{{specific_category.getCategory}}">
                         <button type="submit" name="delete-button"><img src="/img/delete.png"></button>
                     </form>
                     <form class="" action="/THIS NEEDS A ROUTE" method="post">
@@ -29,8 +31,8 @@
             <!-- start of new comment dic -->
             <div class="new_comment">
                 <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
-                    <input type="hidden" name="inputParent" value="null">
-                    <input type="textarea" name="inputComment" value="">
+                    <input type="hidden" name="inputParent" value="false">
+                    <textarea cols="70" rows="6" name="inputComment"></textarea>
                     <button class="btn btn-primary" type="submit" name="button">Submit</button>
                 </form>
             </div>
