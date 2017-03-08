@@ -66,10 +66,19 @@ td {
     border-color: #339999;
 }
 
+.topGenerated {
+    padding-left: 30px;
+    font-size: 2em;
+}
+
+#announcements {
+    text-align: center;
+    font-size: 2em;
+}
+
 #newCopies {
     color: black;
 }
-
 
 #bs-example-navbar-collapse-2 {
     position: relative;
@@ -81,11 +90,12 @@ td {
 }
 
 /*for when user is logged out*/
-/*.fa-user-circle-o {
+.logged-out {
   font-size: 2em;
   float: right;
-}*/
+}
 
+/* ORANGE for when user is logged IN */
 .fa-user-circle-o {
   font-size: 2em;
   float: right;
