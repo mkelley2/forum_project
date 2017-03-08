@@ -29,12 +29,6 @@
                       <tr>
                           <td>{{count}}</td>
                           <td><a href="/category/{{specific_category.getCategory}}/{{thread.getId}}">{{thread.getPostTitle}}</a></td>
-                          <td>
-                              <form class="form-group tbl-del" action="/delete-thread/{{thread.getId}}" method="post">
-                                    <input type="hidden" name="_method" value="delete">
-                                    <button type="submit" class="btn btn-xs btn-danger" name="button">Remove</button>
-                              </form>
-                          </td>
                       </tr>
                       {% endfor %}
                       {%endif%}
