@@ -71,7 +71,7 @@
         $new_category = Category::findbyCategory($id);
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
-        return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags, 'user'=>$_SESSION['user']));
+        return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags, 'user'=>$_SESSION['user'], 'comments'=>$new_thread->getComments()));
 
     });
     

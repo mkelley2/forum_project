@@ -74,10 +74,16 @@ td {
 #bs-example-navbar-collapse-2 {
     position: relative;
 }
-#user-dropdown {
-    position: absolute;
-    right: 23%;
-    top: -10%;
+
+.userIcon {
+  margin: 0; 
+} 
+
+.navbar-form {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /*for when user is logged out*/
@@ -90,4 +96,8 @@ td {
   font-size: 2em;
   float: right;
   color: #ff8800;
+}
+
+.comment {
+  margin-left: 10%;
 }

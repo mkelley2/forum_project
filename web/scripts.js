@@ -1,7 +1,7 @@
 $(document).ready(function(){
   // comments.forEach(function(elem){
   //   if(elem.parent_id === null){
-  //     $(".container").append("<div id="+ elem.comment_id + "><h1>" + elem.text + "</h1></div>");
+  //     $(".comment-holder").append("<div id="+ elem.comment_id + "><h1>" + elem.text + "</h1></div>");
   //   }else{
   //     $("#"+elem.parent_id).append("<div id="+ elem.comment_id + "><h1>" + elem.text + "</h1></div>");
   //   }
@@ -15,20 +15,23 @@ $(document).ready(function(){
     }
   }
   
-  var copy = comments;
+  var copy = [];
+  comments.forEach(function(elem){
+    copy.push(JSON.parse(elem));
+  });
   var added =[];
   
   function loop(){
     for(i=0;i<copy.length;i++){
-      if(copy[i].parent_id === null){
-        $(".container").append("<div id="+ copy[i].comment_id + "><h1>" + "Score: " + copy[i].score + " - " + copy[i].text + "</h1></div>");
+      if(copy[i].parent_id === "false"){
+        $(".comment-holder").append("<div class='comment' id='"+ copy[i].comment_id + "'><p>" + "Score: " + copy[i].score + " - " + copy[i].comment + "</p></div>");
         added.push(copy[i]);
         copy.splice(i,1);
         loop();
         
       }else{
         if(search(copy[i].parent_id,added)){
-          $("#"+copy[i].parent_id).append("<div id="+ copy[i].comment_id + "><h1>" + "Score: " + copy[i].score + " - " + copy[i].text + "</h1></div>");
+          $("#"+copy[i].parent_id).append("<div class='comment' id='"+ copy[i].comment_id + "'><p>" + "Score: " + copy[i].score + " - " + copy[i].comment + "</p></div>");
           added.push(copy[i]);
           copy.splice(i,1);
           loop();
@@ -36,7 +39,7 @@ $(document).ready(function(){
       }
     }
   }
-
+  
   while(copy.length>0){
     loop();
   }
