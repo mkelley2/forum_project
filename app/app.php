@@ -42,6 +42,7 @@
     ));
 
     $app->get("/", function() use ($app) {
+      
         return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
     });
 
@@ -136,10 +137,15 @@
     });
 
     $app->patch('/score/{id}', function($id) use ($app) {
-      $comment = Commend::find($id);
+      $comment = Comment::find($id);
       $comment->updateScore($_POST['inputScore']);
-      $url = $_POST['currentUrl'];
-      return $app->redirect($url);
+      $thread_id = $comment->getThreadId();
+      $thread = Thread::find($thread_id);
+      $cat_id = $thread->getCategoryId();
+      $category = Category::find($cat_id);
+      $cat = $category->getCategory();
+      return $app->redirect("/category/$cat/$thread_id");
+
     });
 
     $app->delete("/delete-thread/{id}", function($id) use ($app) {

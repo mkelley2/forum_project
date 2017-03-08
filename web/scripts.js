@@ -24,18 +24,18 @@ $(document).ready(function(){
   function loop(){
     for(i=0;i<copy.length;i++){
       if(copy[i].parent_id == false){
-        $(".comment-holder").append("<div class='comment-parent' id='"+ copy[i].comment_id + "'><div class='row'><div class'col-sm-10'><input"
-        + "type='hidden' name='currentUrl' value='" + window.location.pathname + "'><p>" + "Score:" +  copy[i].score + " - " + copy[i].comment + "</p></div><div class'col-sm-2'><form class='button-form' action='/score/" + copy[i].comment_id + "''method='post'> <button class='button-add' type='submit' name='like-button' value='1'><img src='/img/like.png'></button></form><form class='button-form' action='/score/" + copy[i].comment_id + "'method='post'> <button class='button-add' type='submit'" +
-        "name='dislike-button' value='-1'><img src='/img/dislike.png'></button></form> </div> </div> </div>");
+        $(".comment-holder").append("<div class='comment-parent' id='"+ copy[i].comment_id + "'><div class='row'><div class'col-sm-10'><input" +
+        "type='hidden' name='currentUrl' value='" + document.referrer + "'><p>" + "Score:" +  copy[i].score + " - " + copy[i].comment + "</p></div><div class'col-sm-2'><form class='button-form' action='/score/" + copy[i].comment_id + "' method='post'> <input type='hidden' name='_method' value='patch'><input type='hidden' name='inputScore' value='1'><button class='button-add' type='submit' name='like-button'><img src='/img/like.png'></button></form><form class='button-form' action='/score/" + copy[i].comment_id + "'method='post'> <input type='hidden' name='_method' value='patch'> <input type='hidden' name='inputScore' value='-1'><button class='button-add' type='submit'" +
+        "name='dislike-button'><img src='/img/dislike.png'></button></form> </div> </div> </div>");
         added.push(copy[i]);
         copy.splice(i,1);
         loop();
 
       }else{
         if(search(copy[i].parent_id,added)){
-          $("#"+copy[i].parent_id).append("<div class='comment' id='"+ copy[i].comment_id + "'><div class='row'><div class'col-sm-6'><input"
-          + "type='hidden' name='currentUrl' value='" + window.location.pathname + "'><p>" + "Score:" +  copy[i].score + " - " + copy[i].comment + "</p></div><div class'col-sm-2'><form class='button-form' action='/score/" + copy[i].comment_id + "''method='post'> <button class='button-add' type='submit' name='like-button' value='1'><img src='/img/like.png'></button></form><form class='button-form' action='/score/" + copy[i].comment_id + "'method='post'> <button class='button-add' type='submit'" +
-          "name='dislike-button' value='-1'><img src='/img/dislike.png'></button></form> </div> </div> </div>");
+          $("#"+copy[i].parent_id).append("<div class='comment' id='"+ copy[i].comment_id + "'><div class='row'><div class'col-sm-10'><input" +
+          "type='hidden' name='currentUrl' value='" + document.referrer + "'><p>" + "Score:" +  copy[i].score + " - " + copy[i].comment + "</p></div><div class'col-sm-2'><form class='button-form' action='/score/" + copy[i].comment_id + "' method='post'> <input type='hidden' name='_method' value='patch'><input type='hidden' name='inputScore' value='1'><button class='button-add' type='submit' name='like-button'><img src='/img/like.png'></button></form><form class='button-form' action='/score/" + copy[i].comment_id + "'method='post'> <input type='hidden' name='_method' value='patch'> <input type='hidden' name='inputScore' value='-1'><button class='button-add' type='submit'" +
+          "name='dislike-button'><img src='/img/dislike.png'></button></form> </div> </div> </div>");
           added.push(copy[i]);
           copy.splice(i,1);
           loop();
@@ -47,10 +47,6 @@ $(document).ready(function(){
   // while(copy.length>0){
     loop();
   // }
-console.log(comments);
-});
-  }
-// console.log(copy);
 
   $(".editThreadBTN").click(function(){
 
@@ -65,5 +61,6 @@ console.log(comments);
       '</form>'
     );
   });
+  
 });
 

@@ -118,11 +118,12 @@
         function updateScore($new_score)
         {
             $GLOBALS['DB']->exec("UPDATE comments SET score = ( score + {$new_score}) WHERE comment_id = {$this->getCommentId()};");
-            
-            $returned_comment = $GLOBALS['DB']->query("SELECT * FROM comments WHERE comment_id = {$this->getCommentId()};");
-            foreach($returned_comment as $comment) {    
-                $this->setScore($comment['score']);
+            $returned_comment = $GLOBALS['DB']->query("SELECT score FROM comments WHERE comment_id = {$this->getCommentId()};");
+            $score = null;
+            foreach($returned_comment as $comment) {
+              $score = $comment[0];
             }
+            $this->setScore($score+$new_score);
         }
 
         function delete()
