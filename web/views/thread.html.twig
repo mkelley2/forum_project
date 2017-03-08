@@ -4,31 +4,49 @@
     <body>
         <div class="container">
             {% include '/components/navbar.html.twig' %}
-
-            <div class="post">
-                <!--  text will be generated here  -->
-                <!-- icons -->
-                <div class="post-left">
-                    <form action="/THIS NEEDS A ROUTE" method="post">
-                        <button type="submit" name="like-button"><img src="/img/like.png"></button>
-                    </form>
-                    <form action="/THIS NEEDS A ROUTE" method="post">
-                        <button type="submit" name="like-button"><img src="/img/dislike.png"></button>
-                    </form>
+            <div class="thread-post well">
+                <h2>{{ title }}</h2>
+                <div class="panel panel-default">
+                    <!--  post will be generated here  -->
+                    {{ post }}
                 </div>
-                <div class="post-right">
-                    <form action="/THIS NEEDS A ROUTE" method="post">
-                        <button type="submit" name="delete-button"><img src="/img/delete.png"></button>
-                    </form>
-                    <form class="" action="/THIS NEEDS A ROUTE" method="post">
-                        <button type="submit" name="edit-button"><img src="/img/edit.png"></button>
-                    </form>
+                <!-- icons for posts -->
+                <div class="row">
+                    <div class="post-left">
+                        <div class="col-sm-1">
+                            <form action="/THIS NEEDS A ROUTE" method="post">
+                                <button class="button-add" type="submit" name="like-button"><img src="/img/like.png"></button>
+                            </form>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <form action="/THIS NEEDS A ROUTE" method="post">
+                                <button class="button-add" type="submit" name="like-button"><img src="/img/dislike.png"></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="post-right">
+                        <div class="col-sm-1">
+                            <form action="/THIS NEEDS A ROUTE" method="post">
+                                <button class="button-add" type="submit" name="delete-button"><img src="/img/delete.png"></button>
+                            </form>
+                        </div>
+                        <div class="col-sm-1">
+                            <form class="" action="/THIS NEEDS A ROUTE" method="post">
+                                <button class="button-add" type="submit" name="edit-button"><img src="/img/edit.png"></button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- end of post div -->
-            <!-- start of new comment dic -->
-            <div class="new_comment">
+        </div>
+
+            <!-- start of new comment div -->
+            <div class="new_comment well">
                 <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
+                    <input type="hidden" name="inputParent" value="null">
+                    <textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea>
+                    <!-- <input type="textarea" name="inputComment" value=""> -->
                     <input type="hidden" name="inputParent" value="false">
                     <textarea cols="70" rows="6" name="inputComment"></textarea>
                     <button class="btn btn-primary" type="submit" name="button">Submit</button>
@@ -37,21 +55,24 @@
             <script type="text/javascript">
                 var comments = {{ comments|json_encode|raw }}
             </script>
-
+            <!-- end of new comment -->
             <div class="comment-holder">
                 <!-- comments will be generated here -->
+                <!-- icons comments -->
+                <div class="post-left well">
+                    <div class="row">
 
-                <!-- icons -->
-                <div class="post-left">
                     <form action="/THIS NEEDS A ROUTE" method="post">
-                        <button type="submit" name="like-button"><img src="/img/like.png"></button>
+                        <button class="button-add" type="submit" name="like-button"><img src="/img/like.png"></button>
                     </form>
                     <form action="/THIS NEEDS A ROUTE" method="post">
-                        <button type="submit" name="like-button"><img src="/img/dislike.png"></button>
+                        <button class="button-add" type="submit" name="like-button"><img src="/img/dislike.png"></button>
                     </form>
+                </div>
                 </div>
             </div>
             {% include '/components/footer.html.twig' %}
         </div>
+    </div> <!-- end of container -->
     </body>
 </html>
