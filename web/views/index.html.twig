@@ -22,17 +22,15 @@
 
                 <div id="posts" class="well">
                     <div class="panel panel-default">
-                      <div class="panel-heading">Top Categories</div>
+                      <div class="panel-heading">Top 5 Categories</div>
 
                       <div class="panel-body">
                           {% if all_categories is not empty %}
-                          {% for category in [all_categories][0:4]%}
-                          {% for category in all_categories %}
-
-                            <a class="topGenerated" href="/category/{{category.getCategory}}">{{ category.getCategory }}</a> <br>
-
-                        {% endfor %}
-                        {% endfor %}
+                          <ol>
+                              {% for category in  all_categories|slice(0, 5) %}
+                                <li><a class="topGenerated" href="/category/{{category.getCategory}}">{{ category.getCategory }}</a></li>
+                              {% endfor %}
+                          </ol>
                         {% endif %}
                       </div>
                     </div>
@@ -40,7 +38,7 @@
 
                 <div class="well" id="comment-holder">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Top Threads</div>
+                        <div class="panel-heading">Top 5 Threads</div>
                         <div class="panel-body" id="comments-here">
                             <div class="row">
                                 <div class="col-md-2">
@@ -48,7 +46,7 @@
                                         {% if all_threads is not empty %}
                                         {% for thread in all_threads %}
 
-                                          <a class="topGenerated" href="/new-thread/{{id}}">{{ thread.getPostTitle }}</a> <br>
+                                        <!-- a tag removed goes here -->
 
                                       {% endfor %}
                                       {% endif %}
