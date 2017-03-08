@@ -137,8 +137,16 @@
         return $app['twig']->render("users.html.twig", array('all_categories'=>Category::getAll(),  'user'=>$_SESSION['user']));
     });
 
+    $app->post("/user-bio", function() use ($app) {
+        $user = $_SESSION['user'];
+        $bio = nl2br($_POST['new-bio']);
+        $bio = preg_replace("/\r|\n/", "", $bio);
+        $new_bio = $user->getBio();
+        return $app['twig']->render("users.html.twig", array('all_categories'=>Category::getAll(),  'user'=>$_SESSION['user']));
+    });
+
     $app->patch('/score{id}', function($id) use ($app) {
-      $comment = Commend::find($id);
+      $comment = Comment::find($id);
       $comment->updateScore($_POST['inputScore']);
       $url = $_POST['currentUrl'];
       return $app->redirect($url);

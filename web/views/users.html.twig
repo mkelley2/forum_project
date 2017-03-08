@@ -14,16 +14,18 @@
                 </div>
                 <div id="user-bio" class="well">
                     <div class="panel panel-default">
-                      <div class="panel-heading">User Bio</div>
+                      <div class="panel-heading">{{user.getUserName}} Bio</div>
                       <div class="panel-body" method="post">
+                        {% if user is not empty %}
                           <p>{{user.getBio}}</p>
-                          <form name="new-bio" action="/user-bio" method="post">
-                              <input name="_method" type="hidden" value = "patch">
-                              <input id="bio-editor" type="hidden" name="bio" value="{{ user.getId() }}">
-                              <label for="new-bio">Edit bio</label>
-                              <textarea class="form-control" rows="3" id="textArea"></textarea>
-                              <button type="submit" class="btn btn-default"> &nbsp Edit</button>
+                          <button id="edit-user-bio" type="button" class="btn btn-default"> &nbsp Edit</button>
+                          <form id="bio-form" action='/user-bio' method='post' class="form-group">
+                              <label for='new-bio'>Enter bio:</label>
+                              <textarea type="text" name="new-bio" class="form-control" rows="3" id="textArea" ></textarea>
+                              <button type="reset" class="btn btn-default"><i class="fa fa-times" aria-hidden="true"></i> &nbsp Cancel</button>
+                              <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp Submit</button>
                           </form>
+                          {% endif %}
                       </div>
                     </div>
                 </div>

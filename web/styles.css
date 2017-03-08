@@ -129,3 +129,7 @@ td {
 textarea {
     width: 50%;
 }
+
+#bio-form {
+    display: none;
+}
