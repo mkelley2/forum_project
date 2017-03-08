@@ -94,7 +94,9 @@
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
         $date = date("Y-m-d h:i:s");
+        var_dump($_SESSION['user']->getUserName());
         $new_comment = new Comment($_SESSION['user']->getId(), $_POST['inputComment'], $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
+        $new_comment->save();
         return $app->redirect("/category/$id/$thread_id");
 
     });

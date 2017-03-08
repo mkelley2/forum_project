@@ -23,7 +23,7 @@ $(document).ready(function(){
   
   function loop(){
     for(i=0;i<copy.length;i++){
-      if(copy[i].parent_id === "false"){
+      if(copy[i].parent_id == false){
         $(".comment-holder").append("<div class='comment' id='"+ copy[i].comment_id + "'><p>" + "Score: " + copy[i].score + " - " + copy[i].comment + "</p></div>");
         added.push(copy[i]);
         copy.splice(i,1);
