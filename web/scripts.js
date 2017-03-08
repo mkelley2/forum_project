@@ -54,6 +54,7 @@ console.log(comments);
 
   $(".editThreadBTN").click(function(){
 
+
     $(".editThread").empty();
     $(".editThread").html(
       '<form action="/edit-thread/' + thread + '" method="post">' +
@@ -65,3 +66,4 @@ console.log(comments);
     );
   });
 });
+
