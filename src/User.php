@@ -172,7 +172,7 @@
             }
             return $found_user;
         }
-        
+
         static function findbyName($search_id)
         {
             $found_user = null;
@@ -212,7 +212,7 @@
                 $user_id = $comment['user_id'];
                 $comment_text = $comment['comment'];
                 $parent_id = $comment['parent_id'];
-                $score = $comment['score'];
+                $score = $comment['user_score'];
                 $post_time = $comment['post_time'];
                 $init_commit_id = $comment['init_commit_id'];
                 $thread_id = $comment['thread_id'];
@@ -222,11 +222,11 @@
             }
             return $comments;
         }
-        
+
         static function logIn($username, $password){
           $return_users= $GLOBALS['DB']->query("SELECT * FROM users WHERE username = '{$username}';");
           $users = null;
-          
+
           foreach($return_users as $user){
             if(password_verify($password, $user['password'])){
               $username = $user['username'];

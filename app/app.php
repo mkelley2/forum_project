@@ -131,6 +131,12 @@
       return $app->redirect('/');
     });
 
+    $app->post("/users", function() use ($app) {
+        return $app['twig']->render("users.html.twig", array('all_categories'=>Category::getAll(),  'user'=>$_SESSION['user']));
+    });
+
+
+
 
     return $app;
 ?>

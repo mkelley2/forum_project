@@ -97,8 +97,8 @@ td {
 }
 
 .userIcon {
-  margin: 0; 
-} 
+  margin: 0;
+}
 
 .navbar-form {
   margin-left: 0;
@@ -122,4 +122,10 @@ td {
 
 .comment {
   margin-left: 10%;
+}
+
+/* USERS PAGE */
+
+textarea {
+    width: 50%;
 }
