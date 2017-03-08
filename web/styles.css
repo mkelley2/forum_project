@@ -6,6 +6,7 @@ h2 {
     font-size: 35px;
 }
 
+/*This is for ALL buttons like, dislike, etc that ARE NOT for submit*/
 button.button-add {
     /*background-image: url('/new_comment.png');*/
     background-color: transparent;
@@ -13,10 +14,42 @@ button.button-add {
     background-position: center;
     border: none;
     cursor: pointer;
-    height: 16px;
-    padding-left: 16px;
+    width: 32px;
     vertical-align: middle;
 }
+
+
+/*end of buttons*/
+
+/* This is for buttons with lower RIGHT placement */
+.post-right {
+    /*background-color: #fff;*/
+    border: #fff;
+    float: right;
+
+}
+/*end of placement lower RIGHT buttons*/
+.row {
+    /*text-align: center;*/
+}
+
+.col-sml-1 {
+    border: #fff;
+    margin: 25px;
+}
+/* This is for lower LEFT buttons */
+
+.post-left {
+    /*background-color: #fff;*/*/
+}
+
+/* end of LEFT POST*/
+
+/* post for thread page */
+.thread-post {
+    color: #fff;
+}
+/* end of post for thread page*/
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -97,8 +130,8 @@ td {
 }
 
 .userIcon {
-  margin: 0; 
-} 
+  margin: 0;
+}
 
 .navbar-form {
   margin-left: 0;
@@ -120,6 +153,29 @@ td {
   color: #ff8800;
 }
 
-.comment {
+.comment-parent {
   margin-left: 10%;
+  background-color: #222222;
+  padding: 25px;
+
+}
+
+.comment {
+  margin-left: 25%;
+  padding: 25px;
+  border-left: solid 2px #000;
+}
+
+.comment-parent p {
+    text-align: center;
+    bottom: 5px;
+}
+
+.button-form {
+    z-index: -1;
+    width: 32px;
+}
+
+.button-form p {
+    width: 75%;
 }

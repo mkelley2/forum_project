@@ -71,7 +71,9 @@
         $new_category = Category::findbyCategory($id);
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
-        return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags, 'user'=>$_SESSION['user'], 'comments'=>$new_thread->getComments()));
+        $post = $new_thread->getPost();
+        $title = $new_thread->getPostTitle();
+        return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'post'=>$post, 'title'=>$title,'tags'=>$tags, 'user'=>$_SESSION['user'], 'comments'=>$new_thread->getComments()));
 
     });
 
@@ -139,7 +141,7 @@
       $url = $_POST['currentUrl'];
       return $app->redirect($url);
     });
-    
+
     $app->delete("/delete-thread/{id}", function($id) use ($app) {
         $thread = Thread::find($id);
         $thread->delete();
