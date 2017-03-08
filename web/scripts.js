@@ -24,14 +24,14 @@ $(document).ready(function(){
   function loop(){
     for(i=0;i<copy.length;i++){
       if(copy[i].parent_id == false){
-        $(".comment-holder").append("<div class='comment' id='"+ copy[i].comment_id + "'><p>" + "Score: " + copy[i].score + " - " + copy[i].comment + "</p></div>");
+        $(".comment-holder").append("<div class='comment' id='"+ copy[i].comment_id + "'><input type='hidden' name='currentUrl' value='" + window.location.pathname + "'><p>" + "Score: " + copy[i].score + " - " + copy[i].comment + "</p></div>");
         added.push(copy[i]);
         copy.splice(i,1);
         loop();
         
       }else{
         if(search(copy[i].parent_id,added)){
-          $("#"+copy[i].parent_id).append("<div class='comment' id='"+ copy[i].comment_id + "'><p>" + "Score: " + copy[i].score + " - " + copy[i].comment + "</p></div>");
+          $("#"+copy[i].parent_id).append("<div class='comment' id='"+ copy[i].comment_id + "'><input type='hidden' name='currentUrl' value='" + window.location.pathname + "'><p>" + "Score: " + copy[i].score + " - " + copy[i].comment + "</p></div>");
           added.push(copy[i]);
           copy.splice(i,1);
           loop();
@@ -43,5 +43,5 @@ $(document).ready(function(){
   while(copy.length>0){
     loop();
   }
-
+// console.log(copy);
 });

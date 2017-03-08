@@ -154,6 +154,12 @@
             }
             return $comments;
         }
+        
+        // function updateScore($new_score)
+        // {
+        //     $GLOBALS['DB']->exec("UPDATE threads SET score = ( score + {$new_score}) WHERE thread_id = {$this->getId()};");
+        //     $this->setScore($new_score);
+        // }
     }
 
 ?>
