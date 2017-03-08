@@ -29,8 +29,8 @@
             <!-- start of new comment dic -->
             <div class="new_comment">
                 <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
-                    <input type="hidden" name="inputParent" value="null">
-                    <input type="textarea" name="inputComment" value="">
+                    <input type="hidden" name="inputParent" value="false">
+                    <textarea cols="70" rows="6" name="inputComment"></textarea>
                     <button class="btn btn-primary" type="submit" name="button">Submit</button>
                 </form>
             </div>
