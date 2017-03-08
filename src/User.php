@@ -186,13 +186,18 @@
             return $found_user;
         }
 
-        function update($city, $state, $country, $bio)
+        function update($city, $state, $country)
         {
-            $GLOBALS['DB']->exec("UPDATE users SET location_city = '{$city}', location_state = '{$state}', location_country = '{$country}', bio = '{$bio}' WHERE user_id = {$this->getId()};");
-            $this->setBio($bio);
+            $GLOBALS['DB']->exec("UPDATE users SET location_city = '{$city}', location_state = '{$state}', location_country = '{$country}' WHERE user_id = {$this->getId()};");
             $this->setLocation_city($city);
             $this->setLocation_state($state);
             $this->setLocation_country($country);
+        }
+
+        function updateBio($bio)
+        {
+            $GLOBALS['DB']->exec("UPDATE users SET bio = '{$bio}' WHERE user_id = {$this->getId()};");
+            $this->setBio($bio);
         }
 
         function delete()
