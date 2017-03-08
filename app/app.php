@@ -50,7 +50,7 @@
     });
 
     $app->post("/categories", function() use ($app) {
-        $new_category = new Category($_POST['inputCategory']);
+        $new_category = new Category(filter_var ($_POST['inputCategory'],FILTER_SANITIZE_MAGIC_QUOTES));
         $new_category->save();
         return $app['twig']->render('categories.html.twig', array('all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
     });
@@ -86,7 +86,6 @@
         $new_thread->save();
         $thread_id = $new_thread->getId();
         return $app->redirect("/category/$id/$thread_id");
-
     });
 
     $app->post("/category/{id}/{thread_id}", function($id, $thread_id) use ($app) {
@@ -94,8 +93,9 @@
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
         $date = date("Y-m-d h:i:s");
-        var_dump($_SESSION['user']->getUserName());
-        $new_comment = new Comment($_SESSION['user']->getId(), $_POST['inputComment'], $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
+        $text = nl2br($_POST['inputComment']);
+        $text = preg_replace("/\r|\n/", "", $text);
+        $new_comment = new Comment($_SESSION['user']->getId(), $text, $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
         $new_comment->save();
         return $app->redirect("/category/$id/$thread_id");
 
@@ -105,7 +105,7 @@
         $check = User::findbyName($_POST['inputUsername']);
         $date = date("Y-m-d h:i:s");
         if(!$check){
-          $_SESSION['user'] = new User($_POST['inputUsername'], password_hash($_POST['inputPassword'], CRYPT_BLOWFISH), "imgur.com", "normal", "", "", "", "", 0, $date);
+          $_SESSION['user'] = new User(filter_var($_POST['inputUsername'], FILTER_SANITIZE_MAGIC_QUOTES), password_hash($_POST['inputPassword'], CRYPT_BLOWFISH), "imgur.com", "normal", "", "", "", "", 0, $date);
           $_SESSION['user']->save();
           return $app->redirect('/');
         }else{
@@ -133,6 +133,19 @@
       return $app->redirect('/');
     });
 
+    $app->patch('/score{id}', function($id) use ($app) {
+      $comment = Commend::find($id);
+      $comment->updateScore($_POST['inputScore']);
+      $url = $_POST['currentUrl'];
+      return $app->redirect($url);
+    });
+    
+    $app->delete("/delete-thread/{id}", function($id) use ($app) {
+        $thread = Thread::find($id);
+        $thread->delete();
+        $category = $_POST['categoryName'];
+        return $app->redirect("/category/$category");
+    });
 
     return $app;
 ?>
