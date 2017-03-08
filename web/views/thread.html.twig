@@ -7,7 +7,26 @@
 
             <div class="post">
                 <!--  text will be generated here  -->
+                <!-- icons -->
+                <div class="post-left">
+                    <form action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="like-button"><img src="/img/like.png"></button>
+                    </form>
+                    <form action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="like-button"><img src="/img/dislike.png"></button>
+                    </form>
+                </div>
+                <div class="post-right">
+                    <form action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="delete-button"><img src="/img/delete.png"></button>
+                    </form>
+                    <form class="" action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="edit-button"><img src="/img/edit.png"></button>
+                    </form>
+                </div>
             </div>
+            <!-- end of post div -->
+            <!-- start of new comment dic -->
             <div class="new_comment">
                 <form action="/category/{{ specific_category.getCategory }}/{{ sepcific_thread.getId }}" method="post">
                     <input type="hidden" name="inputParent" value="null">
@@ -15,8 +34,20 @@
                     <button class="btn btn-primary" type="submit" name="button">Submit</button>
                 </form>
             </div>
+            <!-- end of new comment div -->
+            <!-- start of comments -->
             <div class="comment-holder">
                 <!-- comments will be generated here -->
+
+                <!-- icons -->
+                <div class="post-left">
+                    <form action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="like-button"><img src="/img/like.png"></button>
+                    </form>
+                    <form action="/THIS NEEDS A ROUTE" method="post">
+                        <button type="submit" name="like-button"><img src="/img/dislike.png"></button>
+                    </form>
+                </div>
             </div>
             {% include '/components/footer.html.twig' %}
         </div>
