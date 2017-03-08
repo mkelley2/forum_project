@@ -27,9 +27,9 @@
     //   )
     // );
     // $DB = $app['pdo'];
-    
+
     session_start();
-    
+
     if (empty($_SESSION['user'])) {
         $_SESSION['user'] = array();
     }
@@ -42,7 +42,7 @@
     ));
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
+        return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
     });
 
     $app->get("/categories", function() use ($app) {
@@ -74,21 +74,21 @@
         return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'tags'=>$tags, 'user'=>$_SESSION['user'], 'comments'=>$new_thread->getComments()));
 
     });
-    
+
     $app->get("/new-thread/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
         return $app['twig']->render('new-thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'user'=>$_SESSION['user']));
     });
-    
+
     $app->post("/new-thread/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
         $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), $_SESSION['user']->getId(), $_POST['inputTitle']);
         $new_thread->save();
         $thread_id = $new_thread->getId();
         return $app->redirect("/category/$id/$thread_id");
-        
+
     });
-    
+
     $app->post("/category/{id}/{thread_id}", function($id, $thread_id) use ($app) {
         $new_category = Category::findbyCategory($id);
         $new_thread = Thread::find($thread_id);
@@ -98,7 +98,7 @@
         return $app->redirect("/category/$id/$thread_id");
 
     });
-    
+
     $app->post("/register", function() use ($app) {
         $check = User::findbyName($_POST['inputUsername']);
         $date = date("Y-m-d h:i:s");
@@ -110,7 +110,7 @@
           return "User already exists";
         }
     });
-    
+
     $app->post("/login", function() use ($app) {
       $check = User::findbyName($_POST['inputUsername']);
       if($check){
@@ -125,12 +125,12 @@
         return "User does not exist, please register";
       }
     });
-    
+
     $app->post("/logout", function() use ($app) {
       $_SESSION['user'] = array();
       return $app->redirect('/');
     });
-    
-    
+
+
     return $app;
 ?>
