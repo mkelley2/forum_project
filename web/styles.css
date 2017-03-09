@@ -203,3 +203,37 @@ td {
 textarea {
   color: black;
 }
+
+/*** USER - PROFILE PG ***/
+
+#btn-logout {
+    float: left;
+}
+
+#btn-logout,
+#btn-profile {
+    margin-left: 7%;
+    margin-bottom: -5%;
+}
+
+#btn-bio-cancel,
+#btn-bio-cancel {
+    margin-top: 1%;
+    margin-left: .3%;
+}
+
+#bio-form {
+     display: none;
+}
+
+.user-form {
+    width: 33%;
+}
+
+.bio-area {
+    width: 75%;
+}
+
+.user-label {
+    margin-top: 1%;
+}
