@@ -181,7 +181,13 @@
                 if($parent_id==null){
                   $parent_id = "false";
                 }
-                $new_comment = '{"username":"' . $username . '", "user_id":"' . $user . '", "comment":"' . $comment_text . '", "parent_id":"' . $parent_id . '", "score":"' . $score . '", "post_time":"' . $post_time . '", "thread_id":"' . $thread_id . '", "comment_id":"' . $comment_id . '"}';
+                $this_comment = Comment::find($comment_id);
+                $tags_array = $this_comment->getTags();
+                $tags = "";
+                foreach($tags_array as $tag){
+                  $tags = $tags . " " . $tag->getTag();
+                }
+                $new_comment = '{"username":"' . $username . '", "user_id":"' . $user . '", "comment":"' . $comment_text . '", "parent_id":"' . $parent_id . '", "score":"' . $score . '", "post_time":"' . $post_time . '", "thread_id":"' . $thread_id . '", "comment_id":"' . $comment_id . '", "tags":"' . $tags . '"}';
                 array_push($comments, $new_comment);
             }
             return $comments;
