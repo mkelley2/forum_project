@@ -49,7 +49,9 @@ $(document).ready(function(){
               "</div>" +
               "<div class='col-xs-10'>" +
                 "<div class='row'>" +
-                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
+
+                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - "+ timeDifference(new Date(), new Date(copy[i].post_time)) + "&nbsp;&nbsp;" + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
+
                 "</div>" +
                 "<div class='row'>" +
                   "<button type='button' name='reply-button' class='reply-button button-add' value='" + copy[i].comment_id + "'><img src='/img/new_comment.png'></button>" +
@@ -92,9 +94,11 @@ $(document).ready(function(){
                   "</form>" +
                 "</div>" +
                 "<div class='col-xs-10'>" +
-                  "<div class='row'>" +
-                    "<p><a href='" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
-                  "</div>" +
+                "<div class='row'>" +
+
+                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - "+ timeDifference(new Date(), new Date(copy[i].post_time)) + "&nbsp;&nbsp;" + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
+
+                "</div>" +
                   "<div class='row'>" +
                     "<button type='button' name='reply-button' class='reply-button button-add' value='" + copy[i].comment_id + "'><img src='/img/new_comment.png'></button>" +
                     "<div class='reply-form'></div>" +
@@ -109,7 +113,7 @@ $(document).ready(function(){
           for(j=0;j<tags2.length;j++){
             if(tags2[j]!== ""){
                 $(".tag").append(
-                    "<span class='label label-warning'>" + tags[j] +"</span>"
+                    "<span class='label label-warning'>" + tags2[j] +"</span>"
                 );
               console.log(tags2[j]);
             }
@@ -122,7 +126,42 @@ $(document).ready(function(){
     }
   }
 
+// from http://stackoverflow.com/questions/6108819/javascript-timestamp-to-relative-time-eg-2-seconds-ago-one-week-ago-etc-best
+  function timeDifference(current, previous) {
 
+      console.log(current, previous);
+      var msPerMinute = 60 * 1000;
+      var msPerHour = msPerMinute * 60;
+      var msPerDay = msPerHour * 24;
+      var msPerMonth = msPerDay * 30;
+      var msPerYear = msPerDay * 365;
+
+      var elapsed = current - previous;
+
+      if (elapsed < msPerMinute) {
+           return Math.round(elapsed/1000) + ' seconds ago';
+      }
+
+      else if (elapsed < msPerHour) {
+           return Math.round(elapsed/msPerMinute) + ' minutes ago';
+      }
+
+      else if (elapsed < msPerDay ) {
+           return Math.round(elapsed/msPerHour ) + ' hours ago';
+      }
+
+      else if (elapsed < msPerMonth) {
+          return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';
+      }
+
+      else if (elapsed < msPerYear) {
+          return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';
+      }
+
+      else {
+          return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';
+      }
+  }
 
   // while(copy.length>0){
     loop();
