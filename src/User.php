@@ -223,6 +223,27 @@
             return $comments;
         }
         
+        function getLinkInfoComments(){
+          $return_comments = $GLOBALS['DB']->query("SELECT comments.*, threads.category from comments JOIN threads ON (comments.thread_id = threads.thread_id) WHERE threads.user_id = {$this->getId()};");
+
+          $comments = array();
+
+          foreach ($return_comments as $comment){
+              $user_id = $comment['user_id'];
+              $comment_text = $comment['comment'];
+              $parent_id = $comment['parent_id'];
+              $score = $comment['score'];
+              $post_time = $comment['post_time'];
+              $init_commit_id = $comment['init_commit_id'];
+              $thread_id = $comment['thread_id'];
+              $comment_id = $comment['comment_id'];
+              $category = $comment['category'];
+              $new_comment = array('user_id'=> $user_id, 'comment'=> $comment_text, 'parent_id'=>$parent_id, 'score'=>$score, 'post_time'=>$post_time, 'init_commit_id'=>$init_commit_id, 'thread_id'=>$thread_id, 'comment_id'=>$comment_id, 'category'=>$category);
+              array_push($comments, $new_comment);
+          }
+          return $comments;
+        }
+        
         function getThreads()
         {
             $return_threads = $GLOBALS['DB']->query("SELECT * FROM threads where user_id = {$this->getId()};");

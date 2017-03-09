@@ -164,7 +164,7 @@
     
     $app->get("/user/{id}", function($id) use ($app) {
         $user = User::find($id);
-        $userComments = $user->getComments();
+        $userComments = $user->getLinkInfoComments();
         $userThreads = $user->getThreads();
         return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
 

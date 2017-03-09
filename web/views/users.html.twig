@@ -22,7 +22,7 @@
             <!-- <div class="row"> -->
               <div class="col-lg-6">
                 <div class="panel panel-default">
-                  <div class="panel-heading">{{userpage.username}}'s Posts</div>
+                  <div class="panel-heading">{{userpage.username}}'s Threads</div>
                   <div class="panel-body">
                     <ul>
                       {% for thread in user_threads %}
@@ -34,10 +34,11 @@
               </div>
               <div class="col-lg-6">
                 <div class="panel panel-default">
-                  <div class="panel-heading">{{userpage.username}}'s Threads</div>
+                  <div class="panel-heading">{{userpage.username}}'s Posts</div>
                   <div class="panel-body">
                     {% for comment in user_comments %}
-                      <li><a href="/category/{{comment.getCommentId}}/{{comment.getThreadId}}">{{comment.getComment}}</a></li>
+                    <!-- needs to have access to category name -->
+                      <li><a href="/category/{{comment.category}}/{{comment.thread_id}}">{{comment.comment}}</a></li> 
                     {% endfor %}
                   </div>
                 </div>
