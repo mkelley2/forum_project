@@ -203,3 +203,15 @@ td {
 textarea {
   color: black;
 }
+
+/*** USER - PROFILE PG ***/
+
+#btn-logout {
+    float: left;
+}
+
+#btn-logout,
+#btn-profile {
+    margin-left: 7%;
+    margin-bottom: -5%;
+}

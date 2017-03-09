@@ -25,7 +25,7 @@
           <input type="text" name="search_term" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        
+
       </form>
       <ul class="nav navbar-nav navbar-right userIcon">
         <li id="user-dropdown" class="dropdown">
@@ -44,8 +44,13 @@
                 <p>Hello, {{user.getUsername}}</p>
               </li>
               <li>
-                <form class="form-group" action="/logout" method="post">
-                  <button class="btn btn-success" type="submit">logout</button>
+                <form id="btn-logout" class="form-group" action="/logout" method="post">
+                  <button class="btn btn-success" type="submit">Logout</button>
+                </form>
+              </li>
+              <li>
+                <form class="form-group" action="/profile" method="get">
+                  <button id="btn-profile" class="btn btn-default" type="submit">Profile</button>
                 </form>
               </li>
               {% endif %}
