@@ -188,7 +188,7 @@ $(document).ready(function(){
         '<input type="hidden" name="_method" value="patch">' +
         '<input type="hidden" name="categoryName" value="'+ category +'">' +
         '<input type="text" name="inputPost">' +
-        '<button type="submit" name="edit-button"><img src="/img/edit.png"></button>' +
+        '<button class="button-add"type="submit" name="edit-button"><img src="/img/edit.png"></button>' +
       '</form>'
     );
   });
