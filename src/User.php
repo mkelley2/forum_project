@@ -217,10 +217,29 @@
                 $init_commit_id = $comment['init_commit_id'];
                 $thread_id = $comment['thread_id'];
                 $comment_id = $comment['comment_id'];
-                $new_comment = new User($user_id, $comment_text, $parent_id, $score, $post_time, $init_commit_id, $thread_id, $comment_id);
+                $new_comment = new Comment($user_id, $comment_text, $parent_id, $score, $post_time, $init_commit_id, $thread_id, $comment_id);
                 array_push($comments, $new_comment);
             }
             return $comments;
+        }
+        
+        function getThreads()
+        {
+            $return_threads = $GLOBALS['DB']->query("SELECT * FROM threads where user_id = {$this->getId()};");
+
+            $threads = array();
+
+            foreach ($return_threads as $thread){
+                $post = $thread['post'];
+                $category_id = $thread['category_id'];
+                $user_id = $thread['user_id'];
+                $post_title = $thread['post_title'];
+                $category = $thread['category'];
+                $id = $thread['thread_id'];
+                $new_thread = new Thread($post, $category_id, $user_id, $post_title, $category, $id);
+                array_push($threads, $new_thread);
+            }
+            return $threads;
         }
         
         static function logIn($username, $password){

@@ -123,7 +123,7 @@
             foreach($returned_comment as $comment) {
               $score = $comment[0];
             }
-            $this->setScore($score+$new_score);
+            $this->setScore($score);
         }
 
         function delete()

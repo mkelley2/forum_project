@@ -43,7 +43,7 @@
 
     $app->get("/", function() use ($app) {
       
-        return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
+        return $app['twig']->render('index.html.twig', array('alert'=>null, 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
     });
 
     $app->get("/categories", function() use ($app) {
@@ -85,7 +85,7 @@
 
     $app->post("/new-thread/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
-        $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), $_SESSION['user']->getId(), $_POST['inputTitle']);
+        $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), $_SESSION['user']->getId(), $_POST['inputTitle'], $id);
         $new_thread->save();
         $thread_id = $new_thread->getId();
         return $app->redirect("/category/$id/$thread_id");
@@ -112,7 +112,7 @@
           $_SESSION['user']->save();
           return $app->redirect('/');
         }else{
-          return "User already exists";
+          return $app['twig']->render('index.html.twig', array('alert'=>'User already exists', 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
         }
     });
 
@@ -124,10 +124,10 @@
           $_SESSION['user'] = $pass_login;
           return $app->redirect('/');
         }else{
-          return "Incorrect Login info";
+          return $app['twig']->render('index.html.twig', array('alert'=>'Incorrect login info', 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
         }
       }else{
-        return "User does not exist, please register";
+        return $app['twig']->render('index.html.twig', array('alert'=>'Account does not exist, please register', 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
       }
     });
 
@@ -160,6 +160,14 @@
         $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
+    });
+    
+    $app->get("/user/{id}", function($id) use ($app) {
+        $user = User::find($id);
+        $userComments = $user->getComments();
+        $userThreads = $user->getThreads();
+        return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
+
     });
 
     return $app;

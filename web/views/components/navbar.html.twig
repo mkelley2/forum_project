@@ -29,14 +29,26 @@
       </form>
       <ul class="nav navbar-nav navbar-right userIcon">
         <li id="user-dropdown" class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            {% if user is empty %}
+            <i class="fa fa-user-circle-o logged-out" aria-hidden="true"></i>
+            {% else %}
+            <i class="fa fa-user-circle-o logged-in" aria-hidden="true"></i>
+            {% endif %}
+            <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
+            {% if user is empty %}
               <li><button type = "button" class=" purge btn btn-info" data-toggle="modal" data-target="#login-modal">Log In</button></li>
+              {% else %}
+              <li>
+                <p>Hello, {{user.getUsername}}</p>
+              </li>
               <li>
                 <form class="form-group" action="/logout" method="post">
                   <button class="btn btn-success" type="submit">logout</button>
                 </form>
               </li>
+              {% endif %}
           </ul>
         </li>
       </ul>

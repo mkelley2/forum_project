@@ -5,14 +5,16 @@
         private $category_id;
         private $user_id;
         private $post_title;
+        private $category;
         private $id;
 
-        function __construct($post, $category_id, $user_id, $post_title, $id = null)
+        function __construct($post, $category_id, $user_id, $post_title, $category, $id = null)
         {
             $this->post = $post;
             $this->category_id = $category_id;
             $this->user_id = $user_id;
             $this->post_title = $post_title;
+            $this->category = $category;
             $this->id = $id;
         }
 
@@ -55,6 +57,16 @@
         {
             $this->post_title = $post_title;
         }
+        
+        function getCategory()
+        {
+            return $this->category;
+        }
+
+        function setCategory($category)
+        {
+            $this->category = $category;
+        }
 
         function getId()
         {
@@ -63,7 +75,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO threads (post, category_id, user_id, post_title) VALUES ('{$this->getPost()}', {$this->getCategoryId()}, {$this->getUserId()}, '{$this->getPostTitle()}');");
+            $GLOBALS['DB']->exec("INSERT INTO threads (post, category_id, user_id, post_title, category) VALUES ('{$this->getPost()}', {$this->getCategoryId()}, {$this->getUserId()}, '{$this->getPostTitle()}', '{$this->getCategory()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -76,8 +88,9 @@
                 $category_id = $thread['category_id'];
                 $user_id = $thread['user_id'];
                 $post_title = $thread['post_title'];
+                $category = $thread['category'];
                 $thread_id = $thread['thread_id'];
-                $new_thread = new Thread($post, $category_id, $user_id, $post_title, $thread_id);
+                $new_thread = new Thread($post, $category_id, $user_id, $post_title, $category, $thread_id);
                 array_push($threads, $new_thread);
             }
             return $threads;
@@ -139,6 +152,7 @@
             $comments = array();
             foreach($returned_comments as $comment) {
                 $user = $comment['user_id'];
+                $username = User::find($user)->getUsername();
                 $comment_text = $comment['comment'];
                 $parent_id = $comment['parent_id'];
                 $score = $comment['score'];
@@ -149,7 +163,7 @@
                 if($parent_id==null){
                   $parent_id = "false";
                 }
-                $new_comment = '{"user_id":"' . $user . '", "comment":"' . $comment_text . '", "parent_id":"' . $parent_id . '", "score":"' . $score . '", "post_time":"' . $post_time . '", "thread_id":"' . $thread_id . '", "comment_id":"' . $comment_id . '"}';
+                $new_comment = '{"username":"' . $username . '", "user_id":"' . $user . '", "comment":"' . $comment_text . '", "parent_id":"' . $parent_id . '", "score":"' . $score . '", "post_time":"' . $post_time . '", "thread_id":"' . $thread_id . '", "comment_id":"' . $comment_id . '"}';
                 array_push($comments, $new_comment);
             }
             return $comments;

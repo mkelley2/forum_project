@@ -147,35 +147,59 @@ td {
 }
 
 /* ORANGE for when user is logged IN */
-.fa-user-circle-o {
+.logged-in {
   font-size: 2em;
   float: right;
   color: #ff8800;
 }
 
 .comment-parent {
-  margin-left: 10%;
-  background-color: #222222;
-  padding: 25px;
+  margin-left: 1%;
+  /*background-color: #222222;
+  padding: 25px;*/
 
 }
 
 .comment {
-  margin-left: 25%;
+  margin-left: 5%;
   padding: 25px;
   border-left: solid 2px #000;
 }
 
 .comment-parent p {
-    text-align: center;
-    bottom: 5px;
+    /*text-align: center;*/
+    /*bottom: 5px;*/
 }
 
 .button-form {
-    z-index: -1;
-    width: 32px;
+    /*z-index: -1;
+    width: 32px;*/
 }
 
 .button-form p {
-    width: 75%;
+    /*width: 75%;*/
+}
+
+.col-xs-10 p{
+  color: grey;
+}
+
+.reply-button {
+  color: black;
+}
+
+.post-left {
+  background-color: white;
+}
+
+.post-right {
+  float: left;
+}
+
+.pScore {
+  float: left;
+}
+
+textarea {
+  color: black;
 }
