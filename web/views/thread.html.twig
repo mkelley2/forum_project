@@ -5,7 +5,7 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
             <div class="thread-post well">
-                <h2>{{ title }}</h2>
+                <h2>{{ title }} &nbsp; &nbsp; <span class="smallerUserLink"> submitted by &nbsp;<a href="/user/{{ user.getId }}">{{ user.getUsername }}</a></span></h2>
                 <div class="panel panel-default">
                     <!--  post will be generated here  -->
                     <div class="panel-body">
@@ -26,6 +26,7 @@
                          <div class="editThread">
                              <button #id="btn-edit-thread" type="button" class="editThreadBTN button-add" name="edit-init-button"><img src="/img/edit.png"></button>
                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -36,6 +37,8 @@
                     <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
                         <input type="hidden" name="inputParent" value="false">
                         <textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea><br />
+                        <input class="black" type="text" name="tag" maxlength="40" placeholder="add #tag">
+                        <br>
                         <button class="btn btn-primary" type="submit" name="button">Submit</button>
                     </form>
                 </div>

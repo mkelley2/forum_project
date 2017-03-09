@@ -27,8 +27,17 @@
 
         function save()
         {
+          
+            $all_tags = Tag::getAll();
+            foreach ($all_tags as $tag) {
+                if(strtolower($tag->getTag()) == strtolower($this->tag)){
+                    return false;
+                }
+            }
             $GLOBALS['DB']->exec("INSERT INTO tags (tag) VALUES ('{$this->getTag()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
+            
+            return true;
         }
 
         static function getAll()
@@ -63,6 +72,20 @@
             }
             return $found_tag;
         }
+
+        static function findByName($search_id)
+        {
+            $found_tag = null;
+            $tags = Tag::getAll();
+            foreach($tags as $tag) {
+                $tag_id = $tag->getTag();
+                if ($tag_id == $search_id) {
+                  $found_tag = $tag;
+                }
+            }
+            return $found_tag;
+        }
+
 
         function delete()
         {

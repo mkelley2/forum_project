@@ -74,7 +74,15 @@
         $tags = $new_thread->getTags();
         $post = $new_thread->getPost();
         $title = $new_thread->getPostTitle();
-        return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'post'=>$post, 'title'=>$title,'tags'=>$tags, 'user'=>$_SESSION['user'], 'comments'=>$new_thread->getComments()));
+        return $app['twig']->render('thread.html.twig',
+            array('all_categories'=>Category::getAll(),
+            'specific_category'=>$new_category,
+            'specific_thread'=>$new_thread,
+            'post'=>$post,
+            'title'=>$title,
+            'tags'=>$tags,
+            'user'=>$_SESSION['user'],
+            'comments'=>$new_thread->getComments()));
 
     });
 
@@ -85,7 +93,7 @@
 
     $app->post("/new-thread/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
-        $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), $_SESSION['user']->getId(), $_POST['inputTitle'], $id);
+        $new_thread = new Thread(filter_var($_POST['inputPost'],FILTER_SANITIZE_MAGIC_QUOTES), $new_category->getId(), $_SESSION['user']->getId(), filter_var($_POST['inputTitle'],FILTER_SANITIZE_MAGIC_QUOTES), $id);
         $new_thread->save();
         $thread_id = $new_thread->getId();
         return $app->redirect("/category/$id/$thread_id");
@@ -96,10 +104,12 @@
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
         $date = date("Y-m-d h:i:s");
-        $text = nl2br($_POST['inputComment']);
+        $text = nl2br(filter_var($_POST['inputComment'],FILTER_SANITIZE_MAGIC_QUOTES));
         $text = preg_replace("/\r|\n/", "", $text);
         $new_comment = new Comment($_SESSION['user']->getId(), $text, $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
         $new_comment->save();
+        $new_comment->createMultiTags($_POST['tag']);
+        // $new_comment->addMultiTags($_POST['tag']);
         return $app->redirect("/category/$id/$thread_id");
 
     });
@@ -159,7 +169,7 @@
         $thread = Thread::find($id);
         $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
-        return $app->redirect("/category/$category");
+        return $app->redirect("/category/$category/$id");
     });
 
     $app->get("/user/{id}", function($id) use ($app) {
@@ -180,10 +190,17 @@
     });
 
     $app->get("/search", function() use ($app) {
-        $thread_results = Thread::searchFor($_GET['search_term']);
-        $comment_results = Comment::searchFor($_GET['search_term']);
-        $user_results = User::searchFor($_GET['search_term']);
+        $thread_results = Thread::searchFor(filter_var($_GET['search_term'],FILTER_SANITIZE_MAGIC_QUOTES));
+        $comment_results = Comment::searchFor(filter_var($_GET['search_term'],FILTER_SANITIZE_MAGIC_QUOTES));
+        $user_results = User::searchFor(filter_var($_GET['search_term'],FILTER_SANITIZE_MAGIC_QUOTES));
         return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'user_results'=> $user_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
     });
+    
+    $app->get("/tag", function() use ($app) {
+        $thread_results = Thread::searchFor(filter_var($_GET['tag_search'],FILTER_SANITIZE_MAGIC_QUOTES));
+        $comment_results = Comment::searchFor(filter_var($_GET['tag_search'],FILTER_SANITIZE_MAGIC_QUOTES));
+        return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
+    });
     return $app;
+
 ?>

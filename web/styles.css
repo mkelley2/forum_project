@@ -222,6 +222,11 @@ textarea {
   color: black;
 }
 
+
+.black {
+    color: #000;
+}
+
 /*** USER - PROFILE PG ***/
 
 
@@ -265,3 +270,11 @@ textarea {
 }
 
 /*** END USER PAGE ***/
+
+.smallerUserLink {
+    font-size: 50%;
+}
+
+.editThread {
+  color: black;
+}
