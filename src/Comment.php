@@ -182,8 +182,54 @@
             return $found_comment;
         }
 
+        // function  addMultiTags($str)
+        // {
+        //
+        //     $str = preg_replace("/,/", "", $str);
+        //     $array_tags = explode(" ", $str);
+        //
+        //     for($i = 0; $i < count($array_tags); $i++)
+        //     {
+        //         $found_tag = Tag::findByName($array_tags[$i]);
+        //         $query = $GLOBALS['DB']->query("SELECT * FROM tags;");
+        //         $all_tags = array();
+        //
+        //         foreach($query as $tag)
+        //         {
+        //             array_push($all_tags, $tag['tag']);
+        //         }
+        //
+        //         $return = array_search($array_tags[i], $all_tags);
+        //
+        //         if($return !== false){
+        //             $this->addTag($found_tag);
+        //         }
+        //     }
+        // }
+
+        function  createMultiTags($str)
+        {
+        
+            $str = preg_replace("/,/", "", $str);
+            $array_tags = explode(" ", $str);
+        
+            for($i = 0; $i < count($array_tags); $i++)
+            {
+                $new_tag = new Tag($array_tags[$i]);
+                $pass = $new_tag->save();
+                
+                if($new_tag === false){
+                    $found_tag = Tag::findByName($array_tags[$i]);
+                    $this->addTag($found_tag);
+                } else {
+                    $this->addTag($new_tag);
+                }
+            }
+        }
+
         function addTag($tag)
         {
+
             $GLOBALS['DB']->exec("INSERT INTO comments_tags (comment_id, tag_id) VALUES ({$this->getCommentId()}, {$tag->getId()});");
         }
 
@@ -204,22 +250,24 @@
 
         static function searchFor($search_term)
         {
-            $matches = array();
-            // $search_term = explode(" ", strtolower($search_term));
-        
-            $query = $GLOBALS['DB']->query("SELECT * FROM comments WHERE comment LIKE '%$search_term%';");
-            foreach ($query as $match) {
-                $user = $match['user_id'];
-                $comment = $match['comment'];
-                $parent_id = $match['parent_id'];
-                $comment_id = $match['comment_id'];
-                $score = $match['score'];
-                $post_time = $match['post_time'];
-                $return_id = $match['id'];
-                $new_comment = new Comment($user, $comment, $parent_id, $comment_id, $score, $post_time, $return_id);
-                array_push($matches, $new_comment);
-            }
-            return $matches;
+          $return_comments = $GLOBALS['DB']->query("SELECT comments.*, threads.category from comments JOIN threads ON (comments.thread_id = threads.thread_id) WHERE comment LIKE '%{$search_term}%';");
+
+          $comments = array();
+
+          foreach ($return_comments as $comment){
+              $user_id = $comment['user_id'];
+              $comment_text = $comment['comment'];
+              $parent_id = $comment['parent_id'];
+              $score = $comment['score'];
+              $post_time = $comment['post_time'];
+              $init_commit_id = $comment['init_commit_id'];
+              $thread_id = $comment['thread_id'];
+              $comment_id = $comment['comment_id'];
+              $category = $comment['category'];
+              $new_comment = array('user_id'=> $user_id, 'comment'=> $comment_text, 'parent_id'=>$parent_id, 'score'=>$score, 'post_time'=>$post_time, 'init_commit_id'=>$init_commit_id, 'thread_id'=>$thread_id, 'comment_id'=>$comment_id, 'category'=>$category);
+              array_push($comments, $new_comment);
+          }
+          return $comments;
         }
     }
 ?>

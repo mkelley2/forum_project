@@ -16,14 +16,16 @@
                           <form action="/delete-thread/{{specific_thread.getId}}" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <input type="hidden" name="categoryName" value="{{specific_category.getCategory}}">
-                            <button type="submit" name="delete-button"><img src="/img/delete.png"></button>
+                            <button #id="btn-delete-thread" class="button-add" type="submit" name="delete-button"><img src="/img/delete.png"></button>
                           </form>
                           <script type="text/javascript">
                           var category = '{{specific_category.getCategory}}';
                           var thread = '{{specific_thread.getId}}';
                           </script>
                           <br />
-                          <button type="button" class="editThreadBTN" name="edit-init-button"><img src="/img/edit.png"></button>
+                         <div class="editThread">
+                             <button #id="btn-edit-thread" type="button" class="editThreadBTN button-add" name="edit-init-button"><img src="/img/edit.png"></button>
+                         </div>
 
                         </div>
                       </div>
@@ -35,6 +37,8 @@
                     <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
                         <input type="hidden" name="inputParent" value="false">
                         <textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea><br />
+                        <input class="black" type="text" name="tag" maxlength="40" placeholder="add #tag">
+                        <br>
                         <button class="btn btn-primary" type="submit" name="button">Submit</button>
                     </form>
                 </div>

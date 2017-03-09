@@ -19,19 +19,18 @@ button.button-add {
 }
 
 
+
 /*end of buttons*/
 
-/* This is for buttons with lower RIGHT placement */
+/* This is for buttons with RIGHT placement */
 .post-right {
-    /*background-color: #fff;*/
-    border: #fff;
-    float: right;
+    position: relative;
+    left: 800px;
+}
 
-}
+
 /*end of placement lower RIGHT buttons*/
-.row {
-    /*text-align: center;*/
-}
+
 
 .col-sml-1 {
     border: #fff;
@@ -204,6 +203,11 @@ textarea {
   color: black;
 }
 
+
+.black {
+    color: #000;
+}
+
 /*** USER - PROFILE PG ***/
 
 
@@ -246,6 +250,12 @@ textarea {
     margin-top: 1%;
 }
 
+/*** END USER PAGE ***/
+
 .smallerUserLink {
     font-size: 50%;
+}
+
+.editThread {
+  color: black;
 }
