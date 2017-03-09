@@ -167,7 +167,7 @@
         $thread = Thread::find($id);
         $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
-        return $app->redirect("/category/$category");
+        return $app->redirect("/category/$category/$id");
     });
 
     $app->get("/user/{id}", function($id) use ($app) {

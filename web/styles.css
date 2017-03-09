@@ -249,3 +249,7 @@ textarea {
 .smallerUserLink {
     font-size: 50%;
 }
+
+.editThread {
+  color: black;
+}
