@@ -36,7 +36,7 @@
                                 <li><a class="topGenerated" href="/category/{{category.getCategory}}">{{ category.getCategory }}</a></li>
                               {% endfor %}
                           </ol>
-                        {% endif %}
+                          {% endif %}
                       </div>
                     </div>
                 </div>
@@ -49,14 +49,13 @@
                                 <div class="col-md-2">
                                     <div class="row">
                                         {% if all_threads is not empty %}
-                                        {% for thread in all_threads %}
+                                        <ol>
+                                            {% for thread in all_threads|slice(0, 5) %}
 
-
-                                          <!-- link goes here / a tag removed goes here -->
-
-
-                                      {% endfor %}
-                                      {% endif %}
+                                                <li><a class="topGenerated" href="/category/{{ thread.getCategory }}/{{ thread.getId }}">{{ thread.getPostTitle }}</a></li>
+                                            {% endfor %}
+                                        </ol>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
