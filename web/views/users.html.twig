@@ -6,16 +6,41 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
           <div class="panel panel-default">
-            <div class="panel-heading">
-              {{userpage.username}}
+            <div id="bio-title" class="panel-heading">
+                {{userpage.username}}
+                {% if userpage.getId == user.getId() %}
+                    <button id="edit-user-bio" type="button" class="btn btn-default pull-right"> Edit</button>
+                {% endif %}
             </div>
             <div class="panel-body">
+                {% if user is not empty %}
               <ul>
                 <li>Bio: {{userpage.getBio}}</li>
                 <li>City: {{userpage.getLocation_City}}</li>
                 <li>State: {{userpage.getLocation_State}}</li>
                 <li>Country: {{userpage.getLocation_Country}}</li>
               </ul>
+              <p>{{user.getBio}}</p>
+              <form id="bio-form" name="new-bio" action="/user-bio/{{user.getId()}}" method="post">
+                  <input name="_method" type="hidden" value = "patch">
+                  <input id="bio-editor" type="hidden" name="bio" value="{{ user.getId() }}">
+                  <label class="user-label" for="new-bio">Edit bio</label>
+                  <textarea class="form-control bio-area" name="new-bio" rows="3" id="textArea" >{{userpage.getBio}}</textarea>
+
+                  <label class="control-label user-label" for="inputSmall">City</label>
+                  <input class="form-control input-sm user-form" name="city" type="text" value="{{userpage.getLocation_City}}" id="inputSmall">
+
+                  <label class="control-label user-label" for="inputSmall">State</label>
+                  <input class="form-control input-sm user-form " name="state" type="text" value="{{userpage.getLocation_State}}" id="inputSmall">
+
+                  <label class="control-label user-label" for="inputSmall">Country</label>
+                  <input class="form-control input-sm user-form" name="country" type="text" value="{{userpage.getLocation_Country}}" id="inputSmall">
+
+                  <button id="btn-bio-cancel" type="reset" class="btn btn-default"><i class="fa fa-times" aria-hidden="true"></i> &nbsp; Cancel</button>
+                  <button id="btn-bio-cancel" type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Submit</button>
+
+              </form>
+              {% endif %}
             </div>
           </div>
           <div class="panel panel-default">
@@ -38,7 +63,7 @@
                   <div class="panel-body">
                     {% for comment in user_comments %}
                     <!-- needs to have access to category name -->
-                      <li><a href="/category/{{comment.category}}/{{comment.thread_id}}">{{comment.comment}}</a></li> 
+                      <li><a href="/category/{{comment.category}}/{{comment.thread_id}}">{{comment.comment}}</a></li>
                     {% endfor %}
                   </div>
                 </div>
