@@ -42,7 +42,7 @@
     ));
 
     $app->get("/", function() use ($app) {
-      
+
         return $app['twig']->render('index.html.twig', array('alert'=>null, 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
     });
 
@@ -74,7 +74,15 @@
         $tags = $new_thread->getTags();
         $post = $new_thread->getPost();
         $title = $new_thread->getPostTitle();
-        return $app['twig']->render('thread.html.twig', array('all_categories'=>Category::getAll(), 'specific_category'=>$new_category, 'specific_thread'=>$new_thread, 'post'=>$post, 'title'=>$title,'tags'=>$tags, 'user'=>$_SESSION['user'], 'comments'=>$new_thread->getComments()));
+        return $app['twig']->render('thread.html.twig',
+            array('all_categories'=>Category::getAll(),
+            'specific_category'=>$new_category,
+            'specific_thread'=>$new_thread,
+            'post'=>$post,
+            'title'=>$title,
+            'tags'=>$tags,
+            'user'=>$_SESSION['user'],
+            'comments'=>$new_thread->getComments()));
 
     });
 
@@ -154,14 +162,14 @@
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
     });
-    
+
     $app->patch("/edit-thread/{id}", function($id) use ($app) {
         $thread = Thread::find($id);
         $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
     });
-    
+
     $app->get("/user/{id}", function($id) use ($app) {
         $user = User::find($id);
         $userComments = $user->getLinkInfoComments();

@@ -172,7 +172,7 @@
             }
             return $found_user;
         }
-        
+
         static function findbyName($search_id)
         {
             $found_user = null;
@@ -222,7 +222,7 @@
             }
             return $comments;
         }
-        
+
         function getLinkInfoComments(){
           $return_comments = $GLOBALS['DB']->query("SELECT comments.*, threads.category from comments JOIN threads ON (comments.thread_id = threads.thread_id) WHERE threads.user_id = {$this->getId()};");
 
@@ -234,16 +234,15 @@
               $parent_id = $comment['parent_id'];
               $score = $comment['score'];
               $post_time = $comment['post_time'];
-              $init_commit_id = $comment['init_commit_id'];
               $thread_id = $comment['thread_id'];
               $comment_id = $comment['comment_id'];
               $category = $comment['category'];
-              $new_comment = array('user_id'=> $user_id, 'comment'=> $comment_text, 'parent_id'=>$parent_id, 'score'=>$score, 'post_time'=>$post_time, 'init_commit_id'=>$init_commit_id, 'thread_id'=>$thread_id, 'comment_id'=>$comment_id, 'category'=>$category);
+              $new_comment = array('user_id'=> $user_id, 'comment'=> $comment_text, 'parent_id'=>$parent_id, 'score'=>$score, 'post_time'=>$post_time, 'thread_id'=>$thread_id, 'comment_id'=>$comment_id, 'category'=>$category);
               array_push($comments, $new_comment);
           }
           return $comments;
         }
-        
+
         function getThreads()
         {
             $return_threads = $GLOBALS['DB']->query("SELECT * FROM threads where user_id = {$this->getId()};");
@@ -262,11 +261,11 @@
             }
             return $threads;
         }
-        
+
         static function logIn($username, $password){
           $return_users= $GLOBALS['DB']->query("SELECT * FROM users WHERE username = '{$username}';");
           $users = null;
-          
+
           foreach($return_users as $user){
             if(password_verify($password, $user['password'])){
               $username = $user['username'];
