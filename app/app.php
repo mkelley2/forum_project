@@ -169,6 +169,12 @@
         return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
 
     });
-
+    
+    $app->get("/search", function() use ($app) {
+        $thread_results = Thread::searchFor($_GET['search_term']);
+        $comment_results = Comment::searchFor($_GET['search_term']);
+        $user_results = User::searchFor($_GET['search_term']);
+        return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'user_results'=> $user_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
+    });
     return $app;
 ?>
