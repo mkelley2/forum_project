@@ -58,7 +58,7 @@ $(document).ready(function(){
               "</div>" +
           "</div>"
           );
-          
+
           // put a div in the comment that tags can be appended to
           var tags = copy[i].tags;
           tags = tags.split(" ");
@@ -102,7 +102,7 @@ $(document).ready(function(){
                 "</div>" +
             "</div>"
           );
-          
+
           // put a div in the comment that tags can be appended to
           var tags2 = copy[i].tags2;
           tags2 = tags2.split(" ");
@@ -149,7 +149,7 @@ $(document).ready(function(){
         '<input type="hidden" name="_method" value="patch">' +
         '<input type="hidden" name="categoryName" value="'+ category +'">' +
         '<input type="text" name="inputPost">' +
-        '<button type="submit" name="edit-button"><img src="/img/edit.png"></button>' +
+        '<button class="button-add"type="submit" name="edit-button"><img src="/img/edit.png"></button>' +
       '</form>'
     );
   });
