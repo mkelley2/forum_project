@@ -1,4 +1,12 @@
 $(document).ready(function(){
+    $("#edit-user-bio").click(function() {
+        $('#bio-form').show();
+        $('#edit-user-bio').hide();
+    });
+    $("#btn-bio-cancel").click(function() {
+        $('#edit-user-bio').show();
+        $('#bio-form').hide();
+    });
   // comments.forEach(function(elem){
   //   if(elem.parent_id === null){
   //     $(".comment-holder").append("<div id="+ elem.comment_id + "><h1>" + elem.text + "</h1></div>");
@@ -89,13 +97,13 @@ $(document).ready(function(){
       }
     }
   }
-  
-  
+
+
 
   // while(copy.length>0){
     loop();
   // }
-  
+
   $(".reply-button").click(function(){
     $(this).next().append(
       '<form action="/category/' + category + '/'+ thread +'" method="post">' +
@@ -103,9 +111,9 @@ $(document).ready(function(){
           '<textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea>' +
           '<button class="btn btn-primary" type="submit" name="button">Submit</button>' +
       '</form>'
-      
+
     );
-    
+
   });
 
   $(".editThreadBTN").click(function(){
@@ -121,6 +129,5 @@ $(document).ready(function(){
       '</form>'
     );
   });
-  
-});
 
+});

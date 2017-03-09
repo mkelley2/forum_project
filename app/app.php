@@ -42,7 +42,7 @@
     ));
 
     $app->get("/", function() use ($app) {
-      
+
         return $app['twig']->render('index.html.twig', array('alert'=>null, 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
     });
 
@@ -154,21 +154,27 @@
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
     });
-    
+
     $app->patch("/edit-thread/{id}", function($id) use ($app) {
         $thread = Thread::find($id);
         $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
     });
-    
+
     $app->get("/user/{id}", function($id) use ($app) {
         $user = User::find($id);
         $userComments = $user->getLinkInfoComments();
         $userThreads = $user->getThreads();
         return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
-
     });
+
+    // $app->patch("/user-bio", function() use ($app) {
+    //     $user = $_SESSION['user'];
+    //     $bio = nl2br($_POST['new-bio']);
+    //     $new_bio = $user->getBio();
+    //     return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
+    // });
 
     return $app;
 ?>

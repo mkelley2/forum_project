@@ -215,3 +215,7 @@ textarea {
     margin-left: 7%;
     margin-bottom: -5%;
 }
+
+#bio-form {
+     display: none;
+}
