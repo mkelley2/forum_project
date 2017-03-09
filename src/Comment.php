@@ -207,45 +207,25 @@
         //     }
         // }
 
-        // function  createMultiTags($str)
-        // {
-        //
-        //     $str = preg_replace("/,/", "", $str);
-        //     $array_tags = explode(" ", $str);
-        //
-        //     for($i = 0; $i < count($array_tags); $i++)
-        //     {
-        //         $query = $GLOBALS['DB']->query("SELECT tag FROM tags;");
-        //
-        //         $all_tags = array();
-        //
-        //         foreach($query as $tag)
-        //         {
-        //             // array_push($all_tags, $tag['tag']);
-        //             if($tag['tag']==$array_tags[$i]){
-        //                 $found_tag = Tag::findByName($array_tags[$i]);
-        //                 // var_dump($found_tag);
-        //                 $this->addTag($found_tag);
-        //             } else {
-        //                 $new_tag = new Tag($array_tags[$i]);
-        //                 $new_tag->save();
-        //                 $this->addTag($new_tag);
-        //             }
-        //         }
-        //         // var_dump($all_tags);
-        //
-        //         // $return = array_keys($all_tags, $array_tags[i]);
-        //         // if(count($return)>0){
-        //         //     $found_tag = Tag::findByName($array_tags[$i]);
-        //         //     // var_dump($found_tag);
-        //         //     $this->addTag($found_tag);
-        //         // } else {
-        //         //     $new_tag = new Tag($array_tags[$i]);
-        //         //     $new_tag->save();
-        //         //     $this->addTag($new_tag);
-        //         // }
-        //     }
-        // }
+        function  createMultiTags($str)
+        {
+        
+            $str = preg_replace("/,/", "", $str);
+            $array_tags = explode(" ", $str);
+        
+            for($i = 0; $i < count($array_tags); $i++)
+            {
+                $new_tag = new Tag($array_tags[$i]);
+                $pass = $new_tag->save();
+                
+                if($new_tag === false){
+                    $found_tag = Tag::findByName($array_tags[$i]);
+                    $this->addTag($found_tag);
+                } else {
+                    $this->addTag($new_tag);
+                }
+            }
+        }
 
         function addTag($tag)
         {
