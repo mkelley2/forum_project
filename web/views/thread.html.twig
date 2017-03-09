@@ -16,15 +16,16 @@
                           <form action="/delete-thread/{{specific_thread.getId}}" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <input type="hidden" name="categoryName" value="{{specific_category.getCategory}}">
-                            <button class="button-add" type="submit" name="delete-button"><img src="/img/delete.png"></button>
+                            <button #id="btn-delete-thread" class="button-add" type="submit" name="delete-button"><img src="/img/delete.png"></button>
                           </form>
                           <script type="text/javascript">
                           var category = '{{specific_category.getCategory}}';
                           var thread = '{{specific_thread.getId}}';
                           </script>
                           <br />
-                          <button type="button" class="editThreadBTN button-add" name="edit-init-button"><img src="/img/edit.png"></button>
-
+                         <div class="editThread">
+                             <button #id="btn-edit-thread" type="button" class="editThreadBTN button-add" name="edit-init-button"><img src="/img/edit.png"></button>
+                         </div>
                         </div>
                       </div>
                     </div>

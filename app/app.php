@@ -178,7 +178,7 @@
         $new_bio = $user->update($city, $state, $country, $bio);
         return $app->redirect("/user/$id");
     });
-    
+
     $app->get("/search", function() use ($app) {
         $thread_results = Thread::searchFor($_GET['search_term']);
         $comment_results = Comment::searchFor($_GET['search_term']);
