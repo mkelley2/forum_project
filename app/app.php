@@ -176,5 +176,11 @@
         $user_results = User::searchFor($_GET['search_term']);
         return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'user_results'=> $user_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
     });
+    
+    $app->get("/tag", function() use ($app) {
+        $thread_results = Thread::searchFor($_GET['tag_search']);
+        $comment_results = Comment::searchFor($_GET['tag_search']);
+        return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
+    });
     return $app;
 ?>
