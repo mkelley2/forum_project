@@ -85,7 +85,7 @@
 
     $app->post("/new-thread/{id}", function($id) use ($app) {
         $new_category = Category::findbyCategory($id);
-        $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), $_SESSION['user']->getId(), $_POST['inputTitle']);
+        $new_thread = new Thread($_POST['inputPost'], $new_category->getId(), $_SESSION['user']->getId(), $_POST['inputTitle'], $id);
         $new_thread->save();
         $thread_id = $new_thread->getId();
         return $app->redirect("/category/$id/$thread_id");
@@ -160,6 +160,14 @@
         $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
+    });
+    
+    $app->get("/user/{id}", function($id) use ($app) {
+        $user = User::find($id);
+        $userComments = $user->getComments();
+        $userThreads = $user->getThreads();
+        return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
+
     });
 
     return $app;

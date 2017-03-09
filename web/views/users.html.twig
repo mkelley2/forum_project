@@ -5,108 +5,45 @@
     <body>
         <div class="container">
             {% include '/components/navbar.html.twig' %}
-            <div id="post-wrapper">
-                <div id="posts" class="well">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">Bio</div>
-                      <div class="panel-body">
-                          <p></p>
-
-                      </div>
-                    </div>
-                </div>
-                <div class="well" id="comment-holder">
-                    <div class="panel panel-default"><!DOCTYPE html>
-                    <html>
-                        {% include '/components/head.html.twig' %}
-                        <body>
-                            <div class="container">
-
-                                {% include '/components/navbar.html.twig' %}
-                                <div id="post-wrapper">
-                                    <div class="title jumbotron">
-                                        <h1>
-                                            Welcome to CodeFusion <br>
-                                            Answers are the elixir for what ails ya.
-                                        </h1>
-                                    </div>
-                                    <div id="user-bio" class="well">
-                                        <div class="panel panel-default">
-                                          <div class="panel-heading">User Bio</div>
-                                          <div class="panel-body">
-                                              <p>bio goes here</p>
-
-                                          </div>
-                                        </div>
-                                    </div>
-                                    <div class="well">
-                                        <div class="panel panel-default" id="user-div">
-                                            <div class="panel-heading"> Profile</div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="row">
-                                                        <div class="col-md-4" id="user-info">
-                                                            <ul>
-                                                                <li>Score:</li>
-                                                                <li>Member Since: </li>
-                                                                <li>City: </li>
-                                                                <li>State:</li>
-                                                                <li>Country:</li>
-                                                            </ul>
-                                                            <p>
-
-                                                            </p>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div>
-                                                            <p></p>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {% include '/components/footer.html.twig' %}
-                            </div>
-                        </body>
-                    </html>
-
-                        <div class="panel-heading"></div>
-                        <div class="panel-body" id="comments-here">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <p>
-
-                                        </p>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
-                                        <button type="button" class="btn btn-primary">Comment</button>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-8">
-                                    <div id="append-comments">
-
-                                    </div>
-
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
-                                    <button type="button" class="btn btn-primary">Rank Up</button>
-                                    <button type="button" class="btn btn-primary">Rank Down</button>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              {{userpage.username}}
             </div>
+            <div class="panel-body">
+              <ul>
+                <li>Bio: {{userpage.getBio}}</li>
+                <li>City: {{userpage.getLocation_City}}</li>
+                <li>State: {{userpage.getLocation_State}}</li>
+                <li>Country: {{userpage.getLocation_Country}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <!-- <div class="row"> -->
+              <div class="col-lg-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">{{userpage.username}}'s Posts</div>
+                  <div class="panel-body">
+                    <ul>
+                      {% for thread in user_threads %}
+                        <li><a href="/category/{{thread.getCategory}}/{{thread.getId}}">{{thread.getPostTitle}}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">{{userpage.username}}'s Threads</div>
+                  <div class="panel-body">
+                    {% for comment in user_comments %}
+                      <li><a href="/category/{{comment.getCommentId}}/{{comment.getThreadId}}">{{comment.getComment}}</a></li>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            <!-- </div> -->
+          </div>
 
             {% include '/components/footer.html.twig' %}
         </div>
