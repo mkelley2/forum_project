@@ -169,12 +169,15 @@
         return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
     });
 
-    // $app->patch("/user-bio", function() use ($app) {
-    //     $user = $_SESSION['user'];
-    //     $bio = nl2br($_POST['new-bio']);
-    //     $new_bio = $user->getBio();
-    //     return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
-    // });
+    $app->patch("/user-bio/{id}", function($id) use ($app) {
+        $user = User::find($id);
+        $bio = nl2br($_POST['new-bio']);
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+        $country = $_POST['country'];
+        $new_bio = $user->update($city, $state, $country, $bio);
+        return $app->redirect("/user/$id");
+    });
 
     return $app;
 ?>

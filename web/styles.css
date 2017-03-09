@@ -216,6 +216,24 @@ textarea {
     margin-bottom: -5%;
 }
 
+#btn-bio-cancel,
+#btn-bio-cancel {
+    margin-top: 1%;
+    margin-left: .3%;
+}
+
 #bio-form {
      display: none;
+}
+
+.user-form {
+    width: 33%;
+}
+
+.bio-area {
+    width: 75%;
+}
+
+.user-label {
+    margin-top: 1%;
 }
