@@ -42,7 +42,7 @@
     ));
 
     $app->get("/", function() use ($app) {
-      
+
         return $app['twig']->render('index.html.twig', array('alert'=>null, 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
     });
 
@@ -100,6 +100,8 @@
         $text = preg_replace("/\r|\n/", "", $text);
         $new_comment = new Comment($_SESSION['user']->getId(), $text, $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
         $new_comment->save();
+        $new_comment->createMultiTags($_POST['tag']);
+        // $new_comment->addMultiTags($_POST['tag']);
         return $app->redirect("/category/$id/$thread_id");
 
     });
@@ -154,14 +156,14 @@
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
     });
-    
+
     $app->patch("/edit-thread/{id}", function($id) use ($app) {
         $thread = Thread::find($id);
         $thread->update($_POST['inputPost']);
         $category = $_POST['categoryName'];
         return $app->redirect("/category/$category");
     });
-    
+
     $app->get("/user/{id}", function($id) use ($app) {
         $user = User::find($id);
         $userComments = $user->getLinkInfoComments();
@@ -169,7 +171,7 @@
         return $app['twig']->render('users.html.twig', array('all_categories'=>Category::getAll(), 'userpage'=>$user, 'user'=>$_SESSION['user'], 'user_threads'=>$userThreads, 'user_comments'=> $userComments));
 
     });
-    
+
     $app->get("/search", function() use ($app) {
         $thread_results = Thread::searchFor($_GET['search_term']);
         $comment_results = Comment::searchFor($_GET['search_term']);
@@ -177,4 +179,5 @@
         return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'user_results'=> $user_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
     });
     return $app;
+
 ?>

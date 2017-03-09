@@ -182,8 +182,74 @@
             return $found_comment;
         }
 
+        // function  addMultiTags($str)
+        // {
+        //
+        //     $str = preg_replace("/,/", "", $str);
+        //     $array_tags = explode(" ", $str);
+        //
+        //     for($i = 0; $i < count($array_tags); $i++)
+        //     {
+        //         $found_tag = Tag::findByName($array_tags[$i]);
+        //         $query = $GLOBALS['DB']->query("SELECT * FROM tags;");
+        //         $all_tags = array();
+        //
+        //         foreach($query as $tag)
+        //         {
+        //             array_push($all_tags, $tag['tag']);
+        //         }
+        //
+        //         $return = array_search($array_tags[i], $all_tags);
+        //
+        //         if($return !== false){
+        //             $this->addTag($found_tag);
+        //         }
+        //     }
+        // }
+
+        // function  createMultiTags($str)
+        // {
+        //
+        //     $str = preg_replace("/,/", "", $str);
+        //     $array_tags = explode(" ", $str);
+        //
+        //     for($i = 0; $i < count($array_tags); $i++)
+        //     {
+        //         $query = $GLOBALS['DB']->query("SELECT tag FROM tags;");
+        //
+        //         $all_tags = array();
+        //
+        //         foreach($query as $tag)
+        //         {
+        //             // array_push($all_tags, $tag['tag']);
+        //             if($tag['tag']==$array_tags[$i]){
+        //                 $found_tag = Tag::findByName($array_tags[$i]);
+        //                 // var_dump($found_tag);
+        //                 $this->addTag($found_tag);
+        //             } else {
+        //                 $new_tag = new Tag($array_tags[$i]);
+        //                 $new_tag->save();
+        //                 $this->addTag($new_tag);
+        //             }
+        //         }
+        //         // var_dump($all_tags);
+        //
+        //         // $return = array_keys($all_tags, $array_tags[i]);
+        //         // if(count($return)>0){
+        //         //     $found_tag = Tag::findByName($array_tags[$i]);
+        //         //     // var_dump($found_tag);
+        //         //     $this->addTag($found_tag);
+        //         // } else {
+        //         //     $new_tag = new Tag($array_tags[$i]);
+        //         //     $new_tag->save();
+        //         //     $this->addTag($new_tag);
+        //         // }
+        //     }
+        // }
+
         function addTag($tag)
         {
+
             $GLOBALS['DB']->exec("INSERT INTO comments_tags (comment_id, tag_id) VALUES ({$this->getCommentId()}, {$tag->getId()});");
         }
 
@@ -206,7 +272,7 @@
         {
             $matches = array();
             // $search_term = explode(" ", strtolower($search_term));
-        
+
             $query = $GLOBALS['DB']->query("SELECT * FROM comments WHERE comment LIKE '%$search_term%';");
             foreach ($query as $match) {
                 $user = $match['user_id'];

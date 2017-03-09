@@ -64,6 +64,20 @@
             return $found_tag;
         }
 
+        static function findByName($search_id)
+        {
+            $found_tag = null;
+            $tags = Tag::getAll();
+            foreach($tags as $tag) {
+                $tag_id = $tag->getTag();
+                if ($tag_id == $search_id) {
+                  $found_tag = $tag;
+                }
+            }
+            return $found_tag;
+        }
+
+
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM tags WHERE tag_id = {$this->getId()};");
