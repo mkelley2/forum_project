@@ -34,23 +34,17 @@ button.button-add {
 }
 
 
-
 /*end of buttons*/
 
-/* This is for buttons with lower RIGHT placement */
+/* This is for buttons with RIGHT placement */
 .post-right {
-    /*background-color: #fff;*/
-    /*border: #fff;
-    position: absolute;
-    right: 22%;
-    top: 40%;*/
-    /*float: right;*/
+    position: relative;
+    left: 800px;
+}
 
-}
+
 /*end of placement lower RIGHT buttons*/
-.row {
-    /*text-align: center;*/
-}
+
 
 #edit-button {
     position: relative;
