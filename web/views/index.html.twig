@@ -3,8 +3,13 @@
     {% include '/components/head.html.twig' %}
     <body>
         <div class="container">
-
             {% include '/components/navbar.html.twig' %}
+            {% if alert != null %}
+          <div class="alert alert-dismissible alert-danger alert-xs">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <p align="center">{{alert}}</p>
+          </div>
+          {% endif %}
             <div id="post-wrapper">
                 <div class="title jumbotron">
                     <h1 class="welcome">Welcome to CodeFusion</h1>

@@ -43,7 +43,7 @@
 
     $app->get("/", function() use ($app) {
       
-        return $app['twig']->render('index.html.twig', array('all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
+        return $app['twig']->render('index.html.twig', array('alert'=>null, 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
     });
 
     $app->get("/categories", function() use ($app) {
@@ -112,7 +112,7 @@
           $_SESSION['user']->save();
           return $app->redirect('/');
         }else{
-          return "User already exists";
+          return $app['twig']->render('index.html.twig', array('alert'=>'User already exists', 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
         }
     });
 
@@ -124,10 +124,10 @@
           $_SESSION['user'] = $pass_login;
           return $app->redirect('/');
         }else{
-          return "Incorrect Login info";
+          return $app['twig']->render('index.html.twig', array('alert'=>'Incorrect login info', 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
         }
       }else{
-        return "User does not exist, please register";
+        return $app['twig']->render('index.html.twig', array('alert'=>'Account does not exist, please register', 'all_categories'=>Category::getAll(), 'all_threads'=>Thread::getAll(), 'user'=>$_SESSION['user']));
       }
     });
 
