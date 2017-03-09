@@ -28,7 +28,6 @@ $(document).ready(function(){
     copy.push(JSON.parse(elem));
   });
   var added =[];
-
   function loop(){
     for(i=0;i<copy.length;i++){
       if(copy[i].parent_id == false){
@@ -50,7 +49,7 @@ $(document).ready(function(){
               "<div class='col-xs-10'>" +
                 "<div class='row'>" +
 
-                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - "+ timeDifference(new Date(), new Date(copy[i].post_time)) + "&nbsp;&nbsp;" + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
+                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - "+ timeDifference(new Date(), new Date(copy[i].post_time)) + "&nbsp;&nbsp;" + copy[i].comment + "</p><br><br>" + "<div id=" + copy[i].comment_id + "class='tag'>" + "</div>" +
 
                 "</div>" +
                 "<div class='row'>" +
@@ -66,10 +65,9 @@ $(document).ready(function(){
           tags = tags.split(" ");
           for(j=0;j<tags.length;j++){
             if(tags[j]!== ""){
-              $(".tag").append(
+              $("#" + copy[i].comment_id ).append(
                   "<span class='label label-warning'> " + tags[j] +"</span>"
               );
-              console.log(tags[j]);
             }
           }
         added.push(copy[i]);
@@ -96,7 +94,7 @@ $(document).ready(function(){
                 "<div class='col-xs-10'>" +
                 "<div class='row'>" +
 
-                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - "+ timeDifference(new Date(), new Date(copy[i].post_time)) + "&nbsp;&nbsp;" + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
+                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - "+ timeDifference(new Date(), new Date(copy[i].post_time)) + "&nbsp;&nbsp;" + copy[i].comment + "</p><br><br>" + "<div id=" + copy[i].comment_id + "class='tag'>" + "</div>" +
 
                 "</div>" +
                   "<div class='row'>" +
@@ -108,14 +106,13 @@ $(document).ready(function(){
           );
 
           // put a div in the comment that tags can be appended to
-          var tags2 = copy[i].tags2;
+          var tags2 = copy[i].tags;
           tags2 = tags2.split(" ");
           for(j=0;j<tags2.length;j++){
             if(tags2[j]!== ""){
-                $(".tag").append(
+                $("#" + copy[i].comment_id ).append(
                     "<span class='label label-warning'>" + tags2[j] +"</span>"
                 );
-              console.log(tags2[j]);
             }
           }
           added.push(copy[i]);
