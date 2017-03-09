@@ -5,8 +5,86 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
 
-            <h1 class="welcome">Welcome to CodeFusion</h1>
-            <h2 class="welcome">Answers are the elixer for what ails ya.</h2>
+            {% set column_size = 0 %}
+              {% if thread_results is not empty %}
+                {% set column_size = column_size + 1 %}
+              {% endif %}
+              {% if comment_results is not empty %}
+                {% set column_size = column_size + 1 %}
+              {% endif %}
+              {% if user_results is not empty %}
+                {% set column_size = column_size + 1 %}
+              {% endif %}
+              {% set column_size = 12 / column_size %}
+              
+            <div class="row">
+              {% if thread_results is not empty %}
+              <div class="col-lg-{{column_size}}">
+                <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Thread Results</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% set count = 0 %}
+                    {% for thread in thread_results %}
+                    <tr>
+                      {% set count = count + 1%}
+                      <td>{{count}}</td>
+                      <td>{{thread.getPostTitle}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table> 
+              </div>
+              {% endif %}
+              <div class="col-lg-{{column_size}}">
+                {% if comment_results is not empty %}
+                  <table class="table table-striped table-hover ">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Comment Results</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set count = 0 %}
+                      {% for comment in comment_results %}
+                      <tr>
+                        {% set count = count + 1%}
+                        <td>{{count}}</td>
+                        <td>{{comment.comment}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table> 
+                {% endif %}
+              </div>
+              <div class="col-lg-{{column_size}}">
+                {% if user_results is not empty %}
+                  <table class="table table-striped table-hover ">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>User Results</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set count = 0 %}
+                      {% for user in user_results %}
+                      <tr>
+                        {% set count = count + 1%}
+                        <td>{{count}}</td>
+                        <td>{{user.getUsername}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table> 
+                {% endif %}
+              </div>
+            </div>
 
 
 
