@@ -18,32 +18,17 @@ button.button-add {
     vertical-align: middle;
 }
 
+#edit-button {
+    position: relative;
+    left: 1750%;
+    top: 25px;
+}
+
+#delete-button {
+
+}
 
 /*end of buttons*/
-
-/* This is for buttons with lower RIGHT placement */
-.post-right {
-    /*background-color: #fff;*/
-    border: #fff;
-    float: right;
-
-}
-/*end of placement lower RIGHT buttons*/
-.row {
-    /*text-align: center;*/
-}
-
-.col-sml-1 {
-    border: #fff;
-    margin: 25px;
-}
-/* This is for lower LEFT buttons */
-
-.post-left {
-    /*background-color: #fff;*/*/
-}
-
-/* end of LEFT POST*/
 
 /* post for thread page */
 .thread-post {
@@ -258,3 +243,5 @@ textarea {
 .editThread {
   color: black;
 }
+
+@media only screen (max-width: )

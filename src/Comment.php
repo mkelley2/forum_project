@@ -182,42 +182,17 @@
             return $found_comment;
         }
 
-        // function  addMultiTags($str)
-        // {
-        //
-        //     $str = preg_replace("/,/", "", $str);
-        //     $array_tags = explode(" ", $str);
-        //
-        //     for($i = 0; $i < count($array_tags); $i++)
-        //     {
-        //         $found_tag = Tag::findByName($array_tags[$i]);
-        //         $query = $GLOBALS['DB']->query("SELECT * FROM tags;");
-        //         $all_tags = array();
-        //
-        //         foreach($query as $tag)
-        //         {
-        //             array_push($all_tags, $tag['tag']);
-        //         }
-        //
-        //         $return = array_search($array_tags[i], $all_tags);
-        //
-        //         if($return !== false){
-        //             $this->addTag($found_tag);
-        //         }
-        //     }
-        // }
-
         function  createMultiTags($str)
         {
-        
+
             $str = preg_replace("/,/", "", $str);
             $array_tags = explode(" ", $str);
-        
+
             for($i = 0; $i < count($array_tags); $i++)
             {
                 $new_tag = new Tag($array_tags[$i]);
                 $pass = $new_tag->save();
-                
+
                 if($new_tag === false){
                     $found_tag = Tag::findByName($array_tags[$i]);
                     $this->addTag($found_tag);
