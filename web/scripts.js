@@ -49,7 +49,7 @@ $(document).ready(function(){
               "</div>" +
               "<div class='col-xs-10'>" +
                 "<div class='row'>" +
-                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p><br><br>" + "<a>" + copy[i].tag + "</a>" +
+                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
                 "</div>" +
                 "<div class='row'>" +
                   "<button type='button' name='reply-button' class='reply-button button-add' value='" + copy[i].comment_id + "'><img src='/img/new_comment.png'></button>" +
@@ -58,15 +58,15 @@ $(document).ready(function(){
               "</div>" +
           "</div>"
           );
-          
+
           // put a div in the comment that tags can be appended to
           var tags = copy[i].tags;
           tags = tags.split(" ");
           for(j=0;j<tags.length;j++){
             if(tags[j]!== ""){
-              // $(".tagdiv").append(
-              //   // tag div goes here
-              // );
+              $(".tag").append(
+                  "<span class='label label-warning'> " + tags[j] +"</span>"
+              );
               console.log(tags[j]);
             }
           }
@@ -93,7 +93,7 @@ $(document).ready(function(){
                 "</div>" +
                 "<div class='col-xs-10'>" +
                   "<div class='row'>" +
-                    "<p><a href='" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p>" +
+                    "<p><a href='" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
                   "</div>" +
                   "<div class='row'>" +
                     "<button type='button' name='reply-button' class='reply-button button-add' value='" + copy[i].comment_id + "'><img src='/img/new_comment.png'></button>" +
@@ -102,15 +102,15 @@ $(document).ready(function(){
                 "</div>" +
             "</div>"
           );
-          
+
           // put a div in the comment that tags can be appended to
           var tags2 = copy[i].tags2;
           tags2 = tags2.split(" ");
           for(j=0;j<tags2.length;j++){
             if(tags2[j]!== ""){
-              // $(".tagdiv").append(
-              //   // tag div goes here
-              // );
+                $(".tag").append(
+                    "<span class='label label-warning'>" + tags[j] +"</span>"
+                );
               console.log(tags2[j]);
             }
           }
@@ -132,7 +132,7 @@ $(document).ready(function(){
     $(this).next().append(
       '<form action="/category/' + category + '/'+ thread +'" method="post">' +
           '<input type="hidden" name="inputParent" value="'+ $(this).val() +'">' +
-          '<textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea>' +
+          '<textarea name="inputComment" rows="6" cols="90" placeholder="post a reply" required></textarea>' +
           '<button class="btn btn-primary" type="submit" name="button">Submit</button>' +
       '</form>'
 

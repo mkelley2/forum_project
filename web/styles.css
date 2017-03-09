@@ -1,5 +1,7 @@
 body, h1, h2 {
     font-family: 'Slabo 27px', serif;
+    font-size: 16px;
+
 }
 
 h2 {
@@ -31,6 +33,17 @@ button.button-add {
 
 #btn-edit-thread {
     padding: 5%;
+}
+
+.tag {
+    margin-bottom: 10px;
+}
+
+.tag span {
+    margin-left: 10px;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 
