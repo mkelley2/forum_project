@@ -5,7 +5,7 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
             <div class="thread-post well">
-                <h2>{{ title }}</h2>
+                <h2>{{ title }} &nbsp; &nbsp; <span class="smallerUserLink"> submitted by &nbsp;<a href="/user/{{ user.getId }}">{{ user.getUsername }}</a></span></h2>
                 <div class="panel panel-default">
                     <!--  post will be generated here  -->
                     <div class="panel-body">
@@ -23,8 +23,8 @@
                           var thread = '{{specific_thread.getId}}';
                           </script>
                           <br />
-                          <button type="button" class="editThreadBTN" name="edit-init-button"><img src="/img/edit.png"></button>                  
-                          
+                          <button type="button" class="editThreadBTN" name="edit-init-button"><img src="/img/edit.png"></button>
+
                         </div>
                       </div>
                     </div>
@@ -43,7 +43,7 @@
                 <div class="panel panel-default">
                     <div class="comment-holder">
                         <!-- comments will be generated here -->
-                        
+
                     </div>
                 </div>
             </div>

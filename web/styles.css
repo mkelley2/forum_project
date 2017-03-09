@@ -245,3 +245,7 @@ textarea {
 .user-label {
     margin-top: 1%;
 }
+
+.smallerUserLink {
+    font-size: 50%;
+}
