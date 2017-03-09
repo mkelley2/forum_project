@@ -104,6 +104,24 @@
             return $found_thread;
         }
 
+        // static function findByCategoryId($search_id)
+        // {
+        //     // get category from category table where the category.category_id = thread.category_id
+        //     $query = $GLOBALS['DB']->query("SELECT category FROM categories WHERE category.category_id = thread.category_id");
+        //
+        //     $found_category = null;
+        //
+        //     foreach($query as $category) {
+        //         $category_name = $category->getCategory();
+        //         if ($category_name == $search_id) {
+        //           $found_category = $category;
+        //         }
+        //     }
+        //     return $found_category;
+        // }
+
+
+
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM threads WHERE thread_id = {$this->getId()};");
@@ -132,7 +150,7 @@
                 }
             return $tags;
         }
-        
+
         function getComments()
         {
             $returned_comments = $GLOBALS['DB']->query("SELECT * FROM comments WHERE thread_id = {$this->getId()} ORDER BY score DESC;");

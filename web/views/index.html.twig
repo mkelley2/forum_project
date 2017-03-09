@@ -46,7 +46,8 @@
                                         {% if all_threads is not empty %}
                                         <ol>
                                             {% for thread in all_threads|slice(0, 5) %}
-                                              <li><a class="topGenerated" href="/thread/{{thread.getPostTitle}}">{{ thread.getPostTitle }}</a></li>
+
+                                                <li><a class="topGenerated" href="/category/{{ thread.getCategory }}/{{ thread.getId }}">{{ thread.getPostTitle }}</a></li>
                                             {% endfor %}
                                         </ol>
                                         {% endif %}
