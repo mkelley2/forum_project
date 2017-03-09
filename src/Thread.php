@@ -139,6 +139,7 @@
             $comments = array();
             foreach($returned_comments as $comment) {
                 $user = $comment['user_id'];
+                $username = User::find($user)->getUsername();
                 $comment_text = $comment['comment'];
                 $parent_id = $comment['parent_id'];
                 $score = $comment['score'];
@@ -149,7 +150,7 @@
                 if($parent_id==null){
                   $parent_id = "false";
                 }
-                $new_comment = '{"user_id":"' . $user . '", "comment":"' . $comment_text . '", "parent_id":"' . $parent_id . '", "score":"' . $score . '", "post_time":"' . $post_time . '", "thread_id":"' . $thread_id . '", "comment_id":"' . $comment_id . '"}';
+                $new_comment = '{"username":"' . $username . '", "user_id":"' . $user . '", "comment":"' . $comment_text . '", "parent_id":"' . $parent_id . '", "score":"' . $score . '", "post_time":"' . $post_time . '", "thread_id":"' . $thread_id . '", "comment_id":"' . $comment_id . '"}';
                 array_push($comments, $new_comment);
             }
             return $comments;
