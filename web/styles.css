@@ -206,6 +206,7 @@ textarea {
 
 /*** USER - PROFILE PG ***/
 
+
 #btn-logout {
     float: left;
 }
@@ -220,6 +221,13 @@ textarea {
 #btn-bio-cancel {
     margin-top: 1%;
     margin-left: .3%;
+}
+
+#edit-user-bio {
+    margin-top: -1%;
+    color: #ffffff;
+    background-color: #339999;
+    border-color: #339999;
 }
 
 #bio-form {
