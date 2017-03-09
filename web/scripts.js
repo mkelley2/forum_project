@@ -94,9 +94,11 @@ $(document).ready(function(){
                   "</form>" +
                 "</div>" +
                 "<div class='col-xs-10'>" +
-                  "<div class='row'>" +
-                    "<p><a href='" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
-                  "</div>" +
+                "<div class='row'>" +
+
+                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - "+ timeDifference(new Date(), new Date(copy[i].post_time)) + "&nbsp;&nbsp;" + copy[i].comment + "</p><br><br>" + "<div class='tag'></div>" +
+
+                "</div>" +
                   "<div class='row'>" +
                     "<button type='button' name='reply-button' class='reply-button button-add' value='" + copy[i].comment_id + "'><img src='/img/new_comment.png'></button>" +
                     "<div class='reply-form'></div>" +
@@ -111,7 +113,7 @@ $(document).ready(function(){
           for(j=0;j<tags2.length;j++){
             if(tags2[j]!== ""){
                 $(".tag").append(
-                    "<span class='label label-warning'>" + tags[j] +"</span>"
+                    "<span class='label label-warning'>" + tags2[j] +"</span>"
                 );
               console.log(tags2[j]);
             }
