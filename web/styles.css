@@ -20,6 +20,9 @@ button.button-add {
     vertical-align: middle;
 }
 
+li {
+    list-style: none;
+}
 
 #thread-btns {
     float: right;
