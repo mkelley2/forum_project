@@ -49,7 +49,7 @@ $(document).ready(function(){
               "</div>" +
               "<div class='col-xs-10'>" +
                 "<div class='row'>" +
-                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p>" +
+                  "<p><a href='/user/" + copy[i].user_id + "'>" + copy[i].username + "</a> - " + copy[i].comment + "</p><br><br>" + "<a>" + copy[i].tag + "</a>" +
                 "</div>" +
                 "<div class='row'>" +
                   "<button type='button' name='reply-button' class='reply-button button-add' value='" + copy[i].comment_id + "'><img src='/img/new_comment.png'></button>" +
