@@ -23,11 +23,11 @@
                           var thread = '{{specific_thread.getId}}';
                           </script>
                           <br />
+                          <button class="button-add" type="button" class="editThreadBTN" name="edit-init-button"><img src="/img/edit.png"></button>
                           <div class="editThread">
                             <button type="button" class="editThreadBTN" name="edit-init-button"><img src="/img/edit.png"></button>
-                            
-                          </div>
 
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -38,6 +38,8 @@
                     <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
                         <input type="hidden" name="inputParent" value="false">
                         <textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea><br />
+                        <input class="black" type="text" name="tag" maxlength="40" placeholder="add #tag">
+                        <br>
                         <button class="btn btn-primary" type="submit" name="button">Submit</button>
                     </form>
                 </div>

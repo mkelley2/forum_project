@@ -108,6 +108,8 @@
         $text = preg_replace("/\r|\n/", "", $text);
         $new_comment = new Comment($_SESSION['user']->getId(), $text, $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
         $new_comment->save();
+        $new_comment->createMultiTags($_POST['tag']);
+        // $new_comment->addMultiTags($_POST['tag']);
         return $app->redirect("/category/$id/$thread_id");
 
     });
@@ -186,7 +188,7 @@
         $new_bio = $user->update($city, $state, $country, $bio);
         return $app->redirect("/user/$id");
     });
-    
+
     $app->get("/search", function() use ($app) {
         $thread_results = Thread::searchFor(filter_var($_GET['search_term'],FILTER_SANITIZE_MAGIC_QUOTES));
         $comment_results = Comment::searchFor(filter_var($_GET['search_term'],FILTER_SANITIZE_MAGIC_QUOTES));
@@ -200,4 +202,5 @@
         return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
     });
     return $app;
+
 ?>
