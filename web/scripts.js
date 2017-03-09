@@ -58,6 +58,18 @@ $(document).ready(function(){
               "</div>" +
           "</div>"
           );
+          
+          // put a div in the comment that tags can be appended to
+          var tags = copy[i].tags;
+          tags = tags.split(" ");
+          for(j=0;j<tags.length;j++){
+            if(tags[j]!== ""){
+              // $(".tagdiv").append(
+              //   // tag div goes here
+              // );
+              console.log(tags[j]);
+            }
+          }
         added.push(copy[i]);
         copy.splice(i,1);
         loop();
@@ -90,6 +102,18 @@ $(document).ready(function(){
                 "</div>" +
             "</div>"
           );
+          
+          // put a div in the comment that tags can be appended to
+          var tags2 = copy[i].tags2;
+          tags2 = tags2.split(" ");
+          for(j=0;j<tags2.length;j++){
+            if(tags2[j]!== ""){
+              // $(".tagdiv").append(
+              //   // tag div goes here
+              // );
+              console.log(tags2[j]);
+            }
+          }
           added.push(copy[i]);
           copy.splice(i,1);
           loop();
