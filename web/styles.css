@@ -18,14 +18,32 @@ button.button-add {
     vertical-align: middle;
 }
 
+#thread-btns {
+    float: right;
+    margin-bottom: -5%;
+}
+
+#btn-delete-thread {
+    float:left;
+    padding: 5%;
+}
+
+#btn-edit-thread {
+    padding: 5%;
+}
+
+
 
 /*end of buttons*/
 
 /* This is for buttons with lower RIGHT placement */
 .post-right {
     /*background-color: #fff;*/
-    border: #fff;
-    float: right;
+    /*border: #fff;
+    position: absolute;
+    right: 22%;
+    top: 40%;*/
+    /*float: right;*/
 
 }
 /*end of placement lower RIGHT buttons*/
@@ -250,6 +268,8 @@ textarea {
 .user-label {
     margin-top: 1%;
 }
+
+/*** END USER PAGE ***/
 
 .smallerUserLink {
     font-size: 50%;
