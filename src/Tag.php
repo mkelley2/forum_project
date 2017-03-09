@@ -27,8 +27,17 @@
 
         function save()
         {
+          
+            $all_tags = Tag::getAll();
+            foreach ($all_tags as $tag) {
+                if(strtolower($tag->getTag()) == strtolower($this->tag)){
+                    return false;
+                }
+            }
             $GLOBALS['DB']->exec("INSERT INTO tags (tag) VALUES ('{$this->getTag()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
+            
+            return true;
         }
 
         static function getAll()
