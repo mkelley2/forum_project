@@ -8,8 +8,9 @@
           <div class="panel panel-default">
             <div id="bio-title" class="panel-heading">
                 {{userpage.username}}
-
-              <button id="edit-user-bio" type="button" class="btn btn-default pull-right"> Edit</button>
+                {% if userpage.getId == user.getId() %}
+                    <button id="edit-user-bio" type="button" class="btn btn-default pull-right"> Edit</button>
+                {% endif %}
             </div>
             <div class="panel-body">
                 {% if user is not empty %}
