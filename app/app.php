@@ -103,7 +103,7 @@
         $new_category = Category::findbyCategory($id);
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
-        $date = date("Y-m-d h:i:s");
+        $date = date("Y-m-d H:i:s");
         $text = nl2br($_POST['inputComment']);
         $text = preg_replace("/\r|\n/", "", $text);
         $new_comment = new Comment($_SESSION['user']->getId(), $text, $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
@@ -186,7 +186,7 @@
         $new_bio = $user->update($city, $state, $country, $bio);
         return $app->redirect("/user/$id");
     });
-    
+
     $app->get("/search", function() use ($app) {
         $thread_results = Thread::searchFor($_GET['search_term']);
         $comment_results = Comment::searchFor($_GET['search_term']);
