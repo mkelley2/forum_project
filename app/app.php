@@ -103,7 +103,7 @@
         $new_category = Category::findbyCategory($id);
         $new_thread = Thread::find($thread_id);
         $tags = $new_thread->getTags();
-        $date = date("Y-m-d h:i:s");
+        $date = date("Y-m-d H:i:s");
         $text = nl2br(filter_var($_POST['inputComment'],FILTER_SANITIZE_MAGIC_QUOTES));
         $text = preg_replace("/\r|\n/", "", $text);
         $new_comment = new Comment($_SESSION['user']->getId(), $text, $_POST['inputParent'], 1, $date, 1, $new_thread->getId());
@@ -195,7 +195,7 @@
         $user_results = User::searchFor(filter_var($_GET['search_term'],FILTER_SANITIZE_MAGIC_QUOTES));
         return $app['twig']->render('search-results.html.twig', array('thread_results'=>$thread_results, 'comment_results'=> $comment_results, 'user_results'=> $user_results, 'all_categories'=>Category::getAll(), 'user'=>$_SESSION['user']));
     });
-    
+
     $app->get("/tag", function() use ($app) {
         $thread_results = Thread::searchFor(filter_var($_GET['tag_search'],FILTER_SANITIZE_MAGIC_QUOTES));
         $comment_results = Comment::searchFor(filter_var($_GET['tag_search'],FILTER_SANITIZE_MAGIC_QUOTES));

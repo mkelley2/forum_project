@@ -26,7 +26,6 @@
                          <div class="editThread">
                              <button #id="btn-edit-thread" type="button" class="editThreadBTN button-add" name="edit-init-button"><img src="/img/edit.png"></button>
                          </div>
-
                         </div>
                       </div>
                     </div>
@@ -36,7 +35,7 @@
                 <div class="new_comment">
                     <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
                         <input type="hidden" name="inputParent" value="false">
-                        <textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea><br />
+                        <textarea name="inputComment" rows="6" cols="90" placeholder="post a reply" required></textarea><br />
                         <input class="black" type="text" name="tag" maxlength="40" placeholder="add #tag">
                         <br>
                         <button class="btn btn-primary" type="submit" name="button">Submit</button>

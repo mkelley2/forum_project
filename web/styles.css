@@ -1,5 +1,7 @@
 body, h1, h2 {
     font-family: 'Slabo 27px', serif;
+    font-size: 16px;
+
 }
 
 h2 {
@@ -19,6 +21,30 @@ button.button-add {
 }
 
 
+#thread-btns {
+    float: right;
+    margin-bottom: -5%;
+}
+
+#btn-delete-thread {
+    float:left;
+    padding: 5%;
+}
+
+#btn-edit-thread {
+    padding: 5%;
+}
+
+.tag {
+    margin-bottom: 10px;
+}
+
+.tag span {
+    margin-left: 10px;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+}
 
 /*end of buttons*/
 
@@ -32,17 +58,18 @@ button.button-add {
 /*end of placement lower RIGHT buttons*/
 
 
-.col-sml-1 {
-    border: #fff;
-    margin: 25px;
-}
-/* This is for lower LEFT buttons */
+#edit-button {
+    position: relative;
+    left: 1750%;
+    top: 25px;
 
-.post-left {
-    /*background-color: #fff;*/*/
 }
 
-/* end of LEFT POST*/
+#delete-button {
+
+}
+
+/*end of buttons*/
 
 /* post for thread page */
 .thread-post {
@@ -206,6 +233,7 @@ textarea {
 
 .black {
     color: #000;
+    margin-bottom: 5px;
 }
 
 /*** USER - PROFILE PG ***/
@@ -259,3 +287,9 @@ textarea {
 .editThread {
   color: black;
 }
+
+.new_comment {
+    margin-bottom: 25px;
+}
+
+@media only screen (max-width: )
