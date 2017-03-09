@@ -202,24 +202,24 @@
             return $tags;
         }
 
-        // static function searchFor($search_term)
-        // {
-        //     $matches = array();
-        //     $search_term = explode(" ", strtolower($search_term));
-        //
-        //     $query = $GLOBALS['DB']->query("SELECT * FROM comments WHERE user_id LIKE '%$search_term%' ORDER BY user_id ASC;");
-        //     foreach ($query as $match) {
-        //         $user = $match['user_id'];
-        //         $comment = $match['comment'];
-        //         $parent_id = $match['parent_id'];
-        //         $comment_id = $match['comment_id'];
-        //         $score = $match['score'];
-        //         $post_time = $match['post_time'];
-        //         $return_id = $match['id'];
-        //         $new_comment = new Comment($user, $comment, $parent_id, $comment_id, $score, $post_time, $return_id);
-        //         array_push($matches, $new_comment);
-        //     }
-        //     return $matches;
-        // }
+        static function searchFor($search_term)
+        {
+            $matches = array();
+            // $search_term = explode(" ", strtolower($search_term));
+        
+            $query = $GLOBALS['DB']->query("SELECT * FROM comments WHERE comment LIKE '%$search_term%';");
+            foreach ($query as $match) {
+                $user = $match['user_id'];
+                $comment = $match['comment'];
+                $parent_id = $match['parent_id'];
+                $comment_id = $match['comment_id'];
+                $score = $match['score'];
+                $post_time = $match['post_time'];
+                $return_id = $match['id'];
+                $new_comment = new Comment($user, $comment, $parent_id, $comment_id, $score, $post_time, $return_id);
+                array_push($matches, $new_comment);
+            }
+            return $matches;
+        }
     }
 ?>

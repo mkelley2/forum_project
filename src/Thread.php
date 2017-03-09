@@ -193,6 +193,26 @@
             $this->setPost($post);
         }
         
+        static function searchFor($search_term)
+        {
+            $matches = array();
+            // $search_term = explode(" ", strtolower($search_term));
+        
+            $query = $GLOBALS['DB']->query("SELECT * FROM threads WHERE post_title LIKE '%$search_term%' OR post LIKE '%$search_term%' OR category LIKE '%$search_term%';");
+            
+            foreach($query as $thread) {
+                $post = $thread['post'];
+                $category_id = $thread['category_id'];
+                $user_id = $thread['user_id'];
+                $post_title = $thread['post_title'];
+                $category = $thread['category'];
+                $thread_id = $thread['thread_id'];
+                $new_thread = new Thread($post, $category_id, $user_id, $post_title, $category, $thread_id);
+                array_push($matches, $new_thread);
+            }
+            return $matches;
+        }
+        
         // function updateScore($new_score)
         // {
         //     $GLOBALS['DB']->exec("UPDATE threads SET score = ( score + {$new_score}) WHERE thread_id = {$this->getId()};");

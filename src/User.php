@@ -288,5 +288,30 @@
           }
           return $users;
         }
+        
+        static function searchFor($search_term)
+        {
+            $matches = array();
+            // $search_term = explode(" ", strtolower($search_term));
+        
+            $query = $GLOBALS['DB']->query("SELECT * FROM users WHERE username LIKE '%$search_term%' ORDER BY username ASC;");
+            
+            foreach($query as $user) {
+                $username = $user['username'];
+                $password = $user['password'];
+                $user_photo = $user['user_photo'];
+                $rank = $user['rank'];
+                $bio = $user['bio'];
+                $location_city = $user['location_city'];
+                $location_state = $user['location_state'];
+                $location_country = $user['location_country'];
+                $user_score = $user['user_score'];
+                $creation_date = $user['creation_date'];
+                $id = $user['user_id'];
+                $new_user = new User($username, $password, $user_photo, $rank, $bio, $location_city, $location_state, $location_country, $user_score, $creation_date, $id);
+                array_push($matches, $new_user);
+            }
+            return $matches;
+        }
     }
 ?>
