@@ -147,7 +147,7 @@ td {
 }
 
 /* ORANGE for when user is logged IN */
-.fa-user-circle-o {
+.logged-in {
   font-size: 2em;
   float: right;
   color: #ff8800;
