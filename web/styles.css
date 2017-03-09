@@ -233,6 +233,7 @@ textarea {
 
 .black {
     color: #000;
+    margin-bottom: 5px;
 }
 
 /*** USER - PROFILE PG ***/
@@ -285,6 +286,10 @@ textarea {
 
 .editThread {
   color: black;
+}
+
+.new_comment {
+    margin-bottom: 25px;
 }
 
 @media only screen (max-width: )
