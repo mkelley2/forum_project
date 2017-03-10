@@ -235,11 +235,10 @@
               $parent_id = $comment['parent_id'];
               $score = $comment['score'];
               $post_time = $comment['post_time'];
-              $init_commit_id = $comment['init_commit_id'];
               $thread_id = $comment['thread_id'];
               $comment_id = $comment['comment_id'];
               $category = $comment['category'];
-              $new_comment = array('user_id'=> $user_id, 'comment'=> $comment_text, 'parent_id'=>$parent_id, 'score'=>$score, 'post_time'=>$post_time, 'init_commit_id'=>$init_commit_id, 'thread_id'=>$thread_id, 'comment_id'=>$comment_id, 'category'=>$category);
+              $new_comment = array('user_id'=> $user_id, 'comment'=> $comment_text, 'parent_id'=>$parent_id, 'score'=>$score, 'post_time'=>$post_time, 'thread_id'=>$thread_id, 'comment_id'=>$comment_id, 'category'=>$category);
               array_push($comments, $new_comment);
           }
           return $comments;
