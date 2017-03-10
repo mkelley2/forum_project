@@ -40,7 +40,7 @@ $(document).ready(function(){
                   "<input type='hidden' name='inputScore' value='1'>" +
                   "<button class='button-add' type='submit' name='like-button'><img src='/img/like.png'></button>" +
                 "</form>" +
-                "<form class='button-form' action='/score/copy[i].comment_id'method='post'>" +
+                "<form class='button-form' action='/score/" +  copy[i].comment_id + "'method='post'>" +
                   "<input type='hidden' name='_method' value='patch'>" +
                   "<input type='hidden' name='inputScore' value='-1'>" +
                   "<button class='button-add' type='submit' name='dislike-button'><img src='/img/dislike.png'></button>" +
@@ -85,7 +85,7 @@ $(document).ready(function(){
                     "<input type='hidden' name='inputScore' value='1'>" +
                     "<button class='button-add' type='submit' name='like-button'><img src='/img/like.png'></button>" +
                   "</form>" +
-                  "<form class='button-form' action='/score/copy[i].comment_id'method='post'>" +
+                  "<form class='button-form' action='/score/" + copy[i].comment_id  + "'method='post'>" +
                     "<input type='hidden' name='_method' value='patch'>" +
                     "<input type='hidden' name='inputScore' value='-1'>" +
                     "<button class='button-add' type='submit' name='dislike-button'><img src='/img/dislike.png'></button>" +
@@ -165,6 +165,7 @@ $(document).ready(function(){
   // }
 
   $(".reply-button").click(function(){
+      $(this).next().empty();
     $(this).next().append(
       '<form action="/category/' + category + '/'+ thread +'" method="post">' +
           '<input type="hidden" name="inputParent" value="'+ $(this).val() +'">' +
