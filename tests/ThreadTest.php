@@ -282,7 +282,6 @@
         //  var_dump($testThread);
          
          $result = $testThread->getUser();
-         echo("result: " . $result . PHP_EOL);
          
          $this->assertEquals($result, $username);
          

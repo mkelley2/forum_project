@@ -5,7 +5,9 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
             <div class="thread-post well">
-                <h2>{{ title }} &nbsp; &nbsp; <span class="smallerUserLink"> submitted by &nbsp;<a href="/user/{{ user.getId }}">{{ user.getUsername }}</a></span></h2>
+                <h2>{{ title }} </h2>
+                
+                <!-- &nbsp; &nbsp; <span class="smallerUserLink"> submitted by &nbsp;<a href="/user/{{ specific_thread.getUserId }}">{{ specific_thread.getUser }}</a></span> -->
                 <div class="panel panel-default">
                     <!--  post will be generated here  -->
                     <div class="panel-body">

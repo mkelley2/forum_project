@@ -166,15 +166,13 @@
         
         function getUser(){
           var_dump($this->getId());
-            $returned_users = $GLOBALS['DB']->query("SELECT users.username from threads join users ON (threads.user_id = users.user_id) where users.user_id = {$this->getUserId()};");
+            $returned_users = $GLOBALS['DB']->query("SELECT * from threads join users ON (threads.user_id = users.user_id) where users.user_id = {$this->getUserId()};");
             $users = null;
             foreach($returned_users as $user) {
-              var_dump("user");
-              var_dump($user);
-                $user_name = $user[0];
-                $users =  $user_name;
+                $user_name = $user['username'];
                 }
-            return $users;
+                return $user_name;
+            // return $users;
         }
 
         function getComments()
