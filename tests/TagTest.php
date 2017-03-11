@@ -110,15 +110,13 @@
         {
             //Arrange
             $tag = "dogs";
-            $id = 1;
 
-            $testSave = new Tag($tag, $id);
+            $testSave = new Tag($tag);
             $testSave->save();
 
             $tag2 = "cats";
-            $id2 = 2;
 
-            $testSave2 = new Tag($tag, $id);
+            $testSave2 = new Tag($tag2);
             $testSave2->save();
 
             //Act
