@@ -24,17 +24,19 @@
                           <td>{{count}}</td>
                           <td><a href="/category/{{category.getCategory}}">{{category.getCategory}}</a></td>
                           <td>
+                           {% if user is not empty %}
                               <form class="form-group tbl-del" action="/delete-category/{{category.getId}}" method="post">
                                     <input type="hidden" name="_method" value="delete">
-                                    <button type="submit" class="btn btn-xs btn-warning" name="button"><i class="fa fa-times" aria-hidden="true"></i> &nbsp Remove</button>
+                                    <button type="submit" class="btn btn-xs btn-warning" name="button"><i class="fa fa-times" aria-hidden="true"></i> &nbsp; Remove</button>
                               </form>
+                            {% endif %}
                           </td>
                       </tr>
                       {% endfor %}
                       {%endif%}
                   </tbody>
                 </table>
-
+                {% if user is not empty %}
                 <form class="form-horizontal well" action="/categories" method="post">
                   <fieldset>
                     <legend>Add category</legend>
@@ -52,6 +54,7 @@
                     </div>
                   </fieldset>
                 </form>
+                {% endif %}
 
 
             {% include '/components/footer.html.twig' %}

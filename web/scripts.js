@@ -28,7 +28,10 @@ $(document).ready(function(){
     copy.push(JSON.parse(elem));
   });
   var added =[];
+  
+  
   function loop(){
+    
     for(i=0;i<copy.length;i++){
       if(copy[i].parent_id == false){
         $(".comment-holder").append(
@@ -120,6 +123,10 @@ $(document).ready(function(){
           loop();
         }
       }
+      // var button = "";
+      if (logged === true){
+        $(".reply-button").hide();
+      } 
     }
   }
 

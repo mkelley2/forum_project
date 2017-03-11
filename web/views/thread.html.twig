@@ -36,6 +36,7 @@
 
                 <!-- start of new comment div -->
                 <div class="new_comment">
+                  {% if user is not empty %}
                     <form action="/category/{{ specific_category.getCategory }}/{{ specific_thread.getId }}" method="post">
                         <input type="hidden" name="inputParent" value="false">
                         <textarea name="inputComment" rows="6" cols="130" placeholder="post a reply" required></textarea><br />
@@ -43,8 +44,17 @@
                         <br>
                         <button class="btn btn-primary" type="submit" name="button">Submit</button>
                     </form>
+                    {% endif %}
                 </div>
-                <script type="text/javascript">var comments = {{ comments|json_encode|raw }};</script>
+                <script type="text/javascript">
+                var comments = {{ comments|json_encode|raw }};
+                {% if user is not empty %}
+                var logged = false
+                {% else %}
+                var logged = true
+                
+                {% endif %}
+                </script>
                 <!-- end of new comment -->
                 <div class="panel panel-default">
                     <div class="comment-holder">
