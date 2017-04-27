@@ -12,21 +12,25 @@
 
     $app['debug']=true;
 
-    $server = 'mysql:host=localhost:8889;dbname=forum';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
+    if($_SERVER['SERVER_NAME'] == 'localhost') {
+      $server = 'mysql:host=localhost:8889;dbname=forum';
+      $username = 'root';
+      $password = 'root';
+      $DB = new PDO($server, $username, $password);
 
-    // for postgres
-    // $dbopts = parse_url(getenv('DATABASE_URL'));
-    // $app->register(new Herrera\Pdo\PdoServiceProvider(),
-    // array(
-    //   'pdo.dsn' => 'pgsql:dbname='.ltrim($dbopts["path"],'/').';host='.$dbopts["host"] . ';port=' . $dbopts["port"],
-    //   'pdo.username' => $dbopts["user"],
-    //   'pdo.password' => $dbopts["pass"]
-    //   )
-    // );
-    // $DB = $app['pdo'];
+    } else {
+      // for postgres
+      $dbopts = parse_url(getenv('DATABASE_URL'));
+      $app->register(new Herrera\Pdo\PdoServiceProvider(),
+      array(
+        'pdo.dsn' => 'pgsql:dbname='.ltrim($dbopts["path"],'/').';host='.$dbopts["host"] . ';port=' . $dbopts["port"],
+        'pdo.username' => $dbopts["user"],
+        'pdo.password' => $dbopts["pass"]
+        )
+      );
+      $DB = $app['pdo'];
+    }
+
 
     session_start();
 
