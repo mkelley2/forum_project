@@ -1,6 +1,6 @@
-# **Forum**
+# **Code Fusion**
 #### Jason Brown, Matt Kelley, Xia Amendolara, Michaela Davis 3/6/2017
-
+#### Live site: http://code-fusion.herokuapp.com/
 &nbsp;
 ## Description
 A forum where a user may post create a profile with bio, post content, comment on forum content, rank other users, upload photos, and search content through hashtags.
